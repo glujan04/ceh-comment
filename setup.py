@@ -1,10 +1,12 @@
 from setuptools import setup, find_packages
 import sys, os
+from os import path
 
-version = '0.1.0'
+here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
+version = '0.1.0'
 setup(
 	name='ceh-comment',
 	version=version,
@@ -14,7 +16,7 @@ setup(
 	keywords='ckan, cehcomments, comments, commenting, discussion',
 	author='Gary Luján',
 	author_email='glujan@idom.com',
-	url='https://github.com/glujan04/ceh-comment',
+	url='https://github.com/glujan04/ckanext-ceh-comment',
 	license='AGPL',
 	packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
 	namespace_packages=['ckanext'],
