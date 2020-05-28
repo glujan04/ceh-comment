@@ -36,7 +36,7 @@ class CommentPlugin(p.SingletonPlugin):
         site_title = config.get('ckan.site_title', None)
         if ceh_name is None:
             log.warn("No forum name is set. Please set \
-                'ceh_comment.name' in your .ini!")
+                'ceh.comment.name' in your .ini!")
     ##    config['pylons.app_globals'].has_commenting = True
 
     ##    disqus_developer = p.toolkit.asbool(config.get('disqus.developer',
