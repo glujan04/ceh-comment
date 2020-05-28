@@ -29,6 +29,6 @@ setup(
 	entry_points=\
 	"""
     [ckan.plugins]
-	ceh_comment = ckanext.comment.plugin:CommentPlugin
+	ceh_comment = ckanext.ceh_comment.plugin:CommentPlugin
 	""",
 )
