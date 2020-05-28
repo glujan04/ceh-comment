@@ -1,8 +1,8 @@
 {% ckan_extends %}
 {% block secondary_content %}
 {{ super() }}
-  {% resource 'ceh-comment/ceh.js' %}
-  {% resource 'ceh-comment/ceh.css' %}
+  {% resource 'ckanext_comment/ceh.js' %}
+  {% resource 'ckanext_comment/ceh.css' %}
 {% endblock %}
 {% block primary_content_inner %}
   {{ super() }}
@@ -10,3 +10,4 @@
     {{ h.ceh_comments() }}
   {% endblock %}
 {% endblock %}
+
