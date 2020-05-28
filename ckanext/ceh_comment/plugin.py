@@ -28,10 +28,10 @@ class CommentPlugin(p.SingletonPlugin):
     ##    more info on Disqus SSO see:
     ##    https://help.disqus.com/customer/portal/articles/236206-integrating-single-sign-on
     ##    '''
-        ceh_name = config.get('ceh_comment.name', None)
+        ceh_name = config.get('ceh.comment.name', None)
     ##    disqus_secret_key = config.get('disqus.secret_key', None)
     ##    disqus_public_key = config.get('disqus.public_key', None)
-        ceh_url = config.get('ceh_comment.url', None)
+        ceh_url = config.get('ceh.comment.url', None)
         site_url = config.get('ckan.site_url', None)
         site_title = config.get('ckan.site_title', None)
         if ceh_name is None:
