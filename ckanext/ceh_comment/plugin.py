@@ -117,14 +117,14 @@ class CommentPlugin(p.SingletonPlugin):
             identifier = ''
         data = {'identifier': identifier,
                 ##'developer': cls.disqus_developer,
-                'language': cls.language(),
+                ##'language': cls.language(),
                 'ceh_shortname': cls.ceh_name,
 
                 # start Koebrick change
                 'site_url': cls.site_url,
                 'site_title': cls.site_title,
                 'message': message,
-                'sig': sig,
+                ##'sig': sig,
                 'timestamp': timestamp}
                 ##'pub_key': cls.disqus_public_key}
 
