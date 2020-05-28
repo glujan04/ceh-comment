@@ -13,8 +13,8 @@ log = logging.getLogger(__name__)
 
 class CommentPlugin(p.SingletonPlugin):
     
-    p.implements(p.IConfigurable)
-    p.implements(p.IConfigurer)
+    p.implements(p.IConfigurable, inherit=True)
+    p.implements(p.IConfigurer, inherit=True)
     p.implements(p.ITemplateHelpers, inherit=True)
 
     # IConfigurer
