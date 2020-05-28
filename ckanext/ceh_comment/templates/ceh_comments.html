@@ -4,7 +4,7 @@
 <script src="{% url_for_static '/resources/ceh.js' %}"></script>
 {% endblock %}
     <h3>Agregar Comentario</h3>
-<div class="module-content ceh-comments" style="border: 1px solid red;">
+<div class="module-content ceh-comments">
 <form action="#" method="post" class="form-horizontal" id="commentForm" role="form"> 
     <div class="form-group">
         <label for="cehname" class="col-sm-2 control-label">Nombre</label>
@@ -28,8 +28,7 @@
                             <div class="col-sm-offset-2 col-sm-10">
                                   <input type="checkbox" class="form-checkbox-input" name="cehpolicy" id="cehpolicy">
                             <span class="form-checkbox-label" for="cehpolicy">
-                                He leído y acepto los <a href="#" data-toggle="modal" data-target="#termsModal">Términos y Condiciones</a>
-  </span>
+                                He leído y acepto los <a href="#" data-toggle="modal" data-target="#termsModal">Términos y Condiciones</a></span>
                                 </div>
                         </div>
     <br>
