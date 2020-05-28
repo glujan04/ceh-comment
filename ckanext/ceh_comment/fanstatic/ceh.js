@@ -1,5 +1,5 @@
 $(document).ready(function(){
-   $( "#cehCommentForm" ).validate({
+   $('#cehCommentForm').validate({
            rules: {
                    cehname: {
                            required: true,
