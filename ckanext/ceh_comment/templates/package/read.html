@@ -1,4 +1,9 @@
 {% ckan_extends %}
+{% block secondary_content %}
+{{ super() }}
+  {% resource 'ceh-comment/ceh.js' %}
+  {% resource 'ceh-comment/ceh.css' %}
+{% endblock %}
 {% block primary_content_inner %}
   {{ super() }}
   {% block ceh_comments %}
