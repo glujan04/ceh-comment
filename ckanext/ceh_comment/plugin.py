@@ -55,7 +55,7 @@ class CommentPlugin(p.SingletonPlugin):
         # add template directory to template path
         p.toolkit.add_template_directory(config, 'templates')
 		p.toolkit.add_public_directory(config_, 'public')
-        p.toolkit.add_resource('public/ceh_comment', 'res')
+        p.toolkit.add_resource('resources', 'ceh_comment')
 
     @classmethod
     def ceh_comments(cls):
