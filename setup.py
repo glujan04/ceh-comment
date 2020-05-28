@@ -15,7 +15,7 @@ setup(
 	long_description=long_description,
 	classifiers=[], # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
 	keywords='ckan, cehcomments, comments, commenting, discussion',
-	author='Gary Luján',
+	author='Gary Lujan',
 	author_email='glujan@idom.com',
 	url='https://github.com/glujan04/ckanext-ceh-comment',
 	license='AGPL',

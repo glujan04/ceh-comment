@@ -9,29 +9,7 @@ from ckan.common import request
 from ckan.lib.helpers import url_for_static_or_external
 import ckan.plugins as p
 
-lang_translations = {
-    'de': 'de',
-    'es': 'es_ES',
-    'sv': 'sv_SE',
-    'pt': 'pt_EU',
-    'sr': 'sr_CYRL',
-    'sr_Latn': 'sr_LATIN',
-    'no': 'en',  # broken no translation available
-}
-
-# all other codes are two letter language code
-
-# Portuguese (Brazil) = pt_BR
-# Portuguese (European) = pt_EU
-# Serbian (Cyrillic) = sr_CYRL
-# Serbian (Latin) = sr_LATIN
-# Spanish (Argentina) = es_AR
-# Spanish (Mexico) = es_MX
-# Spanish (Spain) = es_ES
-# Swedish = sv_SE
-
-#log = logging.getLogger(__name__)
-
+log = logging.getLogger(__name__)
 
 class CommentPlugin(p.SingletonPlugin):
     '''
@@ -76,17 +54,8 @@ class CommentPlugin(p.SingletonPlugin):
     def update_config(self, config):
         # add template directory to template path
         p.toolkit.add_template_directory(config, 'templates')
-		p.toolkit.add_public_directory(config_, 'public/ceh_comment')
+		p.toolkit.add_public_directory(config_, 'public')
         p.toolkit.add_resource('public/ceh_comment', 'res')
-    
-	@classmethod
-    def language(cls):
-        lang = p.toolkit.request.environ.get('CKAN_LANG')
-        if lang in lang_translations:
-            lang = lang_translations[lang]
-        else:
-            lang = lang[:2]
-        return lang
 
     @classmethod
     def ceh_comments(cls):
