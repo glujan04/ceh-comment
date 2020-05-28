@@ -15,7 +15,7 @@ class CommentPlugin(p.SingletonPlugin):
     
     p.implements(p.IConfigurable)
     p.implements(p.IConfigurer)
-    p.implements(p.ITemplateHelpers, inherit=True)
+    p.implements(p.ITemplateHelpers)
 	
 	# IConfigurer
 		
