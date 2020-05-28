@@ -14,7 +14,7 @@ setup(
 	keywords='ckan, cehcomments, comments, commenting, discussion',
 	author='Gary Luján',
 	author_email='glujan@idom.com',
-	url='https://github.com/glujan04/ckanext-ceh-comment',
+	url='https://github.com/glujan04/ceh-comment',
 	license='AGPL',
 	packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
 	namespace_packages=['ckanext'],
