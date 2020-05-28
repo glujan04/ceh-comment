@@ -16,13 +16,13 @@ class CommentPlugin(p.SingletonPlugin):
     p.implements(p.IConfigurable)
     p.implements(p.IConfigurer)
     p.implements(p.ITemplateHelpers)
-	
-	# IConfigurer
-		
-	def update_config(self, config_):
-		p.toolkit.add_template_directory(config_, 'templates')
-		p.toolkit.add_public_directory(config_, 'public')
-		p.toolkit.add_resource('resources', 'ceh_comment')
+
+    # IConfigurer
+
+    def update_config(self, config_):
+        p.toolkit.add_template_directory(config_, 'templates')
+        p.toolkit.add_public_directory(config_, 'public')
+        p.toolkit.add_resource('resources', 'ceh_comment')
 
     def configure(self, config):
     ##    '''
