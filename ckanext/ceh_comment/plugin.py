@@ -19,6 +19,12 @@ class CommentPlugin(p.SingletonPlugin):
     p.implements(p.IConfigurable, inherit=True)
     p.implements(p.IConfigurer, inherit=True)
     p.implements(p.ITemplateHelpers, inherit=True)
+	
+	def update_config(self, config):
+	# add template directory to template path
+	p.toolkit.add_template_directory(config, 'templates')
+	p.toolkit.add_public_directory(config_, 'public')
+	p.toolkit.add_resource('resources', 'ceh_comment')
 
     def configure(self, config):
     ##    '''
@@ -50,12 +56,6 @@ class CommentPlugin(p.SingletonPlugin):
         self.__class__.ceh_url = ceh_url
         self.__class__.site_url = site_url
         self.__class__.site_title = site_title
-
-    def update_config(self, config):
-        # add template directory to template path
-        p.toolkit.add_template_directory(config, 'templates')
-		p.toolkit.add_public_directory(config_, 'public')
-        p.toolkit.add_resource('resources', 'ceh_comment')
 
     @classmethod
     def ceh_comments(cls):
