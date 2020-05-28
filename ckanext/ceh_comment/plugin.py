@@ -13,16 +13,16 @@ log = logging.getLogger(__name__)
 
 class CommentPlugin(p.SingletonPlugin):
     
-    p.implements(p.IConfigurable, inherit=True)
-    p.implements(p.IConfigurer, inherit=True)
-    p.implements(p.ITemplateHelpers, inherit=True)
+    p.implements(p.IConfigurable)
+    p.implements(p.IConfigurer)
+    p.implements(p.ITemplateHelpers)
 
     # IConfigurer
 
     def update_config(self, config_):
         p.toolkit.add_template_directory(config_, 'templates')
         p.toolkit.add_public_directory(config_, 'public')
-        p.toolkit.add_resource('public/resources', 'ceh_comment')
+        p.toolkit.add_resource('fanstatic', 'ceh_comment')
 
     def configure(self, config):
     ##    '''
