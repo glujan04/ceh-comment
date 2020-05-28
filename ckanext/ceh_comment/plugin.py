@@ -12,19 +12,21 @@ import ckan.plugins as p
 log = logging.getLogger(__name__)
 
 class CommentPlugin(p.SingletonPlugin):
-    '''
-    Insert javascript fragments into package pages and the home page to allow
-    users to view and create comments on any package.
-    '''
+    
+	#Ckan Stuff
+    
+    '''Ceh plugin.'''
+	
     p.implements(p.IConfigurable, inherit=True)
     p.implements(p.IConfigurer, inherit=True)
     p.implements(p.ITemplateHelpers, inherit=True)
 	
+	# IConfigurer
+		
 	def update_config(self, config):
-	# add template directory to template path
-	p.toolkit.add_template_directory(config, 'templates')
-	p.toolkit.add_public_directory(config_, 'public')
-	p.toolkit.add_resource('resources', 'ceh_comment')
+		p.toolkit.add_template_directory(config, 'templates')
+		p.toolkit.add_public_directory(config_, 'public')
+		p.toolkit.add_resource('resources', 'ceh_comment')
 
     def configure(self, config):
     ##    '''
