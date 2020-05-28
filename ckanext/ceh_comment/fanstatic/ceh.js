@@ -1,6 +1,5 @@
-var $j = jQuery.noConflict();
-$j(document).ready(function(){
-   $j('#cehCommentForm').validate({
+$(document).ready(function(){
+   $('#cehCommentForm').validate({
            rules: {
                    cehname: {
                            required: true,
@@ -39,7 +38,7 @@ $j(document).ready(function(){
                    }
            },
            submitHandler : function(_form) {
-                   let form = $j(_form);
+                   let form = $(_form);
                    console.log('form',form);
                    //$.ajax({
                       // tu código ajax
@@ -49,7 +48,7 @@ $j(document).ready(function(){
    });
    
    //updateCountdownAll();
-   $j('#cehcomment').live('input', updCountdown);
+   $('#cehcomment').live('input', updCountdown);
 });
 
 //function updateCountdownAll() {
@@ -65,7 +64,7 @@ function updCountdown(e) {
     } else {
         currentElement = e;
     }
-    let maxLengh = $j(currentElement).attr('maxlength');
+    let maxLengh = $(currentElement).attr('maxlength');
     let remaining = maxLengh - $(currentElement).val().length;
-    $j(currentElement).nextAll('.countdown:first').text(remaining + '/' + maxLengh);
+    $(currentElement).nextAll('.countdown:first').text(remaining + '/' + maxLengh);
 }
