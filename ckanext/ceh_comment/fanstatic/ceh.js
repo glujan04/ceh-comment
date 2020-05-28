@@ -1,3 +1,4 @@
+$.noConflict();
 $(document).ready(function(){
    $('#cehCommentForm').validate({
            rules: {
