@@ -1,12 +1,10 @@
 <section class="additional-info">
-{% block styles %}
-  {{ super() }}
-  {% resource 'ceh_comment/ceh.css' %}
+{% block head_extras %}
+<link rel="stylesheet" href="{% url_for_static '/resources/ceh.css' %}">
+<script src="{% url_for_static '/resources/ceh.js' %}"></script>
 {% endblock %}
     <h3>Agregar Comentario</h3>
-<div class="module-content ceh-comments" style="
-    border: 1px solid red;
-">
+<div class="module-content ceh-comments" style="border: 1px solid red;">
 <form action="#" method="post" class="form-horizontal" id="commentForm" role="form"> 
     <div class="form-group">
         <label for="cehname" class="col-sm-2 control-label">Nombre</label>
@@ -61,10 +59,6 @@
           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
       })();*/
   </script>
-  {% block head_extras %}
-  {{ super() }}
-  {% resource 'ceh_comment/ceh.js' %}
-  {% endblock %}
 </div>
 <!-- Modal -->
 <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="termsConditionLabel" aria-hidden="true" style="display: none;">
