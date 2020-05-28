@@ -1,6 +1,6 @@
-$.noConflict();
-$(document).ready(function(){
-   $('#cehCommentForm').validate({
+var $j = jQuery.noConflict();
+$j(document).ready(function(){
+   $j('#cehCommentForm').validate({
            rules: {
                    cehname: {
                            required: true,
@@ -39,7 +39,7 @@ $(document).ready(function(){
                    }
            },
            submitHandler : function(_form) {
-                   let form = $(_form);
+                   let form = $j(_form);
                    console.log('form',form);
                    //$.ajax({
                       // tu código ajax
@@ -49,7 +49,7 @@ $(document).ready(function(){
    });
    
    //updateCountdownAll();
-   $('#cehcomment').live('input', updCountdown);
+   $j('#cehcomment').live('input', updCountdown);
 });
 
 //function updateCountdownAll() {
@@ -65,7 +65,7 @@ function updCountdown(e) {
     } else {
         currentElement = e;
     }
-    let maxLengh = $(currentElement).attr('maxlength');
+    let maxLengh = $j(currentElement).attr('maxlength');
     let remaining = maxLengh - $(currentElement).val().length;
-    $(currentElement).nextAll('.countdown:first').text(remaining + '/' + maxLengh);
+    $j(currentElement).nextAll('.countdown:first').text(remaining + '/' + maxLengh);
 }
