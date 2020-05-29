@@ -1,0 +1,7 @@
+        {% if c.userobj.sysadmin %}
+        <li>
+          <a href="{{ h.url_for('/report') }}" title="reports">
+            <span >{{ _('Reports') }}</span><a> data de prueba</a>
+          </a>
+        </li>
+        {% endif %}

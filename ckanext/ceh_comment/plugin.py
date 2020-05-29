@@ -129,6 +129,12 @@ class CommentPlugin(p.SingletonPlugin):
         return p.toolkit.render_snippet('ceh_comments.html', data)
 
     @classmethod
+    def ceh_notify(cls):
+        '''Icono de notificacion para el usuario logueado'''
+        data = {'userid':''}
+        return p.toolkit.render_snippet('ceh_notify.html', data)
+
+    @classmethod
     def ceh_recent(cls, num_comments=5):
         '''Add recent comments to the page. '''
         data = {'ceh_shortname': cls.ceh_name,
