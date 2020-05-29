@@ -45,7 +45,7 @@ $(document).ready(function(){
            },
            submitHandler : function(_form) {
                    let form = $(_form);
-                   console.log('form',form);
+                   console.log('form',form.serialize());
                    //$.ajax({
                       // tu código ajax
                    //})
