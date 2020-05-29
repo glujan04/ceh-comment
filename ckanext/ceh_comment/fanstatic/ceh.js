@@ -36,7 +36,7 @@ $(document).ready(function(){
                            //maxlength: $.format("{0} caracteres son demasiados!")
                    },
                    cehpolicy: {
-                           required: "Debe aceptar las políticas"
+                           required: "Debe aceptar los términos"
                    }
            },
            errorPlacement: function(label, element) {
@@ -49,7 +49,8 @@ $(document).ready(function(){
                    //$.ajax({
                       // tu código ajax
                    //})
-                   return false;
+				   $('#alertComment').alert();
+                   //return false;
            }
    });
    
