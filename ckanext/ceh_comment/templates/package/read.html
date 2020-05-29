@@ -1,9 +1,10 @@
 {% ckan_extends %}
 {% block head_extras %}
   {{ super() }}
-  {% resource 'ckanext_comment/jquery.validate.min.js' %}
+  
 {% endblock %}
 {% block secondary_content %}
+{% resource 'ckanext_comment/jquery.validate.min.js' %}
 {{ super() }}
   {% resource 'ckanext_comment/ceh.js' %}
   {% resource 'ckanext_comment/ceh.css' %}
