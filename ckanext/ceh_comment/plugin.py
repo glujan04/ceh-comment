@@ -135,6 +135,11 @@ class CommentPlugin(p.SingletonPlugin):
         return p.toolkit.render_snippet('ceh_notify.html', data)
 
     @classmethod
+    def new_comments():
+        '''Cantidad de comentarios nuevos'''
+        return 6
+
+    @classmethod
     def ceh_recent(cls, num_comments=5):
         '''Add recent comments to the page. '''
         data = {'ceh_shortname': cls.ceh_name,
@@ -155,5 +160,6 @@ class CommentPlugin(p.SingletonPlugin):
     def get_helpers(self):
         return {'ceh_comments': self.ceh_comments,
                 'ceh_recent': self.ceh_recent,
+                'new_comments': self.new_comments,
                 'ceh_notify': self.ceh_notify,
                 'current_ceh_url': self.current_ceh_url}

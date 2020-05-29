@@ -1,7 +1,9 @@
         {% if c.userobj.sysadmin %}
-        <li>
-          <a href="{{ h.url_for('/report') }}" title="reports">
-            <span >{{ _('Reports') }}</span><a> data de prueba</a>
-          </a>
+        {% set new_comments = h.new_comments() %}
+        {% set notify_tooltip = ngettext('%(num)d nuevo comentario', '%(num)d nuevos comentarios', new_comments)
+          %}
+        <li class="notifications {% if new_comments > 0 %}notifications-important{% endif %}">
+          <a href="{{ h.url_for('comments.index') }}" title="">
+            <i class="fa fa-comments"></i><span class="badge">{{ new_comments }}</span></a>
         </li>
         {% endif %}
