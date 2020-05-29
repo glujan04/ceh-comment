@@ -1,5 +1,6 @@
 $(document).ready(function(){
    $('#cehCommentForm').validate({
+           errorElement: 'span',
            rules: {
                    cehname: {
                            required: true,
@@ -8,7 +9,7 @@ $(document).ready(function(){
                    cehemail: {
                            required: true,
                            email: true,
-                           maxlength: 50
+                           maxlength: 30
                    },
                    cehcomment: {
                            required: true,
@@ -22,11 +23,12 @@ $(document).ready(function(){
                    cehname: {
                            required: "Ingrese un nombre",
                            //minlength: $.format("Mínimo {0} caracteres"),
-                           //maxlength: $.format("{0} caracteres son demasiados!")
+                           maxlength: $.format("máximo {0} caracteres")
                    },
                    cehemail: {
                            required: "Ingrese un correo",
-                           //maxlength: $.format("{0} caracteres son demasiados!")
+                           email: "Ingrese un correo válido",
+                           maxlength: $.format("máximo {0} caracteres")
                    },
                    cehcomment: {
                            required: "Ingrese un comentario",
