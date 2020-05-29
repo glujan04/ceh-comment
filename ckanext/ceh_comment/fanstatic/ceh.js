@@ -48,7 +48,7 @@ $(document).ready(function(){
    });
    
    //updateCountdownAll();
-   $('#cehcomment').live('input', updCountdown);
+   $('#cehcomment').on('input', updCountdown);
 });
 
 //function updateCountdownAll() {
