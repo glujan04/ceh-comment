@@ -51,6 +51,7 @@ $(document).ready(function(){
                    //})
 				   $('#cehCommentForm').trigger("reset");
                    $('#alertComment').fadeIn();
+				   resetCounter();
                    return false;
            }
    });
@@ -58,16 +59,15 @@ $(document).ready(function(){
    $('.ceh-close').click(function(){
       $('#alertComment').fadeOut();
    });
-   let ta = $('#cehcomment');
-   updCountdown(ta);
+   let ta = resetCounter();
    ta.on('input', updCountdown);
 });
 
-//function updateCountdownAll() {
-//    $('.message').each(function () {
-//        updCountdown(this);
-//    });
-//}
+function resetCounter() {
+    let ta = $('#cehcomment');
+   updCountdown(ta);
+   return ta;
+}
 
 function updCountdown(e) {
     let currentElement;
