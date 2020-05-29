@@ -155,4 +155,5 @@ class CommentPlugin(p.SingletonPlugin):
     def get_helpers(self):
         return {'ceh_comments': self.ceh_comments,
                 'ceh_recent': self.ceh_recent,
+                'ceh_notify': self.ceh_notify,
                 'current_ceh_url': self.current_ceh_url}
