@@ -38,11 +38,15 @@ Metodos extendidos
     margin-bottom: 0px;
 }
 
+.form-control_label_ech1 {
+    font-size: 13px !important;
+}
+
 .form-control_ech {
     height: 35px !important;
     font-size: 13px !important;
 }
 
 .ech-col {
-    height: 40px;
+    height: 45px;
 }
