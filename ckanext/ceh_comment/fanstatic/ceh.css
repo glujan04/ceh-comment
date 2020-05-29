@@ -50,3 +50,7 @@ Metodos extendidos
 .ech-col {
     height: 45px;
 }
+
+.ceh-tips::before {
+    content: " "
+}

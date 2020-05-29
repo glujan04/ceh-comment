@@ -17,7 +17,7 @@
                         <div class="form-group form-group_ech">
                             <label for="cehcomment" class="col-sm-2 control-label">Comentario</label>
                             <div class="col-sm-10">
-                              <span class="form-control_label_ech1"><i class="fa fa-question-circle"></i>formatos y textos</span>
+                              <span class="form-control_label_ech1"><i class="fa fa-question-circle"></i><a class="ceh-tips" href="#" data-toggle="modal" data-target="#tipsModal">formatos y textos</a></span>
                               <textarea class="form-control form-control_label_ech1" name="cehcomment" id="cehcomment" rows="5" style="margin: 0px; height: 105px; width: 657px;" maxlength="1000" required></textarea>
                               <span class="countdown"></span>
                             </div>
@@ -25,7 +25,7 @@
                         <div class="form-group form-group_ech">
                             <div class="col-sm-offset-2 col-sm-10">
                                   <input type="checkbox" class="form-checkbox-input" name="cehpolicy" id="cehpolicy">
-                            <span class="form-checkbox-label" for="cehpolicy">
+                            <span class="form-checkbox-label form-control_label_ech1" for="cehpolicy">
                                 He leído y acepto los <a href="#" data-toggle="modal" data-target="#termsModal">Términos y Condiciones</a></span>
                                 </div>
                         </div>
@@ -57,7 +57,7 @@
       })();*/
   </script>
 </div>
-<!-- Modal -->
+<!-- Modal Terms and Conditions -->
 <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="termsConditionLabel" aria-hidden="true" style="display: none;">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -85,6 +85,29 @@
           <hr>
 <h5>INFORMACIÓN ADICIONAL</h5>
           <p>Puede consultar la información adicional y detallada sobre nuestra Política de Privacidad.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Tips -->
+<div class="modal fade" id="tipsModal" tabindex="-1" role="dialog" aria-labelledby="tipsLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="tipsLabel">Algunos consejos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul>
+            <li>No se permiten etiquetas HTML.</li>
+            <li>Las líneas y los párrafos se reconocen automáticamente. Las etiquetas de salto de línea &lt;br /&gt;, &lt;p&gt; párrafo y &lt;/p&gt; cerrar párrafo se insertan automáticamente. Si no se reconocen los párrafos, simplemente agregue un par de líneas en blanco.</li>
+            <li>Las direcciones de las páginas web y las direcciones de correo electrónico se convierten en enlaces automáticamente.</li>
+            </ul>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
