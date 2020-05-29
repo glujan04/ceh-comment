@@ -39,6 +39,10 @@ $(document).ready(function(){
                            required: "Debe aceptar las políticas"
                    }
            },
+           errorPlacement: function(label, element) {
+                   label.addClass('ceh-error');
+                   element.parent().append(label);
+           },
            submitHandler : function(_form) {
                    let form = $(_form);
                    console.log('form',form);
@@ -49,8 +53,9 @@ $(document).ready(function(){
            }
    });
    
-   //updateCountdownAll();
-   $('#cehcomment').on('input', updCountdown);
+   let ta = $('#cehcomment');
+   updCountdown(ta);
+   ta.on('input', updCountdown);
 });
 
 //function updateCountdownAll() {
