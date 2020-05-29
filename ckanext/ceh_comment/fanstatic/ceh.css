@@ -39,10 +39,10 @@ Metodos extendidos
 }
 
 .form-control_ech {
-    height: 35px;
-    font-size: 13px;
+    height: 35px !important;
+    font-size: 13px !important;
 }
 
 .ech-col {
-    height: 63px;
+    height: 40px;
 }
