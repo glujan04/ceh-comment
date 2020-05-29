@@ -54,3 +54,7 @@ Metodos extendidos
 .ceh-tips::before {
     content: " "
 }
+
+.ceh-none {
+	display: none;
+}

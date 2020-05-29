@@ -45,16 +45,19 @@ $(document).ready(function(){
            },
            submitHandler : function(_form) {
                    let form = $(_form);
-                   console.log('form',form);
+                   console.log('form',form[0].serialize());
                    //$.ajax({
                       // tu código ajax
                    //})
-				   $('#alertComment').alert();
+				   $('#cehCommentForm').trigger("reset");
+                   $('#alertComment').fadeIn();
                    //return false;
            }
    });
    
-   $('#alertComment').alert('close');
+   $('.ceh-close').click(function(){
+      $('#alertComment').fadeOut();
+   });
    let ta = $('#cehcomment');
    updCountdown(ta);
    ta.on('input', updCountdown);
