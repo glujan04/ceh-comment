@@ -135,7 +135,7 @@ class CommentPlugin(p.SingletonPlugin):
         return p.toolkit.render_snippet('ceh_notify.html', data)
 
     @classmethod
-    def new_comments():
+    def new_comments(cls):
         '''Cantidad de comentarios nuevos'''
         return 6
 
