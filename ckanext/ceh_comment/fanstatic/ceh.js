@@ -45,13 +45,13 @@ $(document).ready(function(){
            },
            submitHandler : function(_form) {
                    let form = $(_form);
-                   console.log('form',form[0].serialize());
+                   console.log('form',form);
                    //$.ajax({
                       // tu código ajax
                    //})
 				   $('#cehCommentForm').trigger("reset");
                    $('#alertComment').fadeIn();
-                   //return false;
+                   return false;
            }
    });
    
