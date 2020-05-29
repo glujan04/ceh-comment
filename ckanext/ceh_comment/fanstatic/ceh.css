@@ -27,4 +27,22 @@ textarea[name=cehcomment] {
 .ceh-error {
     font-size: 13px;
     color: red;
+    display: block;
+}
+
+/*
+Metodos extendidos
+*/
+
+.form-group_ech {
+    margin-bottom: 0px;
+}
+
+.form-control_ech {
+    height: 35px;
+    font-size: 13px;
+}
+
+.ech-col {
+    height: 63px;
 }
