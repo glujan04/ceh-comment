@@ -54,7 +54,7 @@ $(document).ready(function(){
            }
    });
    
-   $('#alertComment').alert();
+   $('#alertComment').alert('close');
    let ta = $('#cehcomment');
    updCountdown(ta);
    ta.on('input', updCountdown);
