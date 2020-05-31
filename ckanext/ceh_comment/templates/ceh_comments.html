@@ -1,46 +1,140 @@
+<!-- <a href="/dataset/ortoexpress-2015">OrtoExpress 25 cm/píxel de Canarias (2015)</a> -->
 <section class="additional-info">
-<div id="alertComment" class="alert alert-success alert-dismissible ceh-none" role="alert">
-  <strong>Muy Bien!</strong> Su comentario ha sido puesto en cola para su revisión por los administradores del sitio y se publicará después de su aprobación.
-  <button type="button" class="close ceh-close" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-     <h3>Agregar Comentario</h3> 
-<div class="module-content ceh-comments">
-<form action="" method="post" class="form-horizontal" id="cehCommentForm" name="cehCommentForm" role="form"> 
-    <div class="form-group form-group_ech">
+  <h3>Gestionar Comentarios</h3>
+  <table class="table table-striped table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Correo</th>
+        <th scope="col">Comentario</th>
+        <th scope="col">Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+          <tr>
+            <td class="dataset-label">Juan García</td>
+            <td class="dataset-details">juan@gmail.com</td>
+            <td class="dataset-details">Es fácil ver aquí cómo cada celda de encabezado en la tabla, provee información para el resto de las celdas en la columna a la que pertenece. Algunos agentes, como los navegadores de voz, hacen el mismo análisis cuando deben informar al usuario qué celda de encabezado está asociada a una celda en particular.</td>
+            <td class="dataset-details">
+              <button type="button" class="btn btn-primary">Publicar</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="dataset-label">Miguel Abanto</td>
+            <td class="dataset-details">miguel@hotmail.com</td>
+            <td class="dataset-details">Los valores "col" y "row" indican que la celda de encabezado provee información para el resto de las celdas en la columna o fila (respectivamente) en que está presente. Los otros dos valores tendrán sentido más adelante en este tutorial.</td>
+            <td class="dataset-details">
+              <button type="button" class="btn btn-secondary">Despublicar</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="dataset-label">Daniel Lozano García Estrada</td>
+            <td class="dataset-details">dlozano@idom.com</td>
+            <td class="dataset-details">En el siguiente ejemplo, la tabla presentada anteriormente ha sido mejorada con más celdas de encabezado, con el fin de aumentar la legibilidad. Aquí, la celda en la esquina superior izquierda de la tabla, proveería información ambigua si el atributo scope no estuviera presente. En otras palabras, afectaría a las celdas en su columna, así como a las celdas en su fila. La presencia del atributo scope ha dejado en claro que las celdas afectadas por este encabezado son aquellas en la misma fila.</td>
+            <td class="dataset-details">
+              <button type="button" class="btn btn-primary">Publicar</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="dataset-label">Eduardo Boris Canales Quiroz</td>
+            <td class="dataset-details">equiroz@yahoo.es</td>
+            <td class="dataset-details">El título de una tabla es otro componente que aporta a la legibilidad. Mientras que algunas tablas, debido a su estructura o simplicidad, pueden sobrevivir sin un título, otras lo necesitarán inexorablemente. En cualquier caso, el título de una tabla puede mejorar pero nunca empeorar.
+
+La idea de un título es la de proveer una descripción concisa acerca de la información presentada en la tabla o su propósito, aportando contexto y haciéndola significativamente más fácil de comprender. En HTML, los títulos de las tablas son insertados mediante el elemento caption, justo después de la etiqueta de apertura de la misma y antes que todos los demás elementos de su estructura. En el ejemplo siguiente hay una tabla en la cual el significado de los datos sería muy difícil de descifrar sin un título apropiado.</td>
+            <td class="dataset-details">
+              <button type="button" class="btn btn-secondary">Despublicar</button>
+            </td>
+          </tr>
+	<!--
+          <tr>
+            <th scope="row" class="dataset-label">Última actualización</th>
+            <td class="dataset-details">
+<span class="automatic-local-datetime" data-datetime="2020-05-27T08:13:41+0000">27 de mayo de 2020, 3:13 (UTC-05:00)</span>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" class="dataset-label">Última actualización</th>
+            <td class="dataset-details">
+<span class="automatic-local-datetime" data-datetime="2020-05-27T08:13:41+0000">27 de mayo de 2020, 3:13 (UTC-05:00)</span>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" class="dataset-label">Creado</th>
+
+            <td class="dataset-details">
+<span class="automatic-local-datetime" data-datetime="2020-05-27T08:13:41+0000">27 de mayo de 2020, 3:13 (UTC-05:00)</span>
+            </td>
+          </tr>
+          <tr rel="dc:relation" resource="_:extra">
+            <th scope="row" class="dataset-label" property="rdfs:label">Identificador</th>
+            <td class="dataset-details" property="rdf:value">https://opendata.sitcan.es/dataset/lineas-de-base-recta</td>
+          </tr>
+          <tr rel="dc:relation" resource="_:extra">
+            <th scope="row" class="dataset-label" property="rdfs:label">Idioma</th>
+            <td class="dataset-details" property="rdf:value">es</td>
+          </tr>
+          <tr rel="dc:relation" resource="_:extra">
+            <th scope="row" class="dataset-label" property="rdfs:label">Nombre del publicador</th>
+            <td class="dataset-details" property="rdf:value">GRAFCAN</td>
+          </tr>
+          <tr rel="dc:relation" resource="_:extra">
+            <th scope="row" class="dataset-label" property="rdfs:label">Tema</th>
+            <td class="dataset-details" property="rdf:value">http://datos.gob.es/kos/sector-publico/sector/sector-publico</td>
+          </tr>
+          <tr rel="dc:relation" resource="_:extra">
+            <th scope="row" class="dataset-label" property="rdfs:label">URI del publicador</th>
+            <td class="dataset-details" property="rdf:value">http://datos.gob.es/recurso/sector-publico/org/Organismo/GE0012152</td>
+          </tr>
+		  -->
+    </tbody>
+  </table>
+</section>
+<section class="additional-info">
+  <div id="alertComment" class="alert alert-success alert-dismissible ceh-none" role="alert">
+    <strong>Muy Bien!</strong> Su comentario ha sido puesto en cola para su revisión por los administradores del sitio y se publicará después de su aprobación.
+      <button type="button" class="close ceh-close" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <h3>Agregar Comentario</h3> 
+  <div class="module-content ceh-comments">
+    <form action="" method="post" class="form-horizontal" id="cehCommentForm" name="cehCommentForm" role="form"> 
+      <div class="form-group form-group_ech">
         <label for="cehname" class="col-sm-2 control-label">Nombre</label>
         <div class="col-sm-10 ech-col">
-                              <input type="text" class="form-control form-control_ech" name="cehname" id="cehname" maxlength="50" required>
-                            </div>
-    </div>
-    <div class="form-group form-group_ech">
+          <input type="text" class="form-control form-control_ech" name="cehname" id="cehname" maxlength="50" required>
+        </div>
+      </div>
+      <div class="form-group form-group_ech">
         <label for="cehemail" class="col-sm-2 control-label">Correo</label>
         <div class="col-sm-10 ech-col">
-                              <input type="text" class="form-control form-control_ech" name="cehemail" id="cehemail" maxlength="30" required>
-                            </div>
-    </div>
-                        <div class="form-group form-group_ech">
-                            <label for="cehcomment" class="col-sm-2 control-label">Comentario</label>
-                            <div class="col-sm-10">
-                              <span class="form-control_label_ech1"><i class="fa fa-question-circle"></i><a class="ceh-tips" href="#" data-toggle="modal" data-target="#tipsModal">formatos y textos</a></span>
-                              <textarea class="form-control form-control_label_ech1" name="cehcomment" id="cehcomment" rows="5" style="margin: 0px; height: 105px; width: 657px;" maxlength="1000" required></textarea>
-                              <span class="countdown"></span>
-                            </div>
-                        </div>
-                        <div class="form-group form-group_ech">
-                            <div class="col-sm-offset-2 col-sm-10 ech-col">
-                                  <input type="checkbox" class="form-checkbox-input" name="cehpolicy" id="cehpolicy">
-                            <span class="form-checkbox-label form-control_label_ech1" for="cehpolicy">
-                                He leído y acepto los <a href="#" data-toggle="modal" data-target="#termsModal">Términos y Condiciones</a></span>
-                                </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button class="btn btn-success btn-circle text-uppercase" type="submit" id="submitComment"><span class="fa fa-paper-plane"></span> Agregar Comentario</button>
-                            </div>
-                        </div>            
-                    </form>
+          <input type="text" class="form-control form-control_ech" name="cehemail" id="cehemail" maxlength="30" required>
+        </div>
+      </div>
+      <div class="form-group form-group_ech">
+        <label for="cehcomment" class="col-sm-2 control-label">Comentario</label>
+        <div class="col-sm-10">
+          <span class="form-control_label_ech1">
+            <i class="fa fa-question-circle"></i>
+            <a class="ceh-tips" href="#" data-toggle="modal" data-target="#tipsModal">formatos y textos</a>
+          </span>
+          <textarea class="form-control form-control_label_ech1" name="cehcomment" id="cehcomment" rows="5" style="margin: 0px; height: 105px; width: 657px;" maxlength="500" required>
+          </textarea>
+          <span class="countdown"></span>
+        </div>
+      </div>
+      <div class="form-group form-group_ech">
+        <div class="col-sm-offset-2 col-sm-10 ech-col">
+          <input type="checkbox" class="form-checkbox-input" name="cehpolicy" id="cehpolicy">
+          <span class="form-checkbox-label form-control_label_ech1" for="cehpolicy">He leído y acepto los <a href="#" data-toggle="modal" data-target="#termsModal">Términos y Condiciones</a></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button class="btn btn-success btn-circle text-uppercase" type="submit" id="submitComment"><span class="fa fa-paper-plane"></span> Agregar Comentario</button>
+        </div>
+      </div>
+    </form>
 
   <div id="ceh_thread"></div>
 
@@ -61,7 +155,7 @@
           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
       })();*/
   </script>
-</div>
+  </div>
 <!-- Modal Terms and Conditions -->
 <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="termsConditionLabel" aria-hidden="true" style="display: none;">
   <div class="modal-dialog" role="document">

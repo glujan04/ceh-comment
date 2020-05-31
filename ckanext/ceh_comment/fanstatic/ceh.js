@@ -13,7 +13,7 @@ $(document).ready(function(){
                    },
                    cehcomment: {
                            required: true,
-                           maxlength: 1000
+                           maxlength: 500
                    },
                    cehpolicy: {
                            required: true
