@@ -2,6 +2,7 @@ textarea[name=cehcomment] {
     resize: none;
 }
 
+/* COMENTARIOS */
 .ceh-comments {
  border: 1px solid red;
 }
@@ -30,10 +31,6 @@ textarea[name=cehcomment] {
     display: block;
 }
 
-/*
-Metodos extendidos
-*/
-
 .form-group_ech {
     margin-bottom: 0px;
 }
@@ -57,4 +54,19 @@ Metodos extendidos
 
 .ceh-none {
 	display: none;
+}
+
+/* GESTION COMENTARIOS */
+
+.table-striped-ceh > tbody > tr:nth-of-type(odd) {
+  background-color: #e6ffe6;
+}
+.table-hover-ceh > tbody > tr:hover {
+  background-color: #a3e9a4;
+}
+
+.btn-secondary-ceh {
+	color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
 }
