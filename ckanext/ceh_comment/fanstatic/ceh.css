@@ -59,14 +59,22 @@ textarea[name=cehcomment] {
 /* GESTION COMENTARIOS */
 
 .table-striped-ceh > tbody > tr:nth-of-type(odd) {
-  background-color: #e6ffe6;
+  background-color: #ebf2fa;
 }
 .table-hover-ceh > tbody > tr:hover {
-  background-color: #a3e9a4;
+  background-color: #8cb3d9;
 }
 
 .btn-secondary-ceh {
 	color: #fff;
     background-color: #6c757d;
     border-color: #6c757d;
+}
+
+.ceh-tr-wd{
+	width: 150px;
+}
+
+.table-hover-ceh > tbody > * {
+	font-size: 13px;
 }
