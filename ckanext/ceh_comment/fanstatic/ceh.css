@@ -75,6 +75,6 @@ textarea[name=cehcomment] {
 	width: 150px;
 }
 
-.table-hover-ceh > tbody > * {
+.table-hover-ceh > tbody, button.btn {
 	font-size: 13px;
 }
