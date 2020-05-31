@@ -71,8 +71,12 @@ textarea[name=cehcomment] {
     border-color: #6c757d;
 }
 
-.ceh-tr-wd {
+.ceh-tr-col1 {
 	width: 150px !important;
+}
+
+.ceh-tr-col2 {
+    width: 140px !important;
 }
 
 .table-hover-ceh > tbody, button.btn {
