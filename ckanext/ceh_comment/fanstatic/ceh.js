@@ -55,12 +55,17 @@ $(document).ready(function(){
                    return false;
            }
    });
-   
-   $('.ceh-close').click(function(){
+   // Comentarios
+   $('.ceh-close-calert').click(function(){
       $('#alertComment').fadeOut();
    });
    let ta = resetCounter();
    ta.on('input', updCountdown);
+
+   // Gestion de comentarios
+   $('.ceh-close-cmalert').click(function(){
+      $('#publishComment').fadeOut();
+   });
 });
 
 function resetCounter() {

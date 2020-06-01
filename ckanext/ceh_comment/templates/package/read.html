@@ -7,7 +7,16 @@
 {% endblock %}
 {% block primary_content_inner %}
   {{ super() }}
-  {% block ceh_comments %}
-    {{ h.ceh_comments() }}
+  {% block header_account_logged %} {% if c.userobj %}
+     {% if c.userobj.sysadmin %}
+        {% block ceh_manager_comments %}
+           {{ h.ceh_manager_comments() }}
+        {% endblock %}
+     {% endif %}
+  {% endif %} {% endblock %}
+  {% block header_account_notlogged %}
+     {% block ceh_comments %}
+       {{ h.ceh_comments() }}
+     {% endblock %}
   {% endblock %}
 {% endblock %}

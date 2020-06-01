@@ -9,7 +9,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 version = '0.1.0'
 setup(
-	name='ceh-comment',
+	name='ckanext-ceh-comment',
 	version=version,
 	description="plugin de comentarios para CKAN",
 	long_description=long_description,
@@ -28,7 +28,9 @@ setup(
 	],
 	entry_points=\
 	"""
-    [ckan.plugins]
-	ceh_comment = ckanext.ceh_comment.plugin:CommentPlugin
-	""",
+        [ckan.plugins]
+            ceh_comment = ckanext.ceh_comment.plugin:CommentPlugin
+        [paste.paster_command]
+            cehcomment = ckanext.ceh_comment.commands.ceh_comments:CehComment
+	"""
 )
