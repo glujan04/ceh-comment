@@ -49,7 +49,7 @@ class CehComment(CkanCommand):
         cmd = self.args[0]
         if cmd == 'initdb':
             self.initdb()
-        else if cmd == 'cleandb':
+        elif cmd == 'cleandb':
             self.cleandb()
         else:
             print('Command {0} not recognized'.format(cmd))
