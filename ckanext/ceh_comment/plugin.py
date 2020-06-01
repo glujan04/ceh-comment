@@ -8,7 +8,6 @@ import time
 from ckan.common import request
 from ckan.lib.helpers import url_for_static_or_external
 import ckan.plugins as p
-from django.contrib import messages
 
 log = logging.getLogger(__name__)
 
@@ -62,7 +61,9 @@ class CommentPlugin(p.SingletonPlugin):
           cehname = request.form.get('cehname')
           cehemail = request.form.get('cehemail')
           cehcomment = request.form.get('cehcomment')
-          messages.success(request, 'Form submission successful kasdjskdks')
+          h.flash_success(
+                _(u'User is now registered but you are still '
+                  u'logged in as "%s" from before'))
 
     @classmethod
     def ceh_manager_comments(cls):
