@@ -58,7 +58,7 @@ class CommentPlugin(p.SingletonPlugin):
         self.__class__.site_title = site_title
 
     @app.route('/save', methods=['POST'])
-    def insert_comment():
+    def save():
         if request.form.is_valid():
           cehname = request.form.get('cehname')
           cehemail = request.form.get('cehemail')
