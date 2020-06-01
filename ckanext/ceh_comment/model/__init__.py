@@ -32,10 +32,10 @@ def init_db():
 
     if ceh_comment_table is None:
         define_comment_tables()
-        log.debug('CEH Comment tables defined in memory')
+        log.debug('Ceh Comment tables defined in memory')
 
     if not model.package_table.exists():
-        log.debug('CEH Comment tables creation deferred')
+        log.debug('Ceh Comment tables creation deferred')
         return
 
     if not ceh_comment_table.exists():
@@ -44,10 +44,10 @@ def init_db():
         # using metadata.create_all()
         ceh_comment_table.create()
 
-        log.debug('CEH Comment tables created')
+        log.debug('Ceh Comment tables created')
     else:
         from ckan.model.meta import engine
-        log.debug('CEH Comment tables already exist')
+        log.debug('Ceh Comment tables already exist')
         # Check if existing tables need to be updated
         inspector = Inspector.from_engine(engine)
 
@@ -94,16 +94,21 @@ def define_comment_tables():
         'ceh_comment',
         metadata,
         Column('id', types.UnicodeText, primary_key=True, default=make_uuid),
-        # The guid is the 'identity' of the dataset, according to the source.
+        # The guid is the 'identity' of the dataset.
         Column('guid', types.UnicodeText, default=u''),
         Column('name', types.UnicodeText, nullable=False),
         Column('email', types.UnicodeText, nullable=False),
         Column('message', types.UnicodeText, nullable=False),
         Column('created', types.DateTime, default=datetime.datetime.utcnow),
+        # If comment is active for show on forum list
         Column('active', types.Boolean, default=False),
+        # If the record is a response to a comment
         Column('ref_id', types.UnicodeText, nullable=True),
+        # The user id who activated or deactivated the registration in the forum list
         Column('pub_userid', types.UnicodeText, nullable=True),
+        # The date of activation or deactivation of the registration in the forum list
         Column('pub_date', types.DateTime, nullable=True),
+        # If the user has been notified
         Column('notify_alert', types.Integer),
     )
 
@@ -117,7 +122,7 @@ def clean_db():
 
     if ceh_comment_table is None:
         define_comment_tables()
-        log.debug('CEH Comment tables defined in memory')
+        log.debug('Ceh Comment tables defined in memory')
 
     try:
         if ceh_comment_table.exists():

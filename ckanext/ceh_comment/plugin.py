@@ -8,6 +8,7 @@ import time
 from ckan.common import request
 from ckan.lib.helpers import url_for_static_or_external
 import ckan.plugins as p
+from django.contrib import messages
 
 log = logging.getLogger(__name__)
 
@@ -54,6 +55,14 @@ class CommentPlugin(p.SingletonPlugin):
         self.__class__.ceh_url = ceh_url
         self.__class__.site_url = site_url
         self.__class__.site_title = site_title
+
+    @app.route('/save', methods=['POST'])
+    def insert_comment():
+        if request.form.is_valid():
+          cehname = request.form.get('cehname')
+          cehemail = request.form.get('cehemail')
+          cehcomment = request.form.get('cehcomment')
+    return messages.success(request, 'Form submission successful kasdjskdks')
 
     @classmethod
     def ceh_manager_comments(cls):

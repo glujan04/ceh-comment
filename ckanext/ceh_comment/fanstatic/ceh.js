@@ -49,10 +49,10 @@ $(document).ready(function(){
                    //$.ajax({
                       // tu código ajax
                    //})
-				   $('#cehCommentForm').trigger("reset");
-                   $('#alertComment').fadeIn();
+				   //$('#cehCommentForm').trigger("reset");
+                   //$('#alertComment').fadeIn();
 				   resetCounter();
-                   return false;
+                   //return false;
            }
    });
    // Comentarios
@@ -63,9 +63,9 @@ $(document).ready(function(){
    ta.on('input', updCountdown);
 
    // Gestion de comentarios
-   $('.ceh-close-cmalert').click(function(){
-      $('#publishComment').fadeOut();
-   });
+   //$('.ceh-close-cmalert').click(function(){
+   //   $('#publishComment').fadeOut();
+   //});
 });
 
 function resetCounter() {
