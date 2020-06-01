@@ -8,8 +8,6 @@ import time
 from ckan.common import request
 from ckan.lib.helpers import url_for_static_or_external
 import ckan.plugins as p
-from flask import Flask
-app = Flask(__name__)
 
 log = logging.getLogger(__name__)
 
@@ -57,7 +55,6 @@ class CommentPlugin(p.SingletonPlugin):
         self.__class__.site_url = site_url
         self.__class__.site_title = site_title
 
-    @app.route('/save', methods=['POST'])
     def save():
         if request.form.is_valid():
           cehname = request.form.get('cehname')
