@@ -62,7 +62,7 @@ class CommentPlugin(p.SingletonPlugin):
           cehname = request.form.get('cehname')
           cehemail = request.form.get('cehemail')
           cehcomment = request.form.get('cehcomment')
-    return messages.success(request, 'Form submission successful kasdjskdks')
+     messages.success(request, 'Form submission successful kasdjskdks')
 
     @classmethod
     def ceh_manager_comments(cls):
