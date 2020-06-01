@@ -235,5 +235,5 @@ class CommentPlugin(p.SingletonPlugin):
                 'ceh_recent': self.ceh_recent,
                 'new_comments': self.new_comments,
                 'ceh_notify': self.ceh_notify,
-                'ceh_manager_comments', self.ceh_manager_comments,
+                'ceh_manager_comments': self.ceh_manager_comments,
                 'current_ceh_url': self.current_ceh_url}
