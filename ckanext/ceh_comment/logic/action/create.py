@@ -39,7 +39,7 @@ def comment_create(context, data_dict):
     # Create the object
     cmt = comment_model.Comment(thread_id=thread_id,
                                 comment=cleaned_comment)
-    cmt.user_id = None#userobj.id if userobj else None
+    cmt.user_id = userobj.id if userobj else None
     cmt.subject = data_dict.get('subject', 'No subject')
     cmt.email = data_dict.get('email', 'No Email')
 
