@@ -8,7 +8,7 @@ import time
 from ckan.common import request
 from ckan.lib.helpers import url_for_static_or_external
 import ckan.plugins as p
-from form import UserForm
+
 
 log = logging.getLogger(__name__)
 
