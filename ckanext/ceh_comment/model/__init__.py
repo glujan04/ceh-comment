@@ -238,6 +238,7 @@ class Comment(Base):
         d['user_id'] = self.user_id
         d['username'] = name
         d['subject'] = self.subject
+        d['email'] = self.email
         d['content'] = self.comment
         d['state'] = self.state
         d['thread_id'] = self.thread_id

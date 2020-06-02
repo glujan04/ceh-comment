@@ -41,6 +41,7 @@ def comment_create(context, data_dict):
                                 comment=cleaned_comment)
     cmt.user_id = userobj.id
     cmt.subject = data_dict.get('subject', 'No subject')
+    cmt.email = data_dict.get('email', 'No Email')
 
     if 'creation_date' in context:
         cmt.creation_date = datetime.datetime.fromtimestamp(context['creation_date'])

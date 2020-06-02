@@ -26,6 +26,7 @@ def comment_update(context, data_dict):
     cleaned_comment = util.clean_input(data_dict.get('comment'))
 
     comment.subject = data_dict.get('subject')
+    comment.email = data_dict.get('email')
     comment.comment = cleaned_comment
     comment.modified_date = datetime.datetime.now()
 
