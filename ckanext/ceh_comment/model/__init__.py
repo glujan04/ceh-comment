@@ -187,7 +187,7 @@ class Comment(Base):
                             order_by="asc(Comment.creation_date)")
 
     thread_id = Column(types.UnicodeText, ForeignKey('ceh_comment_thread.id'), nullable=True)
-    user_id = Column(types.UnicodeText, ForeignKey(model.User.id), nullable=False)
+    user_id = Column(types.UnicodeText, ForeignKey(model.User.id), nullable=True)
     subject = Column(types.UnicodeText)
     email = Column(types.UnicodeText)
     comment = Column(types.UnicodeText)
