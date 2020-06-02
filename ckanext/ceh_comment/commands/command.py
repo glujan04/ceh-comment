@@ -36,8 +36,6 @@ class CehComment(CkanCommand):
     def command(self):
         self._load_config()
 
-        # We'll need a sysadmin user to perform most of the actions
-        # We will use the sysadmin site user (named as the site_id)
         context = {'model': model, 'session': model.Session, 'ignore_auth': True}
         self.admin_user = get_action('get_site_user')(context, {})
 
@@ -61,10 +59,10 @@ class CehComment(CkanCommand):
         from ckanext.ceh_comment.model import init_db as db_setup
         db_setup()
 
-        print('DB table created')
+        print('DB tables created')
 
     def cleandb(self):
         from ckanext.ceh_comment.model import clean_db as db_remove
         db_remove()
 
-        print('DB table removed')
+        print('DB tables removed')

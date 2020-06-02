@@ -1,22 +1,5 @@
 {% ckan_extends %}
-{% block secondary_content %}
-{{ super() }}
-  {% resource 'ckanext_comment/jquery.validate.js' %}
-  {% resource 'ckanext_comment/ceh.js' %}
-  {% resource 'ckanext_comment/ceh.css' %}
-{% endblock %}
 {% block primary_content_inner %}
-  {{ super() }}
-  {% block header_account_logged %} {% if c.userobj %}
-     {% if c.userobj.sysadmin %}
-        {% block ceh_manager_comments %}
-           {{ h.ceh_manager_comments() }}
-        {% endblock %}
-     {% endif %}
-  {% endif %} {% endblock %}
-  {% block header_account_notlogged %}
-     {% block ceh_comments %}
-       {{ h.ceh_comments() }}
-     {% endblock %}
-  {% endblock %}
+    {{ super() }}
+    {% snippet "package/ceh_comment_list.html", pkg_id=c.pkg.id, pkg_name=c.pkg.name, userobj=c.userobj %}
 {% endblock %}

@@ -13,58 +13,33 @@ import ckan.plugins as p
 log = logging.getLogger(__name__)
 
 class CommentPlugin(p.SingletonPlugin):
-
-    p.implements(p.IConfigurable)
-    p.implements(p.IConfigurer)
-    p.implements(p.ITemplateHelpers)
+    p.implements(p.IRoutes, inherit=True)
+    p.implements(p.IConfigurer, inherit=True)
+    p.implements(p.IPackageController, inherit=True)
+    p.implements(p.ITemplateHelpers, inherit=True)
+    p.implements(p.IActions, inherit=True)
+    p.implements(p.IAuthFunctions, inherit=True)
 
     # IConfigurer
 
     def update_config(self, config_):
-        p.toolkit.add_template_directory(config_, 'templates')
+        p.toolkit.add_template_directory(config_, "templates")
         p.toolkit.add_public_directory(config_, 'public')
         p.toolkit.add_resource('fanstatic', 'ckanext_comment')
 
     def configure(self, config):
-    ##    '''
-    ##    Called upon CKAN setup, will pass current configuration dict to the
-    ##    plugin to read custom options.  To implement Disqus Single Sign On,
-    ##    you must have your secret and public key in the ckan config file. For
-    ##    more info on Disqus SSO see:
-    ##    https://help.disqus.com/customer/portal/articles/236206-integrating-single-sign-on
-    ##    '''
         ceh_name = config.get('ceh.comment.name', None)
-    ##    disqus_secret_key = config.get('disqus.secret_key', None)
-    ##    disqus_public_key = config.get('disqus.public_key', None)
         ceh_url = config.get('ceh.comment.url', None)
         site_url = config.get('ckan.site_url', None)
         site_title = config.get('ckan.site_title', None)
         if ceh_name is None:
             log.warn("No forum name is set. Please set \
                 'ceh.comment.name' in your .ini!")
-    ##    config['pylons.app_globals'].has_commenting = True
-
-    ##    disqus_developer = p.toolkit.asbool(config.get('disqus.developer',
-    ##                                                   'false'))
-    ##    disqus_developer = str(disqus_developer).lower()
-    ##    # store these so available to class methods
-    ##    self.__class__.disqus_developer = disqus_developer
         self.__class__.ceh_name = ceh_name
-    ##    self.__class__.disqus_secret_key = disqus_secret_key
-    ##    self.__class__.disqus_public_key = disqus_public_key
         self.__class__.ceh_url = ceh_url
         self.__class__.site_url = site_url
         self.__class__.site_title = site_title
 
-
-    #def register(request):
-    #    if request.form.is_valid():
-    #      cehname = request.form.get('cehname')
-    #     cehemail = request.form.get('cehemail')
-    #      cehcomment = request.form.get('cehcomment')
-    #      h.flash_success(
-    #            _(u'User is now registered but you are still '
-    #              u'logged in as "%s" from before'))
 
     @classmethod
     def ceh_manager_comments(cls):
@@ -176,9 +151,6 @@ class CommentPlugin(p.SingletonPlugin):
         timestamp = int(time.time())
         # generate our hmac signature
         sig = ''
-        ##if cls.disqus_secret_key is not None:
-        ##    sig = hmac.HMAC(cls.disqus_secret_key, '%s %s' %
-        ##                    (message, timestamp), hashlib.sha1).hexdigest()
 
         # we need to create an identifier
         try:
@@ -247,4 +219,62 @@ class CommentPlugin(p.SingletonPlugin):
                 'new_comments': self.new_comments,
                 'ceh_notify': self.ceh_notify,
                 'ceh_manager_comments': self.ceh_manager_comments,
-                'current_ceh_url': self.current_ceh_url}
+                'current_ceh_url': self.current_ceh_url,
+                'get_comment_thread': self._get_comment_thread,
+                'get_comment_count_for_dataset': self._get_comment_count_for_dataset}
+
+    def get_actions(self):
+        from ckanext.ceh_comment.logic.action import get, create, delete, update
+
+        return {
+            "comment_create": create.comment_create,
+            "thread_show": get.thread_show,
+            "comment_update": update.comment_update,
+            "comment_show": get.comment_show,
+            "comment_delete": delete.comment_delete,
+            "comment_count": get.comment_count
+        }
+
+    def get_auth_functions(self):
+        from ckanext.ceh_comment.logic.auth import get, create, delete, update
+
+        return {
+            'comment_create': create.comment_create,
+            'comment_update': update.comment_update,
+            'comment_show': get.comment_show,
+            'comment_delete': delete.comment_delete,
+            "comment_count": get.comment_count
+        }
+
+    # IPackageController
+
+    def before_view(self, pkg_dict):
+        # TODO: append comments from model to pkg_dict
+        return pkg_dict
+
+    # IRoutes
+
+    def before_map(self, map):
+        """
+            /dataset/NAME/comments/reply/PARENT_ID
+            /dataset/NAME/comments/add
+        """
+        controller = 'ckanext.yceh_comment.controller:CommentController'
+        map.connect('/dataset/{dataset_id}/comments/add', controller=controller, action='add')
+        map.connect('/dataset/{dataset_id}/comments/{comment_id}/edit', controller=controller, action='edit')
+        map.connect('/dataset/{dataset_id}/comments/{parent_id}/reply', controller=controller, action='reply')
+        map.connect('/dataset/{dataset_id}/comments/{comment_id}/delete', controller=controller, action='delete')
+        return map
+
+    def _get_comment_thread(self, dataset_name):
+        import ckan.model as model
+        from ckan.logic import get_action
+        url = '/dataset/%s' % dataset_name
+        return get_action('thread_show')({'model': model, 'with_deleted': True}, {'url': url})
+
+    def _get_comment_count_for_dataset(self, dataset_name):
+        import ckan.model as model
+        from ckan.logic import get_action
+        url = '/dataset/%s' % dataset_name
+        count = get_action('comment_count')({'model': model}, {'url': url})
+        return count

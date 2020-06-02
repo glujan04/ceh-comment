@@ -1,133 +1,280 @@
-import logging
+import uuid
 import datetime
 
-from sqlalchemy import event
-from sqlalchemy import Table
-from sqlalchemy import Column
-from sqlalchemy import ForeignKey
+from sqlalchemy import Column, MetaData, ForeignKey, func
 from sqlalchemy import types
-from sqlalchemy import Index
-from sqlalchemy.engine.reflection import Inspector
-from sqlalchemy.orm import backref, relation
-from sqlalchemy.exc import InvalidRequestError
+from sqlalchemy.orm import relationship, backref
+from sqlalchemy.ext.declarative import declarative_base
 
-from ckan import model
-from ckan.model.meta import metadata, mapper, Session
-from ckan.model.types import make_uuid
-from ckan.model.domain_object import DomainObject
-from ckan.model.package import Package
+from ckan.plugins import toolkit
+from ckan.lib.base import model, config
 
-log = logging.getLogger(__name__)
+log = __import__('logging').getLogger(__name__)
 
+Base = declarative_base()
+metadata = MetaData()
 
-__all__ = [
-    'CehComment', 'ceh_comment_table'
-]
+COMMENT_APPROVED = "approved"
+COMMENT_PENDING = "pending"
 
 
-ceh_comment_table = None
+def make_uuid():
+    return unicode(uuid.uuid4())
+
+
+def acceptable_comment_on(objtype):
+    return objtype in ['package']
+
+
+class CommentThread(Base):
+    """
+    Represents a thread, or in this particular case a collection of
+    comments against a CKAN object.  This is the container for the
+    """
+    __tablename__ = 'ceh_comment_thread'
+
+    id = Column(types.UnicodeText, primary_key=True, default=make_uuid)
+    url = Column(types.UnicodeText)
+    creation_date = Column(types.DateTime, default=datetime.datetime.now)
+    locked = Column(types.Boolean, default=False)
+
+    def __init__(self, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
+
+    @classmethod
+    def clean_url(cls, incoming):
+        """
+        We are only interested in the path, so we will strip out
+        everything else
+        """
+        from urlparse import urlparse
+        parsed = urlparse(incoming)
+
+        # Perhaps check on acceptable_comment_on()?
+
+        return parsed.path
+
+    @classmethod
+    def from_url(cls, threadurl):
+        u = cls.clean_url(threadurl)
+
+        # Look for CommentThread for that URL or create it.
+        thread = model.Session.query(cls). \
+            filter(cls.url == u).first()
+        if not thread:
+            thread = cls(url=u)
+            model.Session.add(thread)
+            model.Session.commit()
+
+        return thread
+
+    @classmethod
+    def count_from_url(cls, threadurl):
+
+        u = cls.clean_url(threadurl)
+
+        # Look for CommentThread for that URL or return 0
+        thread = model.Session.query(cls). \
+            filter(cls.url == u).first()
+        if not thread:
+            return 0
+
+        thread_dict = thread.as_dict()
+        children = model.Session.query(
+            Comment.id,
+            Comment.parent_id,
+            Comment.thread_id)\
+            .filter(Comment.state == 'active')\
+            .cte(name='children', recursive=True)
+
+        children = children.union_all(
+            model.Session.query(
+                Comment.id,
+                Comment.parent_id,
+                Comment.thread_id
+            )
+            .filter(Comment.id == children.c.parent_id)
+        )
+
+        q = model.Session.query(func.count('*').label('comment_count'),
+                                children.c.thread_id).group_by(children.c.thread_id).filter(children.c.parent_id == None).subquery()  # noqa
+        t = model.Session.query(func.sum(q.c.comment_count)).group_by(q.c.thread_id).filter(q.c.thread_id == thread_dict['id'])
+
+        count = t.scalar()
+
+        if count:
+            return count
+
+        return 0
+
+    @classmethod
+    def get(cls, id):
+        return model.Session.query(cls).filter(cls.id == id).first()
+
+    @classmethod
+    def count(cls, id):
+
+        thread = model.Session.query(cls).filter(cls.id == id).first()
+        if not thread:
+            return 0
+
+        thread_dict = thread.as_dict()
+
+        children = model.Session.query(
+            Comment.id,
+            Comment.parent_id,
+            Comment.thread_id) \
+            .cte(name='children', recursive=True)
+
+        children = children.union_all(
+            model.Session.query(
+                Comment.id,
+                Comment.parent_id,
+                Comment.thread_id
+            )
+            .filter(Comment.id == children.c.parent_id)
+        )
+
+        q = model.Session.query(func.count('*').label('comment_count'),
+                                children.c.thread_id).group_by(children.c.thread_id).filter(children.c.parent_id == None).subquery()  # noqa
+        t = model.Session.query(func.sum(q.c.comment_count)).group_by(q.c.thread_id).filter(q.c.thread_id == thread_dict['id'])
+
+        count = t.scalar()
+
+        if count:
+            return count
+
+        return 0
+
+    @classmethod
+    def get_or_create(cls, obj, id):
+        """
+        Retrieves the thread for the specified object if any exists. If
+        no thread currently exists, one is created for that object.
+        """
+        thread = model.Session.query(cls). \
+            filter(cls.comment_on == obj). \
+            filter(cls.comment_on_id == id).first()
+        if not thread:
+            if not acceptable_comment_on(obj):
+                return None
+            thread = CommentThread(comment_on=obj, comment_on_id=id)
+            model.Session.add(thread)
+            model.Session.commit()
+        return thread
+
+    def as_dict(self):
+        d = {}
+        d['url'] = self.url
+        d['locked'] = self.locked
+        d['created'] = self.creation_date.isoformat()
+        d['id'] = self.id
+        return d
+
+
+class Comment(Base):
+    """
+    A comment is a text block provided by a user against an object, or in this
+    particular case a CommentThread (one per object).
+    """
+    __tablename__ = 'ceh_comment'
+
+    id = Column(types.UnicodeText, primary_key=True, default=make_uuid)
+    parent_id = Column(types.UnicodeText, ForeignKey('comment.id'))
+    children = relationship("Comment", lazy="joined", join_depth=10,
+                            backref=backref('parent', remote_side=[id]),
+                            order_by="asc(Comment.creation_date)")
+
+    thread_id = Column(types.UnicodeText, ForeignKey('comment_thread.id'), nullable=True)
+    user_id = Column(types.UnicodeText, ForeignKey(model.User.id), nullable=False)
+    subject = Column(types.UnicodeText)
+    comment = Column(types.UnicodeText)
+
+    creation_date = Column(types.DateTime, default=datetime.datetime.now)
+    modified_date = Column(types.DateTime)
+    approval_status = Column(types.UnicodeText)
+
+    state = Column(types.UnicodeText, default=u'active')
+
+    def __init__(self, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
+
+        # Auto-set some values based on configuration
+        from pylons import config
+        if toolkit.asbool(config.get('ckan.comments.moderation', 'true')):
+            self.approval_status = COMMENT_PENDING
+        else:
+            # If user wants first comment moderated and the user who wrote this hasn't
+            # got another comment, put it into moderation, otherwise approve
+            if toolkit.asbool(config.get('ckan.comments.moderation.first_only', 'true')) and \
+                    Comment.count_for_user(self.user, COMMENT_APPROVED) == 0:
+                self.approval_status = COMMENT_PENDING
+            else:
+                self.approval_status = COMMENT_APPROVED
+
+    @classmethod
+    def get(cls, id):
+        return model.Session.query(cls).filter(cls.id == id).first()
+
+    def as_dict(self, only_active_children=True):
+        """
+        Returns this model as a dictionary, including all child comments (as dicts) if
+        if has any
+        """
+        name = 'anonymous'
+        u = model.User.get(self.user_id)
+        if u:
+            name = u.fullname
+
+        # Hack
+        if name == config.get('ckan.site_id', 'ckan_site_user') or not name:
+            name = 'anonymous'
+
+        d = {}
+        d['id'] = self.id
+        d['user_id'] = self.user_id
+        d['username'] = name
+        d['subject'] = self.subject
+        d['content'] = self.comment
+        d['state'] = self.state
+        d['thread_id'] = self.thread_id
+        d['creation_date'] = self.creation_date.isoformat()
+        if self.modified_date:
+            d['modified_date'] = self.modified_date.isoformat()
+        if only_active_children is True:
+            d['comments'] = [c.as_dict() for c in self.children if c.state == 'active']
+        else:
+            d['comments'] = [c.as_dict() for c in self.children]
+        return d
+
+    @classmethod
+    def count_for_user(cls, user, status):
+        return model.Session.query(Comment) \
+            .filter(Comment.approval_status == status) \
+            .filter(Comment.user == user).count()
+
+
+class CommentBlockedUser(Base):
+    """
+    A blocked user who is not allowed to post anymore because they have
+    previously posted spam.
+    """
+    __tablename__ = 'ceh_comment_blocked'
+
+    id = Column(types.UnicodeText, primary_key=True, default=make_uuid)
+    user_id = Column(types.UnicodeText, ForeignKey(model.User.id))
+    blocked_by = Column(types.UnicodeText, ForeignKey(model.User.id))
+    creation_date = Column(types.DateTime, default=datetime.datetime.now)
+
+    def __init__(self, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
 
 
 def init_db():
-
-    if ceh_comment_table is None:
-        define_comment_tables()
-        log.debug('Ceh Comment tables defined in memory')
-
-    if not model.package_table.exists():
-        log.debug('Ceh Comment tables creation deferred')
-        return
-
-    if not ceh_comment_table.exists():
-
-        # Create table individually rather than
-        # using metadata.create_all()
-        ceh_comment_table.create()
-
-        log.debug('Ceh Comment tables created')
-    else:
-        from ckan.model.meta import engine
-        log.debug('Ceh Comment tables already exist')
-        # Check if existing tables need to be updated
-        inspector = Inspector.from_engine(engine)
-
-        # Check if ceh_comment table exist
-        if 'ceh_comment' not in inspector.get_table_names():
-            ceh_comment_table.create()
-
-
-class CehCommentDomainObject(DomainObject):
-    '''Convenience methods for searching objects
-    '''
-    key_attr = 'id'
-
-    @classmethod
-    def get(cls, key, default=None, attr=None):
-        '''Finds a single entity in the register.'''
-        if attr is None:
-            attr = cls.key_attr
-        kwds = {attr: key}
-        o = cls.filter(**kwds).first()
-        if o:
-            return o
-        else:
-            return default
-
-    @classmethod
-    def filter(cls, **kwds):
-        query = Session.query(cls).autoflush(False)
-        return query.filter_by(**kwds)
-
-
-class CehComment(CehCommentDomainObject):
-    '''CehComment object
-    '''
-    pass
-
-
-def define_comment_tables():
-
-    global ceh_comment_table
-
-    # New table
-    ceh_comment_table = Table(
-        'ceh_comment',
-        metadata,
-        Column('id', types.UnicodeText, primary_key=True, default=make_uuid),
-        # The guid is the 'identity' of the dataset.
-        Column('guid', types.UnicodeText, default=u''),
-        Column('name', types.UnicodeText, nullable=False),
-        Column('email', types.UnicodeText, nullable=False),
-        Column('message', types.UnicodeText, nullable=False),
-        Column('created', types.DateTime, default=datetime.datetime.utcnow),
-        # If comment is active for show on forum list
-        Column('active', types.Boolean, default=False),
-        # If the record is a response to a comment
-        Column('ref_id', types.UnicodeText, nullable=True),
-        # The user id who activated or deactivated the registration in the forum list
-        Column('pub_userid', types.UnicodeText, nullable=True),
-        # The date of activation or deactivation of the registration in the forum list
-        Column('pub_date', types.DateTime, nullable=True),
-        # If the user has been notified
-        Column('notify_alert', types.Integer),
-    )
-
-    mapper(
-        CehComment,
-        ceh_comment_table,
-    )
-
+    Base.metadata.create_all(model.meta.engine)
 
 def clean_db():
-
-    if ceh_comment_table is None:
-        define_comment_tables()
-        log.debug('Ceh Comment tables defined in memory')
-
-    try:
-        if ceh_comment_table.exists():
-           ceh_comment_table.drop()
-    except InvalidRequestError:
-        log.error('An error occurred while trying to remove ceh_comment table')
-
-    log.info('ceh_comment table removed successfully')
+    Base.metadata.drop_all(model.meta.engine)
