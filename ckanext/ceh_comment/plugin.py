@@ -64,10 +64,10 @@ class CommentPlugin(p.SingletonPlugin):
             cehemail = form.cleaned_data['cehemail']
             cehcomment = form.cleaned_data['cehcomment']
 
-       return render(request, 'myapp/index.html', {
-                 'cehname': cehname,
-                 'cehemail': cehemail,
-                 'cehcomment':cehcomment, })
+            return render(request, 'ceh_comments.html', {
+                      'cehname': cehname,
+                      'cehemail': cehemail,
+                      'cehcomment':cehcomment, })
     #def register(request):
     #    if request.form.is_valid():
     #      cehname = request.form.get('cehname')
