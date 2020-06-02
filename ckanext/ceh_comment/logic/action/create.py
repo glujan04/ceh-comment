@@ -13,9 +13,10 @@ def comment_create(context, data_dict):
     pprint(context)
     model = context['model']
     user = context['user']
-    #userobj = model.User.get(user)
 
-    #logic.check_access("comment_create", context, data_dict)
+    userobj = model.User.get(user)
+
+    logic.check_access("comment_create", context, data_dict)
 
     # Validate that we have the required fields.
     if not all([data_dict.get('comment')]):

@@ -70,7 +70,7 @@ class CommentController(BaseController):
         # Auth check to make sure the user can see this package
 
         data_dict = {'id': dataset_id}
-        #check_access('package_show', context, data_dict)
+        check_access('package_show', context, data_dict)
 
         try:
             c.pkg_dict = get_action('package_show')(context, {'id': dataset_id})

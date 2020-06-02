@@ -239,7 +239,7 @@ class CommentPlugin(p.SingletonPlugin):
         from ckanext.ceh_comment.logic.auth import get, create, delete, update
 
         return {
-            #'comment_create': create.comment_create,
+            'comment_create': create.comment_create,
             'comment_update': update.comment_update,
             'comment_show': get.comment_show,
             'comment_delete': delete.comment_delete,
