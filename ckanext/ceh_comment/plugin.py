@@ -56,13 +56,13 @@ class CommentPlugin(p.SingletonPlugin):
         self.__class__.site_url = site_url
         self.__class__.site_title = site_title
 
-    def register(self):
+    def register(request):
       if request.POST:
-         form = UserForm(request.POST)
-         if form.is_valid():
-            cehname = form.cleaned_data['cehname']
-            cehemail = form.cleaned_data['cehemail']
-            cehcomment = form.cleaned_data['cehcomment']
+         #form = UserForm(request.POST)
+         if request.form.is_valid():
+            cehname = request.form.get('cehname')
+            cehemail = request.form.get('cehemail')
+            cehcomment = request.form.get('cehcomment')
 
             return render(request, 'ceh_comments.html', {
                       'cehname': cehname,
