@@ -259,7 +259,7 @@ class CommentPlugin(p.SingletonPlugin):
             /dataset/NAME/comments/reply/PARENT_ID
             /dataset/NAME/comments/add
         """
-        controller = 'ckanext.yceh_comment.controller:CommentController'
+        controller = 'ckanext.ceh_comment.controller:CommentController'
         map.connect('/dataset/{dataset_id}/comments/add', controller=controller, action='add')
         map.connect('/dataset/{dataset_id}/comments/{comment_id}/edit', controller=controller, action='edit')
         map.connect('/dataset/{dataset_id}/comments/{parent_id}/reply', controller=controller, action='reply')
