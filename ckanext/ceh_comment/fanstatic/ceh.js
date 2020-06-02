@@ -36,7 +36,7 @@ $(document).ready(function(){
    $('#cehCommentForm').validate({
            errorElement: 'span',
            rules: {
-                   name: {
+                   subject: {
                            required: true,
                            maxlength: 50
                    },
@@ -54,7 +54,7 @@ $(document).ready(function(){
                    }
            },
            messages: {
-                   name: {
+                   subject: {
                            required: "Ingrese un nombre",
                            //minlength: $.format("Mínimo {0} caracteres"),
                            maxlength: $.format("máximo {0} caracteres")
@@ -99,21 +99,17 @@ $(document).ready(function(){
                    // return false;
            // }
    });
-   // Comentarios
+   // COMENTARIOS
+   // popup
    $('.ceh-close-calert').click(function(){
       $('#alertComment').fadeOut();
    });
    let ta = resetCounter();
    ta.on('input', updCountdown);
-
-   // Gestion de comentarios
-   //$('.ceh-close-cmalert').click(function(){
-   //   $('#publishComment').fadeOut();
-   //});
 });
 
 function resetCounter() {
-    let ta = $('#cehcomment');
+    let ta = $('#comment');
    updCountdown(ta);
    return ta;
 }
