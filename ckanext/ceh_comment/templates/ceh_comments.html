@@ -1,4 +1,5 @@
 <section class="additional-info">
+   {{ cehname }}
   <div id="alertComment" class="alert alert-success alert-dismissible ceh-none" role="alert">
     <strong>Muy Bien!</strong> Su comentario ha sido puesto en cola para su revisión por los administradores del sitio y se publicará después de su aprobación.
       <button type="button" class="close ceh-close-calert" aria-label="Close">
@@ -7,7 +8,8 @@
   </div>
   <h3>Agregar Comentario</h3> 
   <div class="module-content ceh-comments">
-    <form action="" method="post" class="form-horizontal" id="cehCommentForm" name="cehCommentForm" role="form"> 
+    <form action="{% url 'register' %}" method="post" class="form-horizontal" id="cehCommentForm" name="cehCommentForm" role="form"> 
+     {% csrf_token %}
       <div class="form-group form-group_ech">
         <label for="cehname" class="col-sm-2 control-label">Nombre</label>
         <div class="col-sm-10 ech-col">

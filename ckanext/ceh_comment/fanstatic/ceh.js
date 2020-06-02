@@ -46,13 +46,23 @@ $(document).ready(function(){
            submitHandler : function(_form) {
                    let form = $(_form);
                    console.log('form',form.serialize());
-                   //$.ajax({
-                      // tu código ajax
-                   //})
-				   //$('#cehCommentForm').trigger("reset");
-                   //$('#alertComment').fadeIn();
+				   console.log('formArray',form.serializeArray());
+                   $.ajax({
+						type: form.attr('method'),
+						url: form.attr('action'),
+						data: form.serializeArray(),
+						cache: false, 
+						success: function (data) {
+							console.log('correcto',data);
+						},
+						error: function(data) {
+							console.log('error',data);
+						}
+					});
+				   $('#cehCommentForm').trigger("reset");
+                   $('#alertComment').fadeIn();
 				   resetCounter();
-                   //return false;
+                   return false;
            }
    });
    // Comentarios

@@ -8,6 +8,7 @@ import time
 from ckan.common import request
 from ckan.lib.helpers import url_for_static_or_external
 import ckan.plugins as p
+from form import UserForm
 
 log = logging.getLogger(__name__)
 
@@ -55,14 +56,26 @@ class CommentPlugin(p.SingletonPlugin):
         self.__class__.site_url = site_url
         self.__class__.site_title = site_title
 
-    def save():
-        if request.form.is_valid():
-          cehname = request.form.get('cehname')
-          cehemail = request.form.get('cehemail')
-          cehcomment = request.form.get('cehcomment')
-          h.flash_success(
-                _(u'User is now registered but you are still '
-                  u'logged in as "%s" from before'))
+    def register(self):
+      if request.POST:
+         form = UserForm(request.POST)
+         if form.is_valid():
+            cehname = form.cleaned_data['cehname']
+            cehemail = form.cleaned_data['cehemail']
+            cehcomment = form.cleaned_data['cehcomment']
+
+       return render(request, 'myapp/index.html', {
+                 'cehname': cehname,
+                 'cehemail': cehemail,
+                 'cehcomment':cehcomment, })
+    #def register(request):
+    #    if request.form.is_valid():
+    #      cehname = request.form.get('cehname')
+    #     cehemail = request.form.get('cehemail')
+    #      cehcomment = request.form.get('cehcomment')
+    #      h.flash_success(
+    #            _(u'User is now registered but you are still '
+    #              u'logged in as "%s" from before'))
 
     @classmethod
     def ceh_manager_comments(cls):
