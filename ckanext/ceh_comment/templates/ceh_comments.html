@@ -8,7 +8,7 @@
   </div>
   <h3>Agregar Comentario</h3> 
   <div class="module-content ceh-comments">
-    <form action="{{ h.url_for('/ceh/new') }}" method="post" class="form-horizontal" id="cehCommentForm" name="cehCommentForm" role="form"> 
+    <form action="{{ h.url_for('new') }}" method="post" class="form-horizontal" id="cehCommentForm" name="cehCommentForm" role="form"> 
      {% csrf_token %}
       <div class="form-group form-group_ech">
         <label for="cehname" class="col-sm-2 control-label">Nombre</label>
