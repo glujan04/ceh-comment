@@ -76,7 +76,7 @@ class CommentController(BaseController):
             c.pkg_dict = get_action('package_show')(context, {'id': dataset_id})
             c.pkg = context['package']
         except:
-            abort(403)
+            abort(404)
 
         if request.method == 'POST':
             data_dict = clean_dict(unflatten(

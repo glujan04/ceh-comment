@@ -13,7 +13,6 @@ def comment_create(context, data_dict):
     pprint(context)
     model = context['model']
     user = context['user']
-    pprint(u'ddddddddd')
     #userobj = model.User.get(user)
 
     #logic.check_access("comment_create", context, data_dict)
