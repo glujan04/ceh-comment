@@ -81,8 +81,10 @@ function ShowCommentForm(id){
         $("#" + id).removeClass('hidden');
 	else{
 		$("#" + id).addClass('hidden');
-		$("#form_" + id).validate().resetForm();
-		//$("#form_" + id).trigger("reset");
+		_form = $("#form_" + id);
+		_form.validate().resetForm();
+		_form.trigger("reset");
+		updCountdown( $(_form).find('textarea.ceh_comment_reply') );
 	}
 }
 
@@ -117,7 +119,6 @@ $(document).ready(function(){
            messages: {
                    subject: {
                            required: "Ingrese un nombre",
-                           //minlength: $.format("Mínimo {0} caracteres"),
                            maxlength: $.format("máximo {0} caracteres")
                    },
                    email: {
@@ -126,9 +127,7 @@ $(document).ready(function(){
                            maxlength: $.format("máximo {0} caracteres")
                    },
                    comment: {
-                           required: "Ingrese un comentario",
-                           //minlength: $.format("Necesitamos por lo menos {0} caracteres"),
-                           //maxlength: $.format("{0} caracteres son demasiados!")
+                           required: "Ingrese un comentario"
                    },
                    cehpolicy: {
                            required: "Debe aceptar los términos"
