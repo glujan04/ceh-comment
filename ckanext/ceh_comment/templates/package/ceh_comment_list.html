@@ -32,13 +32,13 @@
     {% for comment in thread.comments %}
         {# {{ comment.id }} #}
         {% if comment.approved %}
-        <div class="comment" style="font-size: 14px;font: 75%/1.5em Verdana, Helvetica, Arial, sans-serif;background: #fafafa;margin: 0px 0 10px;">
+        <div class="comment" style="font-size: 14px;font: 75%/1.5em Verdana, Helvetica, Arial, sans-serif;background: #fafafa;margin: 0px 0 10px;border-style: solid;border-width: 1px;border-color: #dde4eb;">
             {% if comment.state != 'deleted' %}
                 <div class="ceh-post-main"><div style="float: right;">{{ comment.email }}</div><div>{{ comment.subject }}</div></div>
             {% else %}
                 <h3>{{ _('This comment was deleted.') }}</h3>
             {% endif %}
-			<div style="padding: 10px;">
+			<div style="10px 0 0 6px;font-size: 12px;">
             <div class="submitted">
                 <span>{{ _('Registrado') }}: {{ h.render_datetime(comment.creation_date, "%d.%m.%Y %H:%M") }} {# {{  h.linked_user(comment.user_id, 0, 10) }} #}</span>
                 {% if comment.modified_date %}
@@ -52,7 +52,7 @@
                 {{ _('This comment was deleted.') }}
             {% endif %}
             {% if comment.state == 'active' %}
-            <ul class="links list-inline" style="cursor: pointer;">
+            <ul class="links list-inline" style="cursor: pointer;padding-top: 15px;">
               {#  {% if h.check_access('package_update', {'id': pkg_id }) %}
                     <li><a href="/dataset/{{ pkg_id }}/comments/{{ comment.id }}/delete">{{ _('Delete') }}</a> </li>
                 {% endif %}
