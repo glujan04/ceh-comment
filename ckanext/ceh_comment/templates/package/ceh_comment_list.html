@@ -125,6 +125,7 @@
 
   {% block header_account_logged %} {% if userobj %}
      {% if userobj.sysadmin and comment.comments | length != 0 %}
+
 <section class="additional-info">
 {% macro managed_thread(thread) %}
   <div id="publishComment" class="alert alert-success alert-dismissible ceh-none" role="alert">
@@ -153,13 +154,15 @@
               <button type="button" class="btn {% if comment.approved %}btn-primary{% else %}btn-secondary-ceh{% endif %}">{% if comment.approved %}{{ _('Publicar') }}{% else %}{{ _('Despublicar') }}{% endif %}</button>
             </td>
           </tr>
-		  {# {% if comment.comments | length != 0 %}
+		   {% if comment.comments | length != 0 %}
                 {{ managed_thread(comment) }}
-          {% endif %} #}
+          {% endif %}
     {% endfor %}
     </tbody>
   </table>
 {% endmacro %}
+
+
 </section>
      {% endif %}
   {% endif %} {% endblock %}
