@@ -119,7 +119,7 @@
                 {{ comment_thread(comment) }}
             {% endif %}
     {% endfor %}
-	{% if len(thread) = 0 %}
+	{% if thread == None %}
     {{ _('Aún no existen comentarios.') }}
     {% endif %}
     </div>
