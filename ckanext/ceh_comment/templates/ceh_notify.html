@@ -1,5 +1,5 @@
         {% if c.userobj.sysadmin %}
-        {% set new_comments = '%d' % (h.new_comments) %}
+        {% set new_comments = '{}'.format(h.new_comments()) %}
         {% set notify_tooltip = ngettext('%(num)d nuevo comentario', '%(num)d nuevos comentarios', new_comments)
           %}
         <li class="notifications {% if new_comments > 0 %}notifications-important{% endif %}">
