@@ -130,7 +130,13 @@
 			<td class="dataset-details">{{ comment.email }}</td>
 			<td class="dataset-details">{{ comment.content|safe }}</td>
 			<td class="dataset-details">
-			  <button type="button" class="btn {% if comment.approved %}btn-primary{% else %}btn-secondary-ceh{% endif %}">{% if comment.approved %}{{ _('Publicar') }}{% else %}{{ _('Despublicar') }}{% endif %}</button>
+			  <!-- <button type="button" class="btn {% if comment.approved %}btn-primary{% else %}btn-secondary-ceh{% endif %}">{% if comment.approved %}{{ _('Publicar') }}{% else %}{{ _('Despublicar') }}{% endif %}</button> -->
+			  {{ _('Publicar') }}
+			  <div class="material-switch pull-right">
+                            <input id="lbApproval_status" name="approval_status" type="checkbox" value="{{ comment.approved }}"/>
+                            <label for="lbApproval_status" class="label-primary"></label>
+			  </div>
+			  {{ _('Despublicar') }}
 			</td>
 		  </tr>
 		    {% if comment.comments | length != 0 %}
