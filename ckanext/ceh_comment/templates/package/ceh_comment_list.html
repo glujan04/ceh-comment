@@ -201,8 +201,9 @@
 <h3 id="comments">{{ _('Comentarios') }}</h3>
 <div class="comment-container">
     {{ comment_thread(thread) }}
-    {{ len(thread.comments) }}
+    {% if thread.comments | length != 0 %}
     {{ _('Aún no existen comentarios.') }}
+	{% endif %}
 </div>
 
 {# {% if userobj %} 
