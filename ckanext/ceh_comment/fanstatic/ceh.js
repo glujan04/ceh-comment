@@ -183,7 +183,7 @@ function updCountdown(e) {
         currentElement = e;
     }
     let maxLengh = $(currentElement).attr('maxlength');
-    let remaining = maxLengh - $(currentElement).val().length;
+    let remaining = maxLengh - $(currentElement).text().length;
 	console.log($(currentElement).nextAll('.countdown:first'));
     //$(currentElement).nextAll('.countdown:first').text(remaining + '/' + maxLengh);
 }
