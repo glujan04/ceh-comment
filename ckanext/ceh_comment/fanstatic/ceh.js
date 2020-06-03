@@ -86,7 +86,7 @@ function ShowCommentForm(id){
 function resetCounterReply() {
     let ta = $('.ceh_comment_reply').each( function( index, el ) {
 		updCountdown( el );
-		el.on('input', updCountdown);
+		$(el).on('input', updCountdown);
     });
 }
 
