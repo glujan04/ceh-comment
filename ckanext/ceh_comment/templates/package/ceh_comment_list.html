@@ -30,7 +30,7 @@
 
     <div class="comment-wrapper">
     {% for comment in thread.comments %}
-        {{ comment.id }}
+        {# {{ comment.id }} #}
         <div class="comment">
             {% if comment.state != 'deleted' %}
                 <h3>{{ comment.subject }}</h3>
@@ -52,18 +52,18 @@
             {% endif %}
             {% if comment.state == 'active' %}
             <ul class="links list-inline">
-                {% if h.check_access('package_update', {'id': pkg_id }) %}
+              {#  {% if h.check_access('package_update', {'id': pkg_id }) %}
                     <li><a href="/dataset/{{ pkg_id }}/comments/{{ comment.id }}/delete">{{ _('Delete') }}</a> </li>
                 {% endif %}
 
                 {% if userobj and comment.user_id == userobj.id %}
                     <li><a onclick="ShowCommentForm('edit_{{ comment.id }}')">{{ _('Edit') }}</a></li>
                     {{ comment_form(comment, prefix='edit_', action='edit') }}
-                {% endif %}
-                {% if userobj %}
-                    <li><a onclick="ShowCommentForm('reply_{{ comment.id }}')">{{ _('Reply') }}</a> </li>
+                {% endif %} #}
+                {# {% if userobj %} #}
+                    <li><a onclick="ShowCommentForm('reply_{{ comment.id }}')">{{ _('Responder') }}</a> </li>
                     {{ comment_form(comment, empty=True, prefix='reply_', action='reply') }}
-                {% endif %}
+               {# {% endif %} #}
 
             </ul>
             {% endif %}
@@ -96,15 +96,16 @@
       </tr>
     </thead>
     <tbody>
+    {% for comment in thread.comments %}
           <tr>
-            <td class="dataset-label">Juan García</td>
-            <td class="dataset-details">juan@gmail.com</td>
-            <td class="dataset-details">Es fácil ver aquí cómo cada celda de encabezado en la tabla, provee información para el resto de las celdas en la columna a la que pertenece. Algunos agentes, como los navegadores de voz, hacen el mismo análisis cuando deben informar al usuario qué celda de encabezado está asociada a una celda en particular.</td>
+            <td class="dataset-label">{{ comment.approval_status }}</td>
+            <td class="dataset-details">{{ comment.email }}</td>
+            <td class="dataset-details">{{ comment.content|safe }}</td>
             <td class="dataset-details">
-              <button type="button" class="btn btn-primary">Publicar</button>
+              <button type="button" class="btn btn-primary">{{ _('Publicar') }}</button>
             </td>
           </tr>
-          <tr>
+          <!--<tr>
             <td class="dataset-label">Miguel Abanto</td>
             <td class="dataset-details">miguel@hotmail.com</td>
             <td class="dataset-details">Los valores "col" y "row" indican que la celda de encabezado provee información para el resto de las celdas en la columna o fila (respectivamente) en que está presente. Los otros dos valores tendrán sentido más adelante en este tutorial.</td>
@@ -129,7 +130,8 @@ La idea de un título es la de proveer una descripción concisa acerca de la inf
             <td class="dataset-details">
               <button type="button" class="btn btn-secondary-ceh">Despublicar</button>
             </td>
-          </tr>
+          </tr>-->
+    {% endfor %}
     </tbody>
   </table>
 </section>

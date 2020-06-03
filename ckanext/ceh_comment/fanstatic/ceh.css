@@ -4,7 +4,7 @@ textarea[name=comment] {
 
 /* COMENTARIOS */
 .ceh-comments {
- border: 1px solid red;
+    /*border: 1px solid red;*/
 }
 
 .btn-circle {
