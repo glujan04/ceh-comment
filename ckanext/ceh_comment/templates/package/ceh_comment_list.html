@@ -67,7 +67,8 @@
 
     <div class="comment-wrapper">
     {% for comment in thread.comments %}
-         {{ comment.id }} 
+         {{ comment.id }}
+		 {{ comment.thread_id }}
         {% if comment.approved %}
         <div class="comment" style="font-size: 14px;font: 75%/1.5em Verdana, Helvetica, Arial, sans-serif;background: #fafafa;margin: 0px 0 10px;border-style: solid;border-width: 1px;border-color: #dde4eb;">
             {% if comment.state != 'deleted' %}
