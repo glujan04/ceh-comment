@@ -260,32 +260,7 @@ class Comment(Base):
 
     @classmethod
     def count_for_status(cls, status):
-        thread = model.Session.query(cls). \
-            filter(cls.approval_status == status).first()
-        if not thread:
-            return 0
-
-        thread_dict = thread.as_dict()
-        children = model.Session.query(
-            Comment.id,
-            Comment.parent_id,
-            Comment.thread_id)\
-            .filter(Comment.state == 'active')\
-            .cte(name='children', recursive=True)
-
-        children = children.union_all(
-            model.Session.query(
-                Comment.id,
-                Comment.parent_id,
-                Comment.thread_id
-            )
-            .filter(Comment.id == children.c.parent_id)
-        )
-
-        q = model.Session.query(func.count('*').label('comment_count'),
-                                children.c.thread_id).group_by(children.c.thread_id).filter(children.c.parent_id == None).subquery()  # noqa
-        t = model.Session.query(func.sum(q.c.comment_count)).group_by(q.c.thread_id).filter(q.c.thread_id == thread_dict['id'])
-
+        t =  model.Session.query(Comment).filter(Comment.approval_status == status)
         count = t.scalar()
 
         if count:
