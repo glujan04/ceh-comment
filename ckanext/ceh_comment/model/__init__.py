@@ -262,7 +262,7 @@ class Comment(Base):
     def count_for_status(cls, status):
         t =  model.Session.query(Comment).filter(Comment.approval_status == status)
         q = model.Session.query(func.count('*').label('comment_count'),
-                                t.c.approval_status).group_by(t.c.approval_status)
+                                t.approval_status).group_by(t.approval_status)
         count = q.scalar()
 
         if count:
