@@ -4,6 +4,46 @@
 {% resource 'ckanext_comment/ceh.css' %}
 
 {% macro comment_form(values={}, empty=False, hidden=True, prefix="", action="add") %}
+<div class="module-content ceh-comments {% if hidden %}hidden{% endif %}" id="{{ prefix + values.id }}">
+    <form action="{{ pkg_id }}/comments/{% if values.id %}{{ values.id }}/{% endif %}{{ action }}" method="POST" class="form-horizontal form" role="form"> 
+      <div class="form-group form-group_ech">
+        <label for="subject" class="col-sm-2 control-label">{{ _('Nombre') }}</label>
+        <div class="col-sm-10 ech-col">
+          <input type="text" class="form-control form-control_ech" name="subject" id="subject" maxlength="50" required>
+        </div>
+      </div>
+      <div class="form-group form-group_ech">
+        <label for="email" class="col-sm-2 control-label">{{ _('Correo Electrónico') }}</label>
+        <div class="col-sm-10 ech-col">
+          <input type="text" class="form-control form-control_ech" name="email" id="email" maxlength="30" required>
+        </div>
+      </div>
+      <div class="form-group form-group_ech">
+        <label for="comment" class="col-sm-2 control-label">{{ _('Comentario') }}</label>
+        <div class="col-sm-10">
+          <span class="form-control_label_ech1">
+            <i class="fa fa-question-circle"></i>
+            <a class="ceh-tips" href="#" data-toggle="modal" data-target="#tipsModal">{{ _('formatos y textos') }}</a>
+          </span>
+          <textarea class="form-control form-control_label_ech1" name="comment" id="comment" rows="5" style="margin: 0px; height: 105px; width: 657px;" maxlength="500" required>
+          </textarea>
+          <span class="countdown"></span>
+        </div>
+      </div>
+      <div class="form-group form-group_ech">
+        <div class="col-sm-offset-2 col-sm-10 ech-col">
+          <input type="checkbox" class="form-checkbox-input" name="cehpolicy" id="cehpolicy">
+          <span class="form-checkbox-label form-control_label_ech1" for="cehpolicy">{{ _('He leído y acepto los') }} <a href="#" data-toggle="modal" data-target="#termsModal">{{ _('Términos y Condiciones') }}</a></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button class="btn btn-success btn-circle text-uppercase" type="submit" id="submitComment"><span class="fa fa-paper-plane"></span> {{ _('Agregar Comentario') }}"</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!--
     <form id="{{ prefix + values.id }}" class="form {% if hidden %}hidden{% endif %}" action="{{ pkg_id }}/comments/{% if values.id %}{{ values.id }}/{% endif %}{{ action }}" method="POST">
         <div class="{{ action }}_form_errors form-errors alert alert-error hidden">
             <div class="hidden error-comment">{{ _('Please enter a Comment.') }}</div>
@@ -19,7 +59,7 @@
             <input type="submit" class="btn btn-primary" value="{{ _('Save') }}"/>
             <input type="reset" class="btn" value="{{ _('Clear') }}"/>
         </div>
-    </form>
+    </form>-->
 {% endmacro %}
 
 
@@ -45,7 +85,7 @@
                     <br/><span>{{ h.render_datetime(comment.modified_date, "%d.%m.%Y %H:%M") }} {{ _('Modified') }} </span>
                 {% endif %}
             </div>
-            <div class="content" style="padding: 10px 0;">
+            <div class="content" style="padding: 10px 6px 10px 0;">
             {% if comment.state != 'deleted' %}
                 {{ comment.content|safe }}
             {% else %}
@@ -108,32 +148,6 @@
               <button type="button" class="btn {% if comment.approved %}btn-primary{% else %}btn-secondary-ceh{% endif %}">{% if comment.approved %}{{ _('Publicar') }}{% else %}{{ _('Despublicar') }}{% endif %}</button>
             </td>
           </tr>
-          <!--<tr>
-            <td class="dataset-label">Miguel Abanto</td>
-            <td class="dataset-details">miguel@hotmail.com</td>
-            <td class="dataset-details">Los valores "col" y "row" indican que la celda de encabezado provee información para el resto de las celdas en la columna o fila (respectivamente) en que está presente. Los otros dos valores tendrán sentido más adelante en este tutorial.</td>
-            <td class="dataset-details">
-              <button type="button" class="btn btn-secondary-ceh">Despublicar</button>
-            </td>
-          </tr>
-          <tr>
-            <td class="dataset-label">Daniel Lozano García Estrada</td>
-            <td class="dataset-details">dlozano@idom.com</td>
-            <td class="dataset-details">En el siguiente ejemplo, la tabla presentada anteriormente ha sido mejorada con más celdas de encabezado, con el fin de aumentar la legibilidad. Aquí, la celda en la esquina superior izquierda de la tabla, proveería información ambigua si el atributo scope no estuviera presente. En otras palabras, afectaría a las celdas en su columna, así como a las celdas en su fila. La presencia del atributo scope ha dejado en claro que las celdas afectadas por este encabezado son aquellas en la misma fila.</td>
-            <td class="dataset-details">
-              <button type="button" class="btn btn-primary">Publicar</button>
-            </td>
-          </tr>
-          <tr>
-            <td class="dataset-label">Eduardo Boris Canales Quiroz</td>
-            <td class="dataset-details">equiroz@yahoo.es</td>
-            <td class="dataset-details">El título de una tabla es otro componente que aporta a la legibilidad. Mientras que algunas tablas, debido a su estructura o simplicidad, pueden sobrevivir sin un título, otras lo necesitarán inexorablemente. En cualquier caso, el título de una tabla puede mejorar pero nunca empeorar.
-
-La idea de un título es la de proveer una descripción concisa acerca de la información presentada en la tabla o su propósito, aportando contexto y haciéndola significativamente más fácil de comprender. En HTML, los títulos de las tablas son insertados mediante el elemento caption, justo después de la etiqueta de apertura de la misma y antes que todos los demás elementos de su estructura. En el ejemplo siguiente hay una tabla en la cual el significado de los datos sería muy difícil de descifrar sin un título apropiado.</td>
-            <td class="dataset-details">
-              <button type="button" class="btn btn-secondary-ceh">Despublicar</button>
-            </td>
-          </tr>-->
     {% endfor %}
     </tbody>
   </table>
@@ -143,7 +157,7 @@ La idea de un título es la de proveer una descripción concisa acerca de la inf
 <section class="additional-info">
   <h3>{{ _('Nuevo Comentario') }}</h3> 
   <div class="module-content ceh-comments">
-    <form action="{{ pkg_id }}/comments/add" method="post" class="form-horizontal" id="cehCommentForm" role="form"> 
+    <form action="{{ pkg_id }}/comments/add" method="POST" class="form-horizontal" id="cehCommentForm" role="form"> 
       <div class="form-group form-group_ech">
         <label for="subject" class="col-sm-2 control-label">{{ _('Nombre') }}</label>
         <div class="col-sm-10 ech-col">
@@ -151,7 +165,7 @@ La idea de un título es la de proveer una descripción concisa acerca de la inf
         </div>
       </div>
       <div class="form-group form-group_ech">
-        <label for="email" class="col-sm-2 control-label">{{ _('Correo Electronico') }}</label>
+        <label for="email" class="col-sm-2 control-label">{{ _('Correo Electrónico') }}</label>
         <div class="col-sm-10 ech-col">
           <input type="text" class="form-control form-control_ech" name="email" id="email" maxlength="30" required>
         </div>

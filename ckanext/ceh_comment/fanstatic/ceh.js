@@ -29,7 +29,10 @@ jQuery(document).ready(function() {
 
 // Comments
 function ShowCommentForm(id){
-    $("#" + id).removeClass('hidden');
+	if ($("#" + id).hasClass('hidden'))
+        $("#" + id).removeClass('hidden');
+	else
+		$("#" + id).addClass('hidden');
 }
 
 $(document).ready(function(){
