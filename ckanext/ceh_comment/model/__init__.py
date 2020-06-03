@@ -261,6 +261,7 @@ class Comment(Base):
     @classmethod
     def count_for_status(cls, status):
         count = model.Session.query(Comment).filter(Comment.approval_status == status).scalar()
+        log.error(count)
         if count:
             return count
 
