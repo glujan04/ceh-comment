@@ -190,6 +190,7 @@ class CommentPlugin(p.SingletonPlugin):
         data = {'userid':''}
         return p.toolkit.render_snippet('ceh_notify.html', data)
 
+
     def new_comments(cls):
         '''Cantidad de comentarios nuevos'''
         import ckan.model as model
