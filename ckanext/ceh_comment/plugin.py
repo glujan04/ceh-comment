@@ -236,7 +236,7 @@ class CommentPlugin(p.SingletonPlugin):
             "comment_show": get.comment_show,
             "comment_delete": delete.comment_delete,
             "comment_count": get.comment_count,
-            "comment_count_by_status": get.comment_count_by_status()
+            "comment_count_by_status": get.comment_count_by_status(self)
         }
 
     def get_auth_functions(self):
