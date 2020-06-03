@@ -31,7 +31,7 @@ class CommentThread(Base):
     Represents a thread, or in this particular case a collection of
     comments against a CKAN object.  This is the container for the
     """
-    __tablename__ = 'ceh_comment_thread'
+    __tablename__ = 'ceh2_comment_thread'
 
     id = Column(types.UnicodeText, primary_key=True, default=make_uuid)
     url = Column(types.UnicodeText)
@@ -178,16 +178,17 @@ class Comment(Base):
     A comment is a text block provided by a user against an object, or in this
     particular case a CommentThread (one per object).
     """
-    __tablename__ = 'ceh_comment'
+    __tablename__ = 'ceh2_comment'
 
     id = Column(types.UnicodeText, primary_key=True, default=make_uuid)
-    parent_id = Column(types.UnicodeText, ForeignKey('ceh_comment.id'))
+    parent_id = Column(types.UnicodeText, ForeignKey('ceh2_comment.id'))
     children = relationship("Comment", lazy="joined", join_depth=10,
                             backref=backref('parent', remote_side=[id]),
                             order_by="asc(Comment.creation_date)")
 
-    thread_id = Column(types.UnicodeText, ForeignKey('ceh_comment_thread.id'), nullable=True)
-    user_id = Column(types.UnicodeText, ForeignKey(model.User.id), nullable=True)
+    thread_id = Column(types.UnicodeText, ForeignKey('ceh2_comment_thread.id'), nullable=True)
+    #user_id = Column(types.UnicodeText, ForeignKey(model.User.id), nullable=True)
+    user_id = Column(types.UnicodeText, nullable=True)
     subject = Column(types.UnicodeText)
     email = Column(types.UnicodeText)
     comment = Column(types.UnicodeText)
@@ -263,11 +264,13 @@ class CommentBlockedUser(Base):
     A blocked user who is not allowed to post anymore because they have
     previously posted spam.
     """
-    __tablename__ = 'ceh_comment_blocked'
+    __tablename__ = 'ceh2_comment_blocked'
 
     id = Column(types.UnicodeText, primary_key=True, default=make_uuid)
-    user_id = Column(types.UnicodeText, ForeignKey(model.User.id))
-    blocked_by = Column(types.UnicodeText, ForeignKey(model.User.id))
+    #user_id = Column(types.UnicodeText, ForeignKey(model.User.id))
+    #blocked_by = Column(types.UnicodeText, ForeignKey(model.User.id))
+    user_id = Column(types.UnicodeText, nullable=True)
+    blocked_by = Column(types.UnicodeText, nullable=True)
     creation_date = Column(types.DateTime, default=datetime.datetime.now)
 
     def __init__(self, **kwargs):
