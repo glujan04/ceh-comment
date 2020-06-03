@@ -127,7 +127,6 @@
      {% if userobj.sysadmin and thread.comments | length != 0 %}
 
 <section class="additional-info">
-{% macro managed_thread(thread) %}
   <div id="publishComment" class="alert alert-success alert-dismissible ceh-none" role="alert">
     <strong>Muy Bien!</strong> El comentario ha sido correctamente publicado.
       <button type="button" class="close ceh-close-cmalert" aria-label="Close">
@@ -145,6 +144,7 @@
       </tr>
     </thead>
     <tbody>
+	{% macro managed_thread(thread) %}
     {% for comment in thread.comments %}
           <tr>
             <td class="dataset-label">{{ comment.subject }}</td>
@@ -158,9 +158,9 @@
                 {{ managed_thread(comment) }}
           {% endif %}
     {% endfor %}
+	{% endmacro %}
     </tbody>
   </table>
-{% endmacro %}
 
 
 </section>
