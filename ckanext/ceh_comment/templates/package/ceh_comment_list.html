@@ -99,7 +99,7 @@
                     <li><a onclick="ShowCommentForm('edit_{{ comment.id }}')">{{ _('Edit') }}</a></li>
                     {{ comment_form(comment, prefix='edit_', action='edit') }}
                 {% endif %} #}
-                 {% if comment.child_count == 0 or comment.parent_id is None %}
+                 {% if comment.child_count == 0 %}
                     <li><a onclick="ShowCommentForm('reply_{{ comment.id }}')">{{ _('Responder') }}</a> </li>
                     {{ comment_form(comment, empty=True, prefix='reply_', action='reply') }}
                  {% endif %}
