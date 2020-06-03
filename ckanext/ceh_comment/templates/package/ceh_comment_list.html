@@ -165,6 +165,9 @@
 {% macro managed_thread(thread) %}
 	{% for comment in thread.comments %}
 	<div>{{ comment.id }}</div>
+		{% if comment.comments | length != 0 %}
+				{{ managed_thread(comment) }}
+		{% endif %}
 	{% endfor %}
 {% endmacro %}
  {{ managed_thread(thread) }}
