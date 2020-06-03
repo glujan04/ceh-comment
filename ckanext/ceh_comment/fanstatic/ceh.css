@@ -82,3 +82,20 @@ textarea[name=comment] {
 .table-hover-ceh > tbody, button.btn {
 	font-size: 13px;
 }
+
+/* FORO DE COMENTARIOS */
+
+.ceh-post-main {
+	/* text-indent: 0; */
+    /* visibility: visible; */
+    /* font-size: 1.2em; */
+    /* line-height: 1.2; */
+    /* font-weight: bold; */
+    /* position: static; */
+    background: #f1f1f1;
+    font-weight: bold;
+    padding: 6px;
+    border-style: none none dashed none;
+    border-width: 1px;
+    /* border-color: #dde4eb; */
+}
