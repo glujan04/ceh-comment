@@ -193,9 +193,9 @@ class CommentPlugin(p.SingletonPlugin):
     @classmethod
     def new_comments(cls):
         '''Cantidad de comentarios nuevos'''
-        #import ckan.model as model
-        #from ckan.logic import get_action
-        #count = get_action('comment_count_by_status')
+        import ckan.model as model
+        from ckan.logic import get_action
+        count = get_action('comment_count_by_status')
         return 3#count
 
     @classmethod
