@@ -6,25 +6,24 @@ function hideFormErrors()
 }
 
 jQuery(document).ready(function() {
+    // jQuery('.module-content input[type="submit"]').on('click', function(e) {
+        // if (jQuery(this).hasClass('btn-primary')) {
+            // var form = jQuery(this).closest('form');
+            // var comment = form.find('textarea[name="comment"]').val();
+            // var display_errors = false;
 
-    jQuery('.module-content input[type="submit"]').on('click', function(e) {
-        if (jQuery(this).hasClass('btn-primary')) {
-            var form = jQuery(this).closest('form');
-            var comment = form.find('textarea[name="comment"]').val();
-            var display_errors = false;
+            // hideFormErrors();
 
-            hideFormErrors();
-
-            if (!comment || !comment.replace(/\s/g, '').length) {
-                form.find('.error-comment').removeClass('hidden');
-                display_errors = true;
-            }
-            if (display_errors) {
-                form.find('.form-errors').removeClass('hidden');
-                return false;
-            }
-        }
-    });
+            // if (!comment || !comment.replace(/\s/g, '').length) {
+                // form.find('.error-comment').removeClass('hidden');
+                // display_errors = true;
+            // }
+            // if (display_errors) {
+                // form.find('.form-errors').removeClass('hidden');
+                // return false;
+            // }
+        // }
+    // });
 });
 
 // Comments
