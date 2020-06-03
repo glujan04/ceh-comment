@@ -164,7 +164,14 @@
 
 {% macro managed_thread(thread) %}
 	{% for comment in thread.comments %}
-	<div>{{ comment.id }}</div>
+		  <tr>
+			<td class="dataset-label">{{ comment.subject }}</td>
+			<td class="dataset-details">{{ comment.email }}</td>
+			<td class="dataset-details">{{ comment.content|safe }}</td>
+			<td class="dataset-details">
+			  <button type="button" class="btn {% if comment.approved %}btn-primary{% else %}btn-secondary-ceh{% endif %}">{% if comment.approved %}{{ _('Publicar') }}{% else %}{{ _('Despublicar') }}{% endif %}</button>
+			</td>
+		  </tr>
 		{% if comment.comments | length != 0 %}
 				{{ managed_thread(comment) }}
 		{% endif %}
