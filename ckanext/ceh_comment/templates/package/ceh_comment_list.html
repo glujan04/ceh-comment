@@ -122,10 +122,6 @@
     </div>
 
 {% endmacro %}
-<div>
-{{ managed_thread(thread) }}
-</div>
-{% macro managed_thread(thread) %}
   {% block header_account_logged %} {% if userobj %}
      {% if userobj.sysadmin and comment.comments | length != 0 %}
 <section class="additional-info">
@@ -146,6 +142,7 @@
       </tr>
     </thead>
     <tbody>
+{% macro managed_thread(thread) %}
     {% for comment in thread.comments %}
           <tr>
             <td class="dataset-label">{{ comment.subject }}</td>
@@ -159,12 +156,13 @@
                 {{ managed_thread(comment) }}
           {% endif %} #}
     {% endfor %}
+{% endmacro %}
     </tbody>
   </table>
 </section>
      {% endif %}
   {% endif %} {% endblock %}
-{% endmacro %}
+  
 <section class="additional-info">
   <h3>{{ _('Nuevo Comentario') }}</h3> 
   <div class="module-content ceh-comments">
