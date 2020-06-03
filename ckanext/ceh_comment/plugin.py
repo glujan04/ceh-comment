@@ -196,7 +196,7 @@ class CommentPlugin(p.SingletonPlugin):
         import ckan.model as model
         from ckan.logic import get_action
         count = get_action('comment_count_by_status')
-        return int(count)
+        return n=count()
 
     @classmethod
     def ceh_recent(cls, num_comments=5):
