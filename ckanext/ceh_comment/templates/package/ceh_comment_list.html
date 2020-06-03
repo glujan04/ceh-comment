@@ -67,10 +67,10 @@
 
     <div class="comment-wrapper">
     {% for comment in thread.comments %}
-         {{ comment.id }} /
-         {{ comment.thread_id }} / {{ comment.parent_id }} / {{ comment.child_count }}
+         {# {{ comment.id }} /
+         {{ comment.thread_id }} / {{ comment.parent_id }} / {{ comment.child_count }} #}
         {% if comment.approved %}
-        <div class="comment ceh-post-body{% if comment.parent_id != None %}ceh-post-reply{% endif %}">
+        <div class="comment ceh-post-body {% if comment.parent_id != None %}ceh-post-reply{% endif %}">
             {% if comment.state != 'deleted' %}
                 <div class="ceh-post-main">
 					<div class="ceh-post-left">{{ comment.email }}</div>
