@@ -132,7 +132,7 @@
 			<td class="dataset-details">
 			  <div style="float:left;">{% if comment.approved == False %}{{ _('Despublicado') }}{% else %}{{ _('Publicado') }}{% endif %}</div>
 			  <div class="material-switch pull-right">
-                            <input id="{{ comment.id }}" name="approval_status" type="checkbox" {% if comment.approved == True %}checked{% endif %}" onclick="javascript:publish(this,'{% if h.check_access('package_update', {'id': pkg_id }) %}{{ pkg_id }}{% endif %}','{{ comment.id }}');"/>
+                            <input id="{{ comment.id }}" name="approval_status" type="checkbox" {% if comment.approved == True %}checked{% endif %} onclick="javascript:publish(this,'{% if h.check_access('package_update', {'id': pkg_id }) %}{{ pkg_id }}{% endif %}','{{ comment.id }}');"/>
                             <label for="{{ comment.id }}" class="label-primary" title="{% if comment.approved %}{{ _('Despublicar') }}{% else %}{{ _('Publicar') }}{% endif %}"></label>
 			  </div>
 			</td>
