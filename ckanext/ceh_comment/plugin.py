@@ -197,7 +197,7 @@ class CommentPlugin(p.SingletonPlugin):
         from ckan.logic import get_action
         count = get_action('comment_count_by_status')
         n=count
-        print(n)
+        print(int(n))
         return 3#int(count())
 
     @classmethod
