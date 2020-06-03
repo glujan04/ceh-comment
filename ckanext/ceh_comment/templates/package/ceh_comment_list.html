@@ -4,8 +4,8 @@
 {% resource 'ckanext_comment/ceh.css' %}
 
 {% macro comment_form(values={}, empty=False, hidden=True, prefix="", action="add") %}
-<div class="module-content ceh-comments {% if hidden %}hidden{% endif %}" id="{{ prefix + values.id }}">
-    <form action="{{ pkg_id }}/comments/{% if values.id %}{{ values.id }}/{% endif %}{{ action }}" method="POST" class="form-horizontal form" role="form"> 
+<div class="module-content ceh-comments-reply {% if hidden %}hidden{% endif %}" id="{{ prefix + values.id }}" style="border-top-style: dashed;border-top-width: 1px;margin-top: 10px;">
+    <form action="{{ pkg_id }}/comments/{% if values.id %}{{ values.id }}/{% endif %}{{ action }}" method="POST" class="form-horizontal form" id="form_{{ prefix + values.id }}" role="form"> 
       <div class="form-group form-group_ech">
         <label for="subject" class="col-sm-2 control-label">{{ _('Nombre') }}</label>
         <div class="col-sm-10 ech-col">
@@ -25,7 +25,7 @@
             <i class="fa fa-question-circle"></i>
             <a class="ceh-tips" href="#" data-toggle="modal" data-target="#tipsModal">{{ _('formatos y textos') }}</a>
           </span>
-          <textarea class="form-control form-control_label_ech1" name="comment" id="comment" rows="5" style="margin: 0px; height: 105px; width: 657px;" maxlength="500" required>
+          <textarea class="form-control form-control_label_ech1 ceh_comment_reply" name="comment" rows="5" style="margin: 0px; height: 105px; width: 657px;" maxlength="500" required>
           </textarea>
           <span class="countdown"></span>
         </div>
@@ -38,7 +38,7 @@
       </div>
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-          <button class="btn btn-success btn-circle text-uppercase" type="submit" id="submitComment"><span class="fa fa-paper-plane"></span> {{ _('Agregar Comentario') }}"</button>
+          <button class="btn btn-success btn-circle text-uppercase" type="submit"><span class="fa fa-paper-plane"></span> {{ _('Agregar Comentario') }}</button>
         </div>
       </div>
     </form>
@@ -190,7 +190,7 @@
       </div>
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-          <button class="btn btn-success btn-circle text-uppercase" type="submit" id="submitComment"><span class="fa fa-paper-plane"></span> {{ _('Agregar Comentario') }}"</button>
+          <button class="btn btn-success btn-circle text-uppercase" type="submit" id="submitComment"><span class="fa fa-paper-plane"></span> {{ _('Agregar Comentario') }}</button>
         </div>
       </div>
     </form>

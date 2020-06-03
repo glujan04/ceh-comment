@@ -6,32 +6,86 @@ function hideFormErrors()
 }
 
 jQuery(document).ready(function() {
-    // jQuery('.module-content input[type="submit"]').on('click', function(e) {
-        // if (jQuery(this).hasClass('btn-primary')) {
-            // var form = jQuery(this).closest('form');
-            // var comment = form.find('textarea[name="comment"]').val();
-            // var display_errors = false;
+     validReplyForm();
+     // jQuery('.module-content input[type="submit"]').on('click', function(e) {
+         // if (jQuery(this).hasClass('btn-primary')) {
+             // var form = jQuery(this).closest('form');
+             // var comment = form.find('textarea[name="comment"]').val();
+             // var display_errors = false;
 
-            // hideFormErrors();
+             // hideFormErrors();
 
-            // if (!comment || !comment.replace(/\s/g, '').length) {
-                // form.find('.error-comment').removeClass('hidden');
-                // display_errors = true;
-            // }
-            // if (display_errors) {
-                // form.find('.form-errors').removeClass('hidden');
-                // return false;
-            // }
-        // }
-    // });
+             // if (!comment || !comment.replace(/\s/g, '').length) {
+                 // form.find('.error-comment').removeClass('hidden');
+                 // display_errors = true;
+             // }
+             // if (display_errors) {
+                 // form.find('.form-errors').removeClass('hidden');
+                 // return false;
+             // }
+         // }
+     // });
 });
 
+function validReplyForm(){
+   $('div.ceh-comments-reply').find('form').validate({
+           errorElement: 'span',
+           rules: {
+                   subject: {
+                           required: true,
+                           maxlength: 50
+                   },
+                   email: {
+                           required: true,
+                           email: true,
+                           maxlength: 30
+                   },
+                   comment: {
+                           required: true,
+                           maxlength: 500
+                   },
+                   cehpolicy: {
+                           required: true
+                   }
+           },
+           messages: {
+                   subject: {
+                           required: "Ingrese un nombre",
+                           maxlength: $.format("máximo {0} caracteres")
+                   },
+                   email: {
+                           required: "Ingrese un correo",
+                           email: "Ingrese un correo válido",
+                           maxlength: $.format("máximo {0} caracteres")
+                   },
+                   comment: {
+                           required: "Ingrese un comentario"
+                   },
+                   cehpolicy: {
+                           required: "Debe aceptar los términos"
+                   }
+           },
+           errorPlacement: function(label, element) {
+                   label.addClass('ceh-error');
+                   element.parent().append(label);
+           }
+   });
+   // COMENTARIOS RESPUESTA
+   resetCounterReply();
+}
 // Comments
 function ShowCommentForm(id){
 	if ($("#" + id).hasClass('hidden'))
         $("#" + id).removeClass('hidden');
 	else
 		$("#" + id).addClass('hidden');
+}
+
+function resetCounterReply() {
+    let ta = $('.ceh_comment_reply').each( function( index, el ) {
+		updCountdown( el );
+		el.on('input', updCountdown);
+    });
 }
 
 $(document).ready(function(){
