@@ -262,7 +262,6 @@ class Comment(Base):
     def count_for_status(cls, status):
         return (model.Session.query(func.count(Comment.id)).filter(Comment.approval_status == status).scalar())
 
-
 class CommentBlockedUser(Base):
     """
     A blocked user who is not allowed to post anymore because they have
