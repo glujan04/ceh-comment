@@ -260,8 +260,11 @@ class Comment(Base):
 
     @classmethod
     def count_for_status(cls, status):
-        return model.Session.query(Comment) \
-            .filter(Comment.approval_status == status).count().scalar()
+        count = model.Session.query(Comment).filter(Comment.approval_status == status).scalar()
+        if count:
+            return count
+
+        return 0
 
 
 class CommentBlockedUser(Base):
