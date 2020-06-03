@@ -70,11 +70,11 @@
          {{ comment.id }} /
          {{ comment.thread_id }} / {{ comment.parent_id }} / {{ comment.child_count }}
         {% if comment.approved %}
-        <div class="comment" class="ceh-post-body {% if comment.parent_id != None %}ceh-post-reply{% endif %}">
+        <div class="comment ceh-post-body{% if comment.parent_id != None %}ceh-post-reply{% endif %}">
             {% if comment.state != 'deleted' %}
                 <div class="ceh-post-main">
 					<div class="ceh-post-left">{{ comment.email }}</div>
-					<div>{{ _('Respuesta'): comment.subject }}</div>
+					<div>{{ _('Respuesta') }}: {{ comment.subject }}</div>
 				</div>
             {# {% else %} #}
             {#    <h3>{{ _('This comment was deleted.') }}</h3> #}
