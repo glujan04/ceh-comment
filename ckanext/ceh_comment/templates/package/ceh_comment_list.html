@@ -129,7 +129,7 @@
 			<td class="dataset-label">{{ comment.subject }}</td>
 			<td class="dataset-details">{{ comment.email }}</td>
 			<td class="dataset-details">{{ comment.content|safe }}</td>
-			<td class="dataset-details">{{ comment.approved }}
+			<td class="dataset-details">
 			  <!-- <button type="button" class="btn {% if comment.approved %}btn-primary{% else %}btn-secondary-ceh{% endif %}">{% if comment.approved %}{{ _('Publicado') }}{% else %}{{ _('Despublicado') }}{% endif %}</button> -->
 			  <div style="float:left;">{% if comment.approved == False %}{{ _('Despublicado') }}{% else %}{{ _('Publicado') }}{% endif %}</div>
 			  <div class="material-switch pull-right">
