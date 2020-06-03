@@ -228,7 +228,7 @@ class CommentPlugin(p.SingletonPlugin):
                 'get_comment_count_for_dataset': self._get_comment_count_for_dataset}
 
     def get_actions(self):
-        from ckanext.ceh_comment.logic.action import get, create, delete, update
+        from ckanext.ceh_comment.logic.action import get, create, delete, update, publish
 
         return {
             "comment_create": create.comment_create,
@@ -236,7 +236,8 @@ class CommentPlugin(p.SingletonPlugin):
             "comment_update": update.comment_update,
             "comment_show": get.comment_show,
             "comment_delete": delete.comment_delete,
-            "comment_count": get.comment_count
+            "comment_count": get.comment_count,
+            "comment_publish": publish.comment_publish
         }
 
     def get_auth_functions(self):
@@ -266,6 +267,7 @@ class CommentPlugin(p.SingletonPlugin):
         controller = 'ckanext.ceh_comment.controller:CommentController'
         map.connect('/dataset/{dataset_id}/comments/add', controller=controller, action='add')
         map.connect('/dataset/{dataset_id}/comments/{comment_id}/edit', controller=controller, action='edit')
+        map.connect('/dataset/{dataset_id}/comments/{comment_id}/publish', controller=controller, action='publish')
         map.connect('/dataset/{dataset_id}/comments/{parent_id}/reply', controller=controller, action='reply')
         map.connect('/dataset/{dataset_id}/comments/{comment_id}/delete', controller=controller, action='delete')
         return map

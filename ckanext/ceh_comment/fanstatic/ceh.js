@@ -185,3 +185,16 @@ function updCountdown(e) {
     let remaining = maxLengh - $(currentElement).val().length;
 	$(currentElement).nextAll('.countdown:first').text(remaining + '/' + maxLengh);
 }
+
+function publish( el, pkg_id, id ){
+    let $form = document.createElement('form');
+    $form.setAttribute('id', 'data_form');
+    $form.setAttribute('action', `/dataset/${pkg_id}/comments/${id}/publish`);
+    $form.setAttribute('method', 'post');
+    document.body.appendChild($form);
+	console.log(`/dataset/${pkg_id}/comments/${id}/publish`);
+    addParam($form, "state", $(el).prop('checked'));
+    $form.submit();
+    document.body.removeChild($form);
+}
+

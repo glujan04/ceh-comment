@@ -48,6 +48,37 @@ class CommentController(BaseController):
 
         return render("package/read.html")
 
+    def publish(self, dataset_id, comment_id):
+
+        context = {'model': model, 'user': c.user}
+
+        # Auth check to make sure the user can see this package
+
+        data_dict = {'id': dataset_id}
+        #check_access('package_show', context, data_dict)
+
+        try:
+            c.pkg_dict = get_action('package_show')(context, {'id': dataset_id})
+            c.pkg = context['package']
+        except:
+            abort(403)
+
+        if request.method == 'POST':
+            data_dict = clean_dict(unflatten(
+                tuplize_dict(parse_params(request.POST))))
+            data_dict['id'] = comment_id
+            try:
+                get_action('comment_publish')(context, data_dict)
+            except ValidationError, ve:
+                log.debug(ve)
+            except Exception, e:
+                log.debug(e)
+                abort(403)
+
+        h.redirect_to(str('/dataset/%s' % c.pkg.name))
+
+        return render("package/read.html")
+
     def reply(self, dataset_id, parent_id):
         c.action = 'reply'
 

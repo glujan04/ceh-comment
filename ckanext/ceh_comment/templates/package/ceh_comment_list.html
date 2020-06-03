@@ -130,10 +130,9 @@
 			<td class="dataset-details">{{ comment.email }}</td>
 			<td class="dataset-details">{{ comment.content|safe }}</td>
 			<td class="dataset-details">
-			  <!-- <button type="button" class="btn {% if comment.approved %}btn-primary{% else %}btn-secondary-ceh{% endif %}">{% if comment.approved %}{{ _('Publicado') }}{% else %}{{ _('Despublicado') }}{% endif %}</button> -->
 			  <div style="float:left;">{% if comment.approved == False %}{{ _('Despublicado') }}{% else %}{{ _('Publicado') }}{% endif %}</div>
 			  <div class="material-switch pull-right">
-                            <input id="{{ comment.id }}" name="approval_status" type="checkbox" {% if comment.approved == False %}checked{% endif %}" onclick="javascript:console.log($(this).prop('checked'));"/>
+                            <input id="{{ comment.id }}" name="approval_status" type="checkbox" {% if comment.approved == False %}checked{% endif %}" onclick="javascript:publish(this,{% if h.check_access('package_update', {'id': pkg_id }) %}{{ pkg_id }}{% endif %},{{ comment.id }});"/>
                             <label for="{{ comment.id }}" class="label-primary" title="{% if comment.approved %}{{ _('Despublicar') }}{% else %}{{ _('Publicar') }}{% endif %}"></label>
 			  </div>
 			</td>
