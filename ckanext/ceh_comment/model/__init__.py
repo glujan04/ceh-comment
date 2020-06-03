@@ -242,6 +242,7 @@ class Comment(Base):
         d['email'] = self.email
         d['content'] = self.comment
         d['state'] = self.state
+        d['approval_status'] = self.approval_status
         d['thread_id'] = self.thread_id
         d['creation_date'] = self.creation_date.isoformat()
         if self.modified_date:
