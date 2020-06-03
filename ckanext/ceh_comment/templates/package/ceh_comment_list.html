@@ -98,7 +98,7 @@
     <tbody>
     {% for comment in thread.comments %}
           <tr>
-            <td class="dataset-label">{{ comment.approval_status }}</td>
+            <td class="dataset-label">{{ comment.approved }}</td>
             <td class="dataset-details">{{ comment.email }}</td>
             <td class="dataset-details">{{ comment.content|safe }}</td>
             <td class="dataset-details">
