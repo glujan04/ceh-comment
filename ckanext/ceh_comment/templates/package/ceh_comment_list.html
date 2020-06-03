@@ -161,6 +161,13 @@
 </section>
      {% endif %}
   {% endif %} {% endblock %}
+
+{% macro managed_thread(thread) %}
+	{% for comment in thread.comments %}
+	<div>{{ comment.id }}</div>
+	{% endfor %}
+{% endmacro %}
+ {{ managed_thread(thread) }}
   
 <section class="additional-info">
   <h3>{{ _('Nuevo Comentario') }}</h3> 
