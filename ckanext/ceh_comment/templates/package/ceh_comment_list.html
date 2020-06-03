@@ -123,22 +123,6 @@
 
 {% endmacro %}
 
-
-  {% block header_account_logged %} {% if userobj %}
-     {% if userobj.sysadmin and thread.comments | length != 0 %}
-<section class="additional-info">
-  <div id="publishComment" class="alert alert-success alert-dismissible ceh-none" role="alert">
-    <strong>Muy Bien!</strong> El comentario ha sido correctamente publicado.
-      <button type="button" class="close ceh-close-cmalert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <h3>{{ _('Administrar Comentarios') }}</h3>
-
-</section>
-     {% endif %}
-  {% endif %} {% endblock %}
-
 {% macro managed_thread(thread) %}
 	{% for comment in thread.comments %}
 		  <tr>
@@ -154,6 +138,17 @@
 		  {% endif %} 
 	{% endfor %}
 {% endmacro %}
+
+  {% block header_account_logged %} {% if userobj %}
+     {% if userobj.sysadmin and thread.comments | length != 0 %}
+<section class="additional-info">
+  <div id="publishComment" class="alert alert-success alert-dismissible ceh-none" role="alert">
+    <strong>Muy Bien!</strong> El comentario ha sido correctamente publicado.
+      <button type="button" class="close ceh-close-cmalert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <h3>{{ _('Administrar Comentarios') }}</h3>
   <table class="table table-striped-ceh table-hover-ceh table-bordered table-condensed">
 	<thead>
       <tr>
@@ -167,6 +162,12 @@
 		{{ managed_thread(thread) }}
 	</tbody>
   </table>
+</section>
+     {% endif %}
+  {% endif %} {% endblock %}
+
+
+
 
 <section class="additional-info">
   <h3>{{ _('Nuevo Comentario') }}</h3> 
