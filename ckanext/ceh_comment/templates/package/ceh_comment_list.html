@@ -122,7 +122,7 @@
     </div>
 
 {% endmacro %}
-
+{{ managed_thread(thread) }}
 {% macro managed_thread(thread) %}
   {% block header_account_logged %} {% if userobj %}
      {% if userobj.sysadmin and comment.comments | length != 0 %}
