@@ -77,8 +77,10 @@ function validReplyForm(){
 function ShowCommentForm(id){
 	if ($("#" + id).hasClass('hidden'))
         $("#" + id).removeClass('hidden');
-	else
+	else{
 		$("#" + id).addClass('hidden');
+		$("#form_" + id).trigger("reset");
+	}
 }
 
 function resetCounterReply() {
