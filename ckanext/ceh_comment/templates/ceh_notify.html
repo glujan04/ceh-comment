@@ -1,5 +1,5 @@
         {% if c.userobj.sysadmin %}
-        {% set new_comments = h.get_comment_count_for_dataset(c.pkg.id) %}
+        {% set new_comments = h.get_comment_count_for_dataset('7a4c10ac-ffac-49fa-959c-865b50c273ce') %}
         {% set notify_tooltip = ngettext('%(num)d nuevo comentario', '%(num)d nuevos comentarios', new_comments)
           %}
         <li class="notifications {% if new_comments > 0 %}notifications-important{% endif %}">
