@@ -76,8 +76,8 @@
     </div>
 
 {% endmacro %}
-  {% block header_account_logged %} {% if c.userobj %}
-     {% if c.userobj.sysadmin %}
+  {% block header_account_logged %} {% if userobj %}
+     {% if userobj.sysadmin %}
 <section class="additional-info">
   <div id="publishComment" class="alert alert-success alert-dismissible ceh-none" role="alert">
     <strong>Muy Bien!</strong> El comentario ha sido correctamente publicado.
