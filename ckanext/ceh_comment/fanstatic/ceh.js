@@ -187,7 +187,9 @@ function updCountdown(e) {
 }
 
 function publish( el, pkg_id, id ){
-    let $form = document.createElement('form');
+    $('.material-switch').attr('disabled','');
+	console.log($('.material-switch'));
+	let $form = document.createElement('form');
     $form.setAttribute('id', 'data_form');
     $form.setAttribute('action', `/dataset/${pkg_id}/comments/${id}/publish`);
     $form.setAttribute('method', 'post');
@@ -195,7 +197,6 @@ function publish( el, pkg_id, id ){
     addParam($form, "state", $(el).prop('checked'));
     $form.submit();
     // Se desactivan todos los botones luego del submit
-    $('.material-switch').attr('disabled','');
     document.body.removeChild($form);
 }
 
