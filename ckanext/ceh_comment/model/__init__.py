@@ -260,9 +260,9 @@ class Comment(Base):
 
     @classmethod
     def count_for_status(cls, status):
-        t =  model.Session.query(Comment).filter(Comment.approval_status == status)
+        t =  model.Session.query(Comment).filter(Comment.approval_status == status).subquery()
         q = model.Session.query(func.count('*').label('comment_count'),
-                                t.approval_status).group_by(t.approval_status)
+                                t.c.approval_status).group_by(t.c.approval_status)
         count = q.scalar()
 
         if count:
