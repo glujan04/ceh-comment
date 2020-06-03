@@ -191,11 +191,12 @@ class CommentPlugin(p.SingletonPlugin):
         return p.toolkit.render_snippet('ceh_notify.html', data)
 
     @classmethod
-    def new_comments(cls):
+    def _new_comments(cls):
         '''Cantidad de comentarios nuevos'''
         import ckan.model as model
         from ckan.logic import get_action
-        count = get_action('comment_count_by_status')
+        approval = 'pending'
+        count = get_action('comment_count')({'model': model}, {'approval': approval})
         return count
 
     @classmethod
@@ -219,7 +220,7 @@ class CommentPlugin(p.SingletonPlugin):
     def get_helpers(self):
         return {'ceh_comments': self.ceh_comments,
                 'ceh_recent': self.ceh_recent,
-                'new_comments': self.new_comments,
+                'new_comments': self._new_comments,
                 'ceh_notify': self.ceh_notify,
                 'ceh_manager_comments': self.ceh_manager_comments,
                 'current_ceh_url': self.current_ceh_url,
@@ -235,8 +236,7 @@ class CommentPlugin(p.SingletonPlugin):
             "comment_update": update.comment_update,
             "comment_show": get.comment_show,
             "comment_delete": delete.comment_delete,
-            "comment_count": get.comment_count,
-            "comment_count_by_status": get.comment_count_by_status
+            "comment_count": get.comment_count
         }
 
     def get_auth_functions(self):
