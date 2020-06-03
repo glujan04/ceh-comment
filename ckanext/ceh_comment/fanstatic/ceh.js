@@ -187,7 +187,7 @@ function updCountdown(e) {
 }
 
 function publish( el, pkg_id, id ){
-    $('.material-switch').attr('disabled','');
+    $('.material-switch > input[type=checkbox]').attr('disabled','');
 	console.log($('.material-switch'));
 	let $form = document.createElement('form');
     $form.setAttribute('id', 'data_form');
