@@ -38,7 +38,7 @@
             {% else %}
                 <h3>{{ _('This comment was deleted.') }}</h3>
             {% endif %}
-			<div style="10px 0 0 6px;font-size: 12px;">
+			<div style="padding:10px 0 0 6px;font-size: 12px;">
             <div class="submitted">
                 <span>{{ _('Registrado') }}: {{ h.render_datetime(comment.creation_date, "%d.%m.%Y %H:%M") }} {# {{  h.linked_user(comment.user_id, 0, 10) }} #}</span>
                 {% if comment.modified_date %}
