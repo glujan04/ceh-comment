@@ -144,6 +144,7 @@
       </tr>
     </thead>
     <tbody>
+	{{ managed_thread(comment) }}
 	{% macro managed_thread(thread) %}
     {% for comment in thread.comments %}
           <tr>
