@@ -123,7 +123,7 @@
 
 {% endmacro %}
   {% block header_account_logged %} {% if userobj %}
-     {% if userobj.sysadmin %}
+     {% if userobj.sysadmin and comment.comments | length != 0 %}
 <section class="additional-info">
   <div id="publishComment" class="alert alert-success alert-dismissible ceh-none" role="alert">
     <strong>Muy Bien!</strong> El comentario ha sido correctamente publicado.
@@ -142,6 +142,7 @@
       </tr>
     </thead>
     <tbody>
+	{% macro managed_thread(thread) %}
     {% for comment in thread.comments %}
           <tr>
             <td class="dataset-label">{{ comment.subject }}</td>
@@ -151,7 +152,11 @@
               <button type="button" class="btn {% if comment.approved %}btn-primary{% else %}btn-secondary-ceh{% endif %}">{% if comment.approved %}{{ _('Publicar') }}{% else %}{{ _('Despublicar') }}{% endif %}</button>
             </td>
           </tr>
+		  {% if comment.comments | length != 0 %}
+                {{ managed_thread(comment) }}
+          {% endif %}
     {% endfor %}
+	{% endmacro %}
     </tbody>
   </table>
 </section>
