@@ -119,12 +119,12 @@
                 {{ comment_thread(comment) }}
             {% endif %}
     {% endfor %}
-	{% if thread is None %}
-    {{ _('Aún no existen comentarios.') }}
-    {% endif %}
     </div>
 
 {% endmacro %}
+	{% if thread == None %}
+    {{ _('Aún no existen comentarios.') }}
+    {% endif %}
   {% block header_account_logged %} {% if userobj %}
      {% if userobj.sysadmin %}
 <section class="additional-info">
