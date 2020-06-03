@@ -245,7 +245,7 @@ class Comment(Base):
         d['approved'] = self.approval_status == COMMENT_PENDING
         d['parent_id'] = self.parent_id
         d['thread_id'] = self.thread_id
-        d['has_child'] = self.children.count()
+        d['has_child'] = len(self.children)
         d['creation_date'] = self.creation_date.isoformat()
         if self.modified_date:
             d['modified_date'] = self.modified_date.isoformat()
