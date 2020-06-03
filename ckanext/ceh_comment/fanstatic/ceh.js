@@ -198,3 +198,11 @@ function publish( el, pkg_id, id ){
     document.body.removeChild($form);
 }
 
+function addParam(form, name, value) {
+    var $input = document.createElement('input');
+    $input.setAttribute('type', 'hidden');
+    $input.setAttribute('name', name);
+    $input.setAttribute('value', value);
+    form.appendChild($input);
+}
+
