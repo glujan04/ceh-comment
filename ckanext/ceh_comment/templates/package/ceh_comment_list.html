@@ -143,10 +143,7 @@
       </tr>
     </thead>
     <tbody>
-	{{ managed_thread(thread) }}
 	{% macro managed_thread(thread) %}
-	</tbody>
-  </table>
     {% for comment in thread.comments %}
           <tr>
             <td class="dataset-label">{{ comment.subject }}</td>
@@ -161,7 +158,9 @@
           {% endif %}
     {% endfor %}
 	{% endmacro %}
-    
+	</tbody>
+  </table>
+    {{ managed_thread(thread) }}
 </section>
      {% endif %}
   {% endif %} {% endblock %}
