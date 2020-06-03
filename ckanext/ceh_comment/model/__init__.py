@@ -5,7 +5,7 @@ from sqlalchemy import Column, MetaData, ForeignKey, func
 from sqlalchemy import types
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
-
+from pprint import pprint
 from ckan.plugins import toolkit
 from ckan.lib.base import model, config
 
@@ -261,7 +261,7 @@ class Comment(Base):
     @classmethod
     def count_for_status(cls, status):
         count = model.Session.query(Comment).filter(Comment.approval_status == status).scalar()
-        log.error(count)
+        pprint(count)
         if count:
             return count
 
