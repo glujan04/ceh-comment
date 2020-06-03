@@ -31,7 +31,7 @@ def thread_show(context, data_dict):
         return abort(404)
 
     data_dict['thread'] = thread
-    # logic.check_access("thread_show", context, data_dict)
+    logic.check_access("thread_show", context, data_dict)
 
     # Dictize the thread and all the comments within it.
     thread_dict = thread.as_dict()
@@ -61,11 +61,11 @@ def thread_show(context, data_dict):
 
     if context.get('with_deleted') is not True:
         thread_dict['comments'] = [
-            c.as_dict() for c in comments.order_by('ceh_comment.creation_date asc').all()
+            c.as_dict() for c in comments.order_by('ceh2_comment.creation_date asc').all()
         ]
     else:
         thread_dict['comments'] = [
-            c.as_dict(only_active_children=False) for c in comments.order_by('ceh_comment.creation_date asc').all()
+            c.as_dict(only_active_children=False) for c in comments.order_by('ceh2_comment.creation_date asc').all()
         ]
 
     return thread_dict
