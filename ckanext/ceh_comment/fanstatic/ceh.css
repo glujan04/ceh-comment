@@ -39,6 +39,12 @@ textarea[name=comment] {
     font-size: 13px !important;
 }
 
+.form-ceh-comment {
+	margin: 0px;
+	height: 105px;
+	width: 657px;
+}
+
 .form-control_ech {
     height: 35px !important;
     font-size: 13px !important;
@@ -85,6 +91,12 @@ textarea[name=comment] {
 
 /* FORO DE COMENTARIOS */
 
+.ceh-form-reply{
+	border-top-style: dashed;
+	border-top-width: 1px;
+	margin-top: 10px;
+}
+
 .ceh-post-main {
 	/* text-indent: 0; */
     /* visibility: visible; */
@@ -98,4 +110,39 @@ textarea[name=comment] {
     border-style: none none dashed none;
     border-width: 1px;
     /* border-color: #dde4eb; */
+}
+
+.ceh-post-body {
+	font-size: 14px;
+	font: 75%/1.5em Verdana, Helvetica, Arial, sans-serif;
+	background: #fafafa;
+	margin: 0px 0 10px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #dde4eb;
+}
+
+.ceh-post-reply {
+	margin-left: 25px;
+}
+
+.ceh-post-head {
+	padding:10px 0 0 6px;
+	font-size: 12px;
+}
+
+.ceh-post-content {
+	padding: 10px 6px 10px 0;
+}
+
+.ceh-post-content1{
+	padding-bottom:15px;
+}
+
+.ceh-post-left {
+	float: right;
+}
+
+.ceh-pointer{
+	cursor: pointer;
 }
