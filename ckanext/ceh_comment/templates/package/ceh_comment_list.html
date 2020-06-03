@@ -133,7 +133,7 @@
 			  <!-- <button type="button" class="btn {% if comment.approved %}btn-primary{% else %}btn-secondary-ceh{% endif %}">{% if comment.approved %}{{ _('Publicar') }}{% else %}{{ _('Despublicar') }}{% endif %}</button> -->
 			  <div>{{ _('Publicar') }}</div>
 			  <div class="material-switch pull-right">
-                            <input id="{{ comment.id }}" name="approval_status" type="checkbox" value="{{ comment.approved }}" onclick="alert(this.value);return false;"/>
+                            <input id="{{ comment.id }}" name="approval_status" type="checkbox" {% if comment.approved %}checked{% endif %}" onclick="javascript:console.log(this.value);"/>
                             <label for="{{ comment.id }}" class="label-primary"></label>
 			  </div>
 			  <div>{{ _('Despublicar') }}</div>
