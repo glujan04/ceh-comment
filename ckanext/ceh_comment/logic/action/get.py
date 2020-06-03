@@ -99,3 +99,15 @@ def comment_count(context, data_dict):
         return abort(404)
 
     return count
+
+
+def comment_count_by_status(context):
+
+    count = None
+    if count is None:
+        count = comment_model.Comment.count_for_status(comment_model.COMMENT_PENDING)
+
+    if count is None:
+        count = 0
+
+    return count
