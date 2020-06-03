@@ -115,7 +115,7 @@
 			</div>
         </div>
         {% endif %}
-            {% if comment.comments | length != 0 %}
+            {% if (comment.comments | length != 0) and comment.approved %}
                 {{ comment_thread(comment) }}
             {% endif %}
     {% endfor %}
@@ -169,8 +169,6 @@
 </section>
      {% endif %}
   {% endif %} {% endblock %}
-
-
 
 
 <section class="additional-info">
