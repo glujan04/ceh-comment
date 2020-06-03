@@ -32,12 +32,13 @@
     {% for comment in thread.comments %}
         {# {{ comment.id }} #}
         {% if comment.approved %}
-        <div class="comment">
+        <div class="comment" style="font-size: 14px;font: 75%/1.5em Verdana, Helvetica, Arial, sans-serif;background: #fafafa;margin: 0px 0 10px;">
             {% if comment.state != 'deleted' %}
                 <div class="ceh-post-main"><div style="float: right;">{{ comment.email }}</div><div>{{ comment.subject }}</div></div>
             {% else %}
                 <h3>{{ _('This comment was deleted.') }}</h3>
             {% endif %}
+			<div style="padding: 10px;">
             <div class="submitted">
                 <span>{{ _('Registrado') }}: {{ h.render_datetime(comment.creation_date, "%d.%m.%Y %H:%M") }} {# {{  h.linked_user(comment.user_id, 0, 10) }} #}</span>
                 {% if comment.modified_date %}
@@ -68,6 +69,7 @@
             </ul>
             {% endif %}
             </div>
+			</div>
         </div>
         {% endif %}
             {% if comment.comments | length != 0 %}
