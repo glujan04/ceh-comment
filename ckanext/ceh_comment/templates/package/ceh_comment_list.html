@@ -124,7 +124,7 @@
 {% endmacro %}
 
   {% block header_account_logged %} {% if userobj %}
-     {% if userobj.sysadmin and comment.comments | length != 0 %}
+     {% if userobj.sysadmin and thread.comments | length != 0 %}
 
 <section class="additional-info">
 {% macro managed_thread(thread) %}
