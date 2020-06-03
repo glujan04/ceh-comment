@@ -119,6 +119,9 @@
                 {{ comment_thread(comment) }}
             {% endif %}
     {% endfor %}
+	{% if len(thread) = 0 %}
+    {{ _('Aún no existen comentarios.') }}
+    {% endif %}
     </div>
 
 {% endmacro %}
@@ -204,7 +207,6 @@
 </div>
 
 {# {% if userobj %} 
-
 <form class="form" action="{{ pkg_id }}/comments/add" method="post">
     <div id="comment_form_errors" class="alert alert-error form-errors hidden">
         <div class="hidden error-comment">{{ _('Please enter a Comment.') }}</div>
