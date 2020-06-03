@@ -119,9 +119,6 @@
                 {{ comment_thread(comment) }}
             {% endif %}
     {% endfor %}
-	{% if thread.comments == None %}
-    {{ _('Aún no existen comentarios.') }}
-    {% endif %}
     </div>
 
 {% endmacro %}
@@ -204,6 +201,9 @@
 <h3 id="comments">{{ _('Comentarios') }}</h3>
 <div class="comment-container">
     {{ comment_thread(thread) }}
+    {% if len(thread.comments) == 0 %}
+    {{ _('Aún no existen comentarios.') }}
+    {% endif %}
 </div>
 
 {# {% if userobj %} 
