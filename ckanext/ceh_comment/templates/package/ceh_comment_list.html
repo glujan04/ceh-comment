@@ -122,10 +122,10 @@
     </div>
 
 {% endmacro %}
+
+{% macro managed_thread(thread) %}
   {% block header_account_logged %} {% if userobj %}
      {% if userobj.sysadmin and comment.comments | length != 0 %}
-	{{ managed_thread(thread) }}
-	{% macro managed_thread(thread) %}
 <section class="additional-info">
   <div id="publishComment" class="alert alert-success alert-dismissible ceh-none" role="alert">
     <strong>Muy Bien!</strong> El comentario ha sido correctamente publicado.
@@ -160,9 +160,9 @@
     </tbody>
   </table>
 </section>
-	{% endmacro %}
      {% endif %}
   {% endif %} {% endblock %}
+{% endmacro %}
 <section class="additional-info">
   <h3>{{ _('Nuevo Comentario') }}</h3> 
   <div class="module-content ceh-comments">
