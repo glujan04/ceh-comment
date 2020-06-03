@@ -74,14 +74,14 @@
             {% if comment.state != 'deleted' %}
                 <div class="ceh-post-main">
 					<div class="ceh-post-left">{{ comment.email }}</div>
-					<div>{{ _('Respuesta') }}: {{ comment.subject }}</div>
+					<div>{% if comment.parent_id != None %} {{ _('Respuesta') }}: {% endif %}{{ comment.subject }}</div>
 				</div>
             {# {% else %} #}
             {#    <h3>{{ _('This comment was deleted.') }}</h3> #}
             {% endif %}
             <div class="ceh-post-head">
             <div class="submitted">
-                <span>{{ _('Registrado') }}: {{ h.render_datetime(comment.creation_date, "%d.%m.%Y %H:%M") }} {# {{  h.linked_user(comment.user_id, 0, 10) }} #}</span>
+                <span>{{ _('Registrado') }}: {{ h.render_datetime(comment.creation_date, "%d/%m/%Y a las %H:%M") }} {# {{  h.linked_user(comment.user_id, 0, 10) }} #}</span>
                 {% if comment.modified_date %}
                     <br/><span>{{ h.render_datetime(comment.modified_date, "%d.%m.%Y %H:%M") }} {{ _('Modified') }} </span>
                 {% endif %}
