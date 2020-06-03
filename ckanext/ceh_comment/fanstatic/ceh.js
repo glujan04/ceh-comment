@@ -184,6 +184,5 @@ function updCountdown(e) {
     }
     let maxLengh = $(currentElement).attr('maxlength');
     let remaining = maxLengh - $(currentElement).text().length;
-	console.log($(currentElement).nextAll('.countdown:first'));
-    //$(currentElement).nextAll('.countdown:first').text(remaining + '/' + maxLengh);
+	$(currentElement).nextAll('.countdown:first').text(remaining + '/' + maxLengh);
 }
