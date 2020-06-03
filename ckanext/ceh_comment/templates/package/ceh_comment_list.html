@@ -98,11 +98,11 @@
     <tbody>
     {% for comment in thread.comments %}
           <tr>
-            <td class="dataset-label">{{ comment.approved }}</td>
+            <td class="dataset-label">{{ comment.subject }}</td>
             <td class="dataset-details">{{ comment.email }}</td>
             <td class="dataset-details">{{ comment.content|safe }}</td>
             <td class="dataset-details">
-              <button type="button" class="btn btn-primary">{{ _('Publicar') }}</button>
+              <button type="button" class="btn {% if comment.approved %}btn-secondary-ceh{% else %}btn-primary{% endif %}">{{ if comment.approved _('Publicar') else _('Despublicar') }}</button>
             </td>
           </tr>
           <!--<tr>
