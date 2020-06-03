@@ -28,47 +28,49 @@ jQuery(document).ready(function() {
 });
 
 function validReplyForm(){
-   $('div.ceh-comments-reply').find('form').validate({
-           errorElement: 'span',
-           rules: {
-                   subject: {
-                           required: true,
-                           maxlength: 50
-                   },
-                   email: {
-                           required: true,
-                           email: true,
-                           maxlength: 30
-                   },
-                   comment: {
-                           required: true,
-                           maxlength: 500
-                   },
-                   cehpolicy: {
-                           required: true
-                   }
-           },
-           messages: {
-                   subject: {
-                           required: "Ingrese un nombre",
-                           maxlength: $.format("máximo {0} caracteres")
-                   },
-                   email: {
-                           required: "Ingrese un correo",
-                           email: "Ingrese un correo válido",
-                           maxlength: $.format("máximo {0} caracteres")
-                   },
-                   comment: {
-                           required: "Ingrese un comentario"
-                   },
-                   cehpolicy: {
-                           required: "Debe aceptar los términos"
-                   }
-           },
-           errorPlacement: function(label, element) {
-                   label.addClass('ceh-error');
-                   element.parent().append(label);
-           }
+   $('.ceh-comments-reply').each(function(e){
+			$( this ).find('form').validate({
+			   errorElement: 'span',
+			   rules: {
+					   subject: {
+							   required: true,
+							   maxlength: 50
+					   },
+					   email: {
+							   required: true,
+							   email: true,
+							   maxlength: 30
+					   },
+					   comment: {
+							   required: true,
+							   maxlength: 500
+					   },
+					   cehpolicy: {
+							   required: true
+					   }
+			   },
+			   messages: {
+					   subject: {
+							   required: "Ingrese un nombre",
+							   maxlength: $.format("máximo {0} caracteres")
+					   },
+					   email: {
+							   required: "Ingrese un correo",
+							   email: "Ingrese un correo válido",
+							   maxlength: $.format("máximo {0} caracteres")
+					   },
+					   comment: {
+							   required: "Ingrese un comentario"
+					   },
+					   cehpolicy: {
+							   required: "Debe aceptar los términos"
+					   }
+			   },
+			   errorPlacement: function(label, element) {
+					   label.addClass('ceh-error');
+					   element.parent().append(label);
+			   }
+	   });
    });
    // COMENTARIOS RESPUESTA
    resetCounterReply();
@@ -181,5 +183,6 @@ function updCountdown(e) {
     }
     let maxLengh = $(currentElement).attr('maxlength');
     let remaining = maxLengh - $(currentElement).val().length;
+	console.log($(currentElement).nextAll('.countdown:first'));
     $(currentElement).nextAll('.countdown:first').text(remaining + '/' + maxLengh);
 }
