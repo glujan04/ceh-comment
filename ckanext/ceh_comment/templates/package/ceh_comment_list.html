@@ -142,6 +142,10 @@
       </tr>
     </thead>
     <tbody>
+	{{ managed_thread(thread) }}
+    </tbody>
+  </table>
+</section>
 	{% macro managed_thread(thread) %}
     {% for comment in thread.comments %}
           <tr>
@@ -157,9 +161,6 @@
           {% endif %}
     {% endfor %}
 	{% endmacro %}
-    </tbody>
-  </table>
-</section>
      {% endif %}
   {% endif %} {% endblock %}
 <section class="additional-info">
