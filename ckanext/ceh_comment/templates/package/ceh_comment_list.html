@@ -124,6 +124,8 @@
 {% endmacro %}
   {% block header_account_logged %} {% if userobj %}
      {% if userobj.sysadmin and comment.comments | length != 0 %}
+	{{ managed_thread(thread) }}
+	{% macro managed_thread(thread) %}
 <section class="additional-info">
   <div id="publishComment" class="alert alert-success alert-dismissible ceh-none" role="alert">
     <strong>Muy Bien!</strong> El comentario ha sido correctamente publicado.
@@ -142,11 +144,6 @@
       </tr>
     </thead>
     <tbody>
-	{{ managed_thread(thread) }}
-    </tbody>
-  </table>
-</section>
-	{% macro managed_thread(thread) %}
     {% for comment in thread.comments %}
           <tr>
             <td class="dataset-label">{{ comment.subject }}</td>
@@ -157,9 +154,12 @@
             </td>
           </tr>
 		  {% if comment.comments | length != 0 %}
-                {# {{ managed_thread(comment) }} #}
+                {{ managed_thread(comment) }}
           {% endif %}
     {% endfor %}
+    </tbody>
+  </table>
+</section>
 	{% endmacro %}
      {% endif %}
   {% endif %} {% endblock %}
