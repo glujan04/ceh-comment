@@ -134,6 +134,11 @@
     </button>
   </div>
   <h3>{{ _('Administrar Comentarios') }}</h3>
+
+</section>
+     {% endif %}
+  {% endif %} {% endblock %}
+
 {% macro managed_thread(thread) %}
 	{% for comment in thread.comments %}
 		  <tr>
@@ -161,10 +166,6 @@
 		{{ managed_thread(thread) }}
 
   </table>
-</section>
-     {% endif %}
-  {% endif %} {% endblock %}
-
 
 <section class="additional-info">
   <h3>{{ _('Nuevo Comentario') }}</h3> 
