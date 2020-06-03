@@ -81,6 +81,7 @@ function ShowCommentForm(id){
         $("#" + id).removeClass('hidden');
 	else{
 		$("#" + id).addClass('hidden');
+		$("#form_" + id).resetForm();
 		$("#form_" + id).trigger("reset");
 	}
 }
