@@ -19,7 +19,7 @@ def comment_publish(context, data_dict):
 
     if data_dict.get('state') == True:
         comment.approval_status = comment_model.COMMENT_APPROVED
-    else
+    if data_dict.get('state') == False:
         comment.approval_status = comment_model.COMMENT_PENDING
     comment.modified_date = datetime.datetime.now()
 
