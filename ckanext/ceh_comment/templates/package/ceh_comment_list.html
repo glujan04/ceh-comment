@@ -143,7 +143,6 @@
       </tr>
     </thead>
     <tbody>
-{% macro manager_thread(thread) %}
 	{% for comment in thread.comments %}
 		  <tr>
 			<td class="dataset-label">{{ comment.subject }}</td>
@@ -153,12 +152,10 @@
 			  <button type="button" class="btn {% if comment.approved %}btn-primary{% else %}btn-secondary-ceh{% endif %}">{% if comment.approved %}{{ _('Publicar') }}{% else %}{{ _('Despublicar') }}{% endif %}</button>
 			</td>
 		  </tr>
-		   {% if comment.comments | length != 0 %}
+		   {# {% if comment.comments | length != 0 %}
 				{{ manager_thread(comment) }}
-		  {% endif %}
+		  {% endif %} #}
 	{% endfor %}
-{% endmacro %}
-	{{ manager_thread(thread) }}
 	</tbody>
   </table>
 </section>
