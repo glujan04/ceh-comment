@@ -5,7 +5,7 @@ from ckan.lib.base import abort
 from ckan import logic
 
 log = logging.getLogger(__name__)
-
+from pprint import pprint
 
 def thread_show(context, data_dict):
     """
@@ -109,5 +109,5 @@ def comment_count_by_status(context):
 
     if count is None:
         count = 0
-
+    pprint(count)
     return count
