@@ -242,7 +242,7 @@ class Comment(Base):
         d['email'] = self.email
         d['content'] = self.comment
         d['state'] = self.state
-        d['approved'] = self.approval_status == COMMENT_PENDING
+        d['approved'] = self.approval_status == COMMENT_APPROVED
         d['parent_id'] = self.parent_id
         d['thread_id'] = self.thread_id
         d['child_count'] = len(self.children)
