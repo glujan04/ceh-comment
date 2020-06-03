@@ -81,8 +81,8 @@ function ShowCommentForm(id){
         $("#" + id).removeClass('hidden');
 	else{
 		$("#" + id).addClass('hidden');
-		$("#form_" + id).resetForm();
-		$("#form_" + id).trigger("reset");
+		$("#form_" + id).validate().resetForm();
+		//$("#form_" + id).trigger("reset");
 	}
 }
 
@@ -185,5 +185,5 @@ function updCountdown(e) {
     let maxLengh = $(currentElement).attr('maxlength');
     let remaining = maxLengh - $(currentElement).val().length;
 	console.log($(currentElement).nextAll('.countdown:first'));
-    $(currentElement).nextAll('.countdown:first').text(remaining + '/' + maxLengh);
+    //$(currentElement).nextAll('.countdown:first').text(remaining + '/' + maxLengh);
 }
