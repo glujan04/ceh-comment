@@ -192,9 +192,10 @@ function publish( el, pkg_id, id ){
     $form.setAttribute('action', `/dataset/${pkg_id}/comments/${id}/publish`);
     $form.setAttribute('method', 'post');
     document.body.appendChild($form);
-	console.log(`/dataset/${pkg_id}/comments/${id}/publish`);
     addParam($form, "state", $(el).prop('checked'));
     $form.submit();
+    // Se desactivan todos los botones luego del submit
+    $('.material-switch').attr('disabled','');
     document.body.removeChild($form);
 }
 

@@ -192,3 +192,10 @@ textarea[name=comment] {
     background: inherit;
     left: 20px;
 }
+
+.material-switch > input[type="checkbox"]:disabled + label {
+    background-color: rgb(232,235,238);
+    border-color: rgb(255,255,255);
+    cursor: default;
+    pointer-events: none;
+}
