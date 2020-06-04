@@ -62,7 +62,7 @@
 {% endmacro %}
 
 {% set thread = h.get_comment_thread(pkg_name) %}
-
+{% c = 0 %}
 {% macro comment_thread(thread) %}
 
     <div class="comment-wrapper">
@@ -70,7 +70,6 @@
          {# {{ comment.id }} /
          {{ comment.thread_id }} / {{ comment.parent_id }} / {{ comment.child_count }} #}
         {% if comment.approved %}
-        {% set c = 1 %}
         <div class="comment ceh-post-body {% if comment.parent_id != None %}ceh-post-reply{% endif %}">
             {% if comment.state != 'deleted' %}
                 <div class="ceh-post-main">
@@ -215,8 +214,8 @@
   <hr style="margin-top:20px; border: 2px solid #004BA7; background-color:#004BA7;">
 <h3 id="comments">{{ _('Comentarios') }}</h3>
 <div class="comment-container">
-    {{ comment_thread(thread) }} {{ c }}
-    {% if (thread.comments | length == 0) %}
+    {{ comment_thread(thread) }}
+    {% if (thread.comments | length == 0) or c == 0 %}
     {{ _('Aún no existen comentarios.') }}
 	{% endif %}
 </div>
