@@ -62,7 +62,6 @@
 {% endmacro %}
 
 {% set thread = h.get_comment_thread(pkg_name) %}
-{% set c = 0|int %}
 {% macro comment_thread(thread) %}
 
     <div class="comment-wrapper">
@@ -70,7 +69,7 @@
          {# {{ comment.id }} /
          {{ comment.thread_id }} / {{ comment.parent_id }} / {{ comment.child_count }} #}
         {% if comment.approved %}
-        {% c = 1|int %}
+        {% set c = 0|int %}
         <div class="comment ceh-post-body {% if comment.parent_id != None %}ceh-post-reply{% endif %}">
             {% if comment.state != 'deleted' %}
                 <div class="ceh-post-main">
