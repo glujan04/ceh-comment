@@ -15,6 +15,7 @@
       </h1> 
 	  {% set threads = h.get_comment_thread(c.userobj.id) %}
       <section class="additional-info">{{ c.userobj.id }}
+	  {{ threads }}
 	  <ul>
 	  {% for package in c.datasets %}
 	  {{ package.name }}
