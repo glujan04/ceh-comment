@@ -17,14 +17,6 @@
       <section class="additional-info">{{ c.userobj.id }}
 	  {{ threads }}
 	  <ul>
-	  {% for package in c.datasets %}
-	  {{ package.name }}
-	  {% for resource in h.dict_list_reduce(package.resources, 'format') %}
-                <li>
-                  <a href="{{ h.url_for(package.type ~ '.read', id=package.name) }}" class="label label-default" data-format="{{ resource.lower() }}">{{ resource }}</a>
-                </li>
-      {% endfor %}
-	  {% endfor %}
 	  </ul>
 <table class="table table-striped-ceh table-hover-ceh table-bordered table-condensed">
     <thead>
