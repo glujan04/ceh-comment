@@ -215,7 +215,7 @@
 <h3 id="comments">{{ _('Comentarios') }}</h3>
 <div class="comment-container">
     {{ comment_thread(thread) }}
-    {% if (thread.comments | length == 0) or c is not None %}
+    {% if (thread.comments | length == 0) or not c %}
     {{ _('Aún no existen comentarios.') }}
 	{% endif %}
 </div>
