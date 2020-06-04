@@ -225,6 +225,7 @@ class CommentPlugin(p.SingletonPlugin):
                 'ceh_manager_comments': self.ceh_manager_comments,
                 'current_ceh_url': self.current_ceh_url,
                 'get_comment_thread': self._get_comment_thread,
+                'get_comment_all_dataset': self._get_comment_all_dataset,
                 'get_comment_count_for_dataset': self._get_comment_count_for_dataset}
 
     def get_actions(self):
@@ -278,6 +279,11 @@ class CommentPlugin(p.SingletonPlugin):
         from ckan.logic import get_action
         url = '/dataset/%s' % dataset_name
         return get_action('thread_show')({'model': model, 'with_deleted': True}, {'url': url})
+
+    def _get_comment_all_dataset(self, id):
+        import ckan.model as model
+        from ckan.logic import get_action
+        return get_action('thread_show')({'model': model, 'with_deleted': False}, {'userid': id})
 
     def _get_comment_count_for_dataset(self, dataset_name):
         import ckan.model as model

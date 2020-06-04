@@ -20,12 +20,16 @@ def thread_show(context, data_dict):
 
     url = data_dict.get('url')
     id = data_dict.get('id')
+    userid = data_dict.get('userid')
     thread = None
     if url:
         thread = comment_model.CommentThread.from_url(url)
 
     if not thread and id:
         thread = comment_model.CommentThread.get(id)
+
+    if not thread and userid:
+        thread = comment_model.CommentThread.get_datasets(userid)
 
     if not thread:
         return abort(404)
