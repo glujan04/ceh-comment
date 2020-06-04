@@ -71,11 +71,15 @@ class CommentThread(Base):
 
     @classmethod
     def get_datasets(cls, id):
-        t =  model.Session.query(Comment).filter(Comment.approval_status == status).subquery()
-        q = model.Session.query(func.count('*').label('comment_count'),
-                                t.c.approval_status).group_by(t.c.approval_status)
 
-        return q
+        # Look for CommentThread for that URL or create it.
+        thread = model.Session.query(cls).first()
+        if not thread:
+            thread = cls(url=u)
+            model.Session.add(thread)
+            model.Session.commit()
+
+        return thread
 
     @classmethod
     def count_from_url(cls, threadurl):
