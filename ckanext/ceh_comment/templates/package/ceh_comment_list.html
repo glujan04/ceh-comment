@@ -62,6 +62,7 @@
 {% endmacro %}
 
 {% set thread = h.get_comment_thread(pkg_name) %}
+{% set c = 0 %}
 {% macro comment_thread(thread) %}
 
     <div class="comment-wrapper">
