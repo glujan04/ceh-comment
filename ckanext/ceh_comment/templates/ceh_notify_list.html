@@ -4,14 +4,14 @@
 
 
 {% block breadcrumb_content %}
-  <li class="active">{{ h.nav_link(_('Notificaciones'), named_route='/list') }}</li>
+  <li class="active">{{ h.nav_link(_('Notificaciones de comentarios'), named_route='/commands/list') }}</li>
 {% endblock %}
 
 {% block primary_content %}
   <article class="module">
     <div class="module-content">
       <h1 class="page-heading">
-        {% block page_heading %}{{ _('Notificaciones') }}{% endblock %}
+        {% block page_heading %}{{ _('Notificaciones de Comentarios') }}{% endblock %}
       </h1> {#
       {% block users_list %}
         <ul class="user-list">
