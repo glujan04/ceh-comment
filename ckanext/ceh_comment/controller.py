@@ -156,6 +156,7 @@ class CommentController(BaseController):
 
 
     def list(self, id=None):
+        print('dddd')
         context = {'model': model, 'session': model.Session,
                    'user': c.user, 'auth_user_obj': c.userobj,
                    'for_view': True}
