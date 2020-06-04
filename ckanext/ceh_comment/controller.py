@@ -153,3 +153,23 @@ class CommentController(BaseController):
         h.redirect_to(str('/dataset/%s' % c.pkg.name))
 
         return render("package/read.html")
+
+
+    def list(self, id=None):
+        context = {'model': model, 'session': model.Session,
+                   'user': c.user, 'auth_user_obj': c.userobj,
+                   'for_view': True}
+        data_dict = {'id': id,
+                     'user_obj': c.userobj,
+                     'include_datasets': True,
+                     'include_num_followers': True}
+
+        self._setup_template_variables(context, data_dict)
+
+        # The legacy templates have the user's activity stream on the user
+        # profile page, new templates do not.
+        if asbool(config.get('ckan.legacy_templates', False)):
+            c.user_activity_stream = get_action('user_activity_list_html')(
+                context, {'id': c.user_dict['id']})
+
+        return render('package/ceh_notify_list.html')

@@ -270,6 +270,7 @@ class CommentPlugin(p.SingletonPlugin):
         map.connect('/dataset/{dataset_id}/comments/{comment_id}/publish', controller=controller, action='publish')
         map.connect('/dataset/{dataset_id}/comments/{parent_id}/reply', controller=controller, action='reply')
         map.connect('/dataset/{dataset_id}/comments/{comment_id}/delete', controller=controller, action='delete')
+        map.connect('/comments/list', controller=controller, action='list')
         return map
 
     def _get_comment_thread(self, dataset_name):
