@@ -156,7 +156,7 @@ class CommentController(BaseController):
 
 
     def list(self):
-        return render('user/logout.html')
+        #return render('user/logout.html')
 
         #self._setup_template_variables(context, data_dict)
 
@@ -166,4 +166,4 @@ class CommentController(BaseController):
         #    c.user_activity_stream = get_action('user_activity_list_html')(
         #        context, {'id': c.user_dict['id']})
 
-        #return render('package/ceh_notify_list.html')
+        return render('ceh_notify_list.html')
