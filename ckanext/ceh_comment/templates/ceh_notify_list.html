@@ -13,8 +13,8 @@
       <h1 class="page-heading">
         {% block page_heading %}{{ _('Notificaciones de Comentarios') }}{% endblock %}
       </h1> 
-	  {% set thread = h.get_comment_thread(c.userobj.id) %}
-      <section class="additional-info">{{ c.userobj.id }} {{ c.userobj }}
+	  {% set threads = h.get_comment_thread(c.userobj.id) %}
+      <section class="additional-info">{{ c.userobj.id }} / {{ c.userobj }} / {{ h.current_ceh_url() }}
 <table class="table table-striped-ceh table-hover-ceh table-bordered table-condensed">
     <thead>
       <tr>
@@ -23,7 +23,7 @@
       </tr>
     </thead>
     <tbody>
-	{% for comment in thread.comments %}
+	{% for comment in threads.comments %}
 		  <tr>
 			<td class="dataset-label">{{ comment.subject }}</td>
 			<td class="dataset-details">{{ comment.email }}</td>
