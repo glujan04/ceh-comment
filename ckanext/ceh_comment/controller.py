@@ -155,14 +155,8 @@ class CommentController(BaseController):
         return render("package/read.html")
 
 
-    def list(self, id=None):
-        context = {'model': model, 'session': model.Session,
-                   'user': c.user, 'auth_user_obj': c.userobj,
-                   'for_view': True}
-        data_dict = {'id': id,
-                     'user_obj': c.userobj,
-                     'include_datasets': True,
-                     'include_num_followers': True}
+    def list(self):
+        return render('user/logout.html')
 
         #self._setup_template_variables(context, data_dict)
 
@@ -172,4 +166,4 @@ class CommentController(BaseController):
         #    c.user_activity_stream = get_action('user_activity_list_html')(
         #        context, {'id': c.user_dict['id']})
 
-        return render('package/ceh_notify_list.html')
+        #return render('package/ceh_notify_list.html')
