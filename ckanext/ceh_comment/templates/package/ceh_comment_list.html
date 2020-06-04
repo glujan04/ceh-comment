@@ -70,7 +70,7 @@
          {# {{ comment.id }} /
          {{ comment.thread_id }} / {{ comment.parent_id }} / {{ comment.child_count }} #}
         {% if comment.approved %}
-        {% c = 1 %}
+        {{ c = 1 }}
         <div class="comment ceh-post-body {% if comment.parent_id != None %}ceh-post-reply{% endif %}">
             {% if comment.state != 'deleted' %}
                 <div class="ceh-post-main">
