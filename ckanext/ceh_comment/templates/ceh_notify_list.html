@@ -4,7 +4,7 @@
 
 
 {% block breadcrumb_content %}
-  <li class="active">{{ h.nav_link(_('Notificaciones'), named_route='commands/list') }}</li>
+  <li class="active">{{ h.nav_link(_('Notificaciones'), named_route='/list') }}</li>
 {% endblock %}
 
 {% block primary_content %}
@@ -27,5 +27,5 @@
 {% endblock %}
 
 {% block secondary_content %}
-  {% snippet 'user/snippets/user_search.html', q=q %}
+  {% snippet 'snippets/ceh_notify_main.html', q=q %}
 {% endblock %}
