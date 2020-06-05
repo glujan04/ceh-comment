@@ -103,10 +103,10 @@
                     <li><a onclick="ShowCommentForm('edit_{{ comment.id }}')">{{ _('Edit') }}</a></li>
                     {{ comment_form(comment, prefix='edit_', action='edit') }}
                 {% endif %} #}
-                {% if  userobj %}
+                {# {% if  userobj %} #}
                     <li><a onclick="ShowCommentForm('reply_{{ comment.id }}')">{{ _('Responder') }}</a> </li>
                     {{ comment_form(comment, empty=True, prefix='reply_', action='reply') }}
-                {% endif %}
+                {# {% endif %} #}
 
             </ul>
             {% endif %}
