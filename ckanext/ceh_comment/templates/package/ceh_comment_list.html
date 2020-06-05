@@ -81,9 +81,9 @@
             <div class="ceh-post-head">
             <div class="submitted">
                 <span>{{ _('Registrado') }}: {{ h.render_datetime(comment.creation_date, "%d/%m/%Y a las %H:%M") }} {# {{  h.linked_user(comment.user_id, 0, 10) }} #}</span>
-                {# {% if comment.modified_date %} #}
+                {# {% if comment.modified_date %}
                     <br/><span>{{ h.render_datetime(comment.modified_date, "%d.%m.%Y %H:%M") }} {{ _('Modified') }} </span>
-                {# {% endif %} #}
+                {% endif %} #}
             </div>
             <div class="content ceh-post-content">
             {% if comment.state != 'deleted' %}
