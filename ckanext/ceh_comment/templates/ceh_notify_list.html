@@ -2,11 +2,10 @@
 
 {% block subtitle %}{{ _('Listado de Notificaciones') }}{% endblock %}
 
-{% resource 'ckanext_comment/ceh.js' %}
 {% block breadcrumb_content %}
   <li class="active">{{ h.nav_link(_('Notificaciones de comentarios'), named_route='list') }}</li>
 {% endblock %}
-
+{% resource 'ckanext_comment/ceh.js' %}
 {% block primary_content %}
   <article class="module">
     <div class="module-content">
