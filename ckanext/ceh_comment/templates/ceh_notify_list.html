@@ -30,7 +30,7 @@
 		  <tr style="{% if dataset.active_thread == 'active' %}font-weight: bold{% endif %}">
 			<td class="dataset-label">{{ dataset.name }}</td>
 			<td class="dataset-details">{% if dataset.active_thread == 'active' %} {{ _('No leído') }} {% else %} {{ _('Leído') }} {% endif %}</td>
-			<td class="dataset-details"><a href="{{ dataset.url }}">{{ _('Ir') }}</a></td>
+			<td class="dataset-details"><a href="/comments/list/{{ dataset.url }}/read">{{ _('Ir') }}</a></td>
 		  </tr>
 	{% endfor %}
     </tbody>

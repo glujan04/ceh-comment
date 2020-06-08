@@ -156,14 +156,31 @@ class CommentController(BaseController):
 
 
     def list(self):
-        #return render('user/logout.html')
-
-        #self._setup_template_variables(context, data_dict)
-
-        # The legacy templates have the user's activity stream on the user
-        # profile page, new templates do not.
-        #if asbool(config.get('ckan.legacy_templates', False)):
-        #    c.user_activity_stream = get_action('user_activity_list_html')(
-        #        context, {'id': c.user_dict['id']})
 
         return render('ceh_notify_list.html')
+
+
+    def read(self, dataset_id):
+
+        context = {'model': model, 'user': c.user}
+
+        # Auth check to make sure the user can see this package
+
+        data_dict = {'id': dataset_id}
+        check_access('package_show', context, data_dict)
+
+        try:
+            c.pkg_dict = get_action('package_show')(context, {'id': dataset_id})
+            c.pkg = context['package']
+        except:
+            abort(403)
+
+        try:
+            data_dict = {'id': dataset_id}
+            get_action('thread_read')(context, data_dict)
+        except Exception, e:
+            log.debug(e)
+
+        h.redirect_to(str('/dataset/%s' % c.pkg.name))
+
+        return render("package/read.html")
