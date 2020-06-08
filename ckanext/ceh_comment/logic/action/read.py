@@ -11,7 +11,7 @@ log = logging.getLogger(__name__)
 def thread_read(context, data_dict):
     model = context['model']
 
-    logic.check_access("thread_read", context, data_dict)
+    #logic.check_access("thread_read", context, data_dict)
 
     # otherwise content should be set to withdrawn text
     id = logic.get_or_bust(data_dict, 'id')
