@@ -85,6 +85,10 @@ textarea[name=comment] {
     width: 140px !important;
 }
 
+.ceh-tr-col3 {
+    width: 80px !important;
+}
+
 .table-hover-ceh > tbody, button.btn {
 	font-size: 13px;
 }
