@@ -199,3 +199,10 @@ textarea[name=comment] {
     cursor: default;
     pointer-events: none;
 }
+
+/* LISTADO DE THREADS */
+.dataset-ceh-icons
+{
+	text-align:center;
+	font-size: 13px;
+}
