@@ -159,6 +159,18 @@ class CommentThread(Base):
         return 0
 
     @classmethod
+    def count_for_status(cls, status):
+        t =  model.Session.query(CommentThread).filter(CommentThread.active_thread == 'active', CommentThread.state_thread == 'active').subquery()
+        q = model.Session.query(func.count('*').label('comment_count'),
+                                t.c.active_thread).group_by(t.c.active_thread)
+        count = q.scalar()
+
+        if count:
+            return count
+
+        return 0
+
+    @classmethod
     def get_or_create(cls, obj, id):
         """
         Retrieves the thread for the specified object if any exists. If

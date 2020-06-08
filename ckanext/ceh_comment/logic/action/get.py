@@ -98,7 +98,7 @@ def comment_count(context, data_dict):
         count = comment_model.CommentThread.count(id)
 
     if count is None and approval:
-        count = comment_model.Comment.count_for_status(comment_model.COMMENT_PENDING)
+        count = comment_model.CommentThread.count_for_status(comment_model.COMMENT_PENDING)
 
     if count is None:
         return abort(404)
