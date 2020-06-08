@@ -238,6 +238,7 @@ class CommentPlugin(p.SingletonPlugin):
             "comment_show": get.comment_show,
             "comment_delete": delete.comment_delete,
             "comment_count": get.comment_count,
+            "thread_list": get.thread_list,
             "comment_publish": publish.comment_publish
         }
 
