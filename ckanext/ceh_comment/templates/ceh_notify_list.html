@@ -30,7 +30,7 @@
 		  <tr>
 			<td class="dataset-label">{{ dataset.name }}</td>
 			<td class="dataset-details">{% if dataset.active_thread == 'active' %} {{ _('No leído') }} {% else %} {{ _('Leído') }} {% endif %}</td>
-			<td class="dataset-details">{{ h.nav_link(_('Ir'), named_route=dataset.url) }}</td>
+			
 		  </tr>
 	{% endfor %}
     </tbody>
