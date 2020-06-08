@@ -19,7 +19,7 @@ def thread_read(context, data_dict):
         return {'success': True}
 
     cid = logic.get_or_bust(data_dict, 'id')
-
+    log.error(cid)
     commentThread = comment_model.CommentThread.get(cid)
     if not commentThread:
         return {'success': False, 'msg': _('Thread does not exist')}
