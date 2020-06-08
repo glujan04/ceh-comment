@@ -130,6 +130,6 @@ def thread_list(context, data_dict):
 
     # Dictize the thread and all the comments within it.
     thread_dict = thread.as_dict()
-
+    pprint(thread)
     return thread_dict
 
