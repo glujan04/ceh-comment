@@ -62,11 +62,11 @@ def thread_show(context, data_dict):
 
     if context.get('with_deleted') is not True:
         thread_dict['comments'] = [
-            c.as_dict() for c in comments.order_by('ceh2_comment.creation_date asc').all()
+            c.as_dict() for c in comments.order_by('ceh3_comment.creation_date asc').all()
         ]
     else:
         thread_dict['comments'] = [
-            c.as_dict(only_active_children=False) for c in comments.order_by('ceh2_comment.creation_date asc').all()
+            c.as_dict(only_active_children=False) for c in comments.order_by('ceh3_comment.creation_date asc').all()
         ]
 
     return thread_dict
@@ -132,7 +132,7 @@ def thread_list(context, data_dict):
     #thread_dict = thread.as_dict()
 
     thread_dict = [
-            c.as_dict() for c in thread.order_by('ceh2_comment_thread.creation_date asc').all()
+            c.as_dict() for c in thread.order_by('ceh3_comment_thread.creation_date asc').all()
     ]
 
     return thread_dict

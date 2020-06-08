@@ -31,10 +31,11 @@ class CommentThread(Base):
     Represents a thread, or in this particular case a collection of
     comments against a CKAN object.  This is the container for the
     """
-    __tablename__ = 'ceh2_comment_thread'
+    __tablename__ = 'ceh3_comment_thread'
 
     id = Column(types.UnicodeText, primary_key=True, default=make_uuid)
     url = Column(types.UnicodeText)
+    name = Column(types.UnicodeText)
     creation_date = Column(types.DateTime, default=datetime.datetime.now)
     locked = Column(types.Boolean, default=False)
     active_thread = Column(types.UnicodeText, default=u'active')
@@ -65,7 +66,7 @@ class CommentThread(Base):
         thread = model.Session.query(cls). \
             filter(cls.url == u).first()
         if not thread:
-            thread = cls(url=u)
+            thread = cls(url=u, name=u.replace('/dataset/',''))
             model.Session.add(thread)
             model.Session.commit()
 
@@ -189,15 +190,15 @@ class Comment(Base):
     A comment is a text block provided by a user against an object, or in this
     particular case a CommentThread (one per object).
     """
-    __tablename__ = 'ceh2_comment'
+    __tablename__ = 'ceh3_comment'
 
     id = Column(types.UnicodeText, primary_key=True, default=make_uuid)
-    parent_id = Column(types.UnicodeText, ForeignKey('ceh2_comment.id'))
+    parent_id = Column(types.UnicodeText, ForeignKey('ceh3_comment.id'))
     children = relationship("Comment", lazy="joined", join_depth=10,
                             backref=backref('parent', remote_side=[id]),
                             order_by="asc(Comment.creation_date)")
 
-    thread_id = Column(types.UnicodeText, ForeignKey('ceh2_comment_thread.id'), nullable=True)
+    thread_id = Column(types.UnicodeText, ForeignKey('ceh3_comment_thread.id'), nullable=True)
     #user_id = Column(types.UnicodeText, ForeignKey(model.User.id), nullable=True)
     user_id = Column(types.UnicodeText, nullable=True)
     subject = Column(types.UnicodeText)
@@ -289,7 +290,7 @@ class CommentBlockedUser(Base):
     A blocked user who is not allowed to post anymore because they have
     previously posted spam.
     """
-    __tablename__ = 'ceh2_comment_blocked'
+    __tablename__ = 'ceh3_comment_blocked'
 
     id = Column(types.UnicodeText, primary_key=True, default=make_uuid)
     #user_id = Column(types.UnicodeText, ForeignKey(model.User.id))
