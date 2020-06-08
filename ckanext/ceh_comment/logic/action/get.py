@@ -20,16 +20,12 @@ def thread_show(context, data_dict):
 
     url = data_dict.get('url')
     id = data_dict.get('id')
-    userid = data_dict.get('userid')
     thread = None
     if url:
         thread = comment_model.CommentThread.from_url(url)
 
     if not thread and id:
         thread = comment_model.CommentThread.get(id)
-
-    if not thread and userid:
-        thread = comment_model.CommentThread.get_datasets(userid)
 
     if not thread:
         return abort(404)
@@ -107,4 +103,32 @@ def comment_count(context, data_dict):
         return abort(404)
 
     return count
+
+
+def thread_list(context, data_dict):
+    """
+    Returns the content of a thread, based on a url. The url
+    parameter MUST be present in the data_dict.
+    with_deleted (boolean) - Also show deleted comments (requires sysadmin)
+    offset (int) - The number of comments to offset in the threads comment list
+    limit (int) - Total number of comments to return.
+    """
+
+    model = context['model']
+
+    userid = data_dict.get('userid')
+    thread = None
+    if userid:
+        thread = comment_model.CommentThread.get_datasets(userid)
+
+    if not thread:
+        return abort(404)
+
+    data_dict['thread'] = thread
+    #logic.check_access("thread_show", context, data_dict)
+
+    # Dictize the thread and all the comments within it.
+    thread_dict = thread.as_dict()
+
+    return thread_dict
 
