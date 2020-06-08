@@ -125,11 +125,15 @@ def thread_list(context, data_dict):
     if not thread:
         return abort(404)
 
-    data_dict['thread'] = thread
+    #data_dict['thread'] = thread
     #logic.check_access("thread_show", context, data_dict)
 
     # Dictize the thread and all the comments within it.
-    thread_dict = thread.as_dict()
+    #thread_dict = thread.as_dict()
+
+    thread_dict = [
+            c.as_dict() for c in thread.order_by('ceh2_comment_thread.creation_date asc').all()
+    ]
 
     return thread_dict
 
