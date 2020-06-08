@@ -121,13 +121,13 @@ def thread_list(context, data_dict):
     thread = None
     if userid:
         thread = comment_model.CommentThread.get_datasets(userid)
-
+    pprint(data_dict)
     if not thread:
         return abort(404)
 
     data_dict['thread'] = thread
     #logic.check_access("thread_show", context, data_dict)
-    pprint(data_dict)
+    
     # Dictize the thread and all the comments within it.
     thread_dict = thread.as_dict()
 
