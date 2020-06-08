@@ -24,7 +24,7 @@ def thread_delete(context, data_dict):
     if not commentThread:
         return {'success': False, 'msg': _('Thread does not exist')}
 
-    if commentThread.user_id is not userobj.id:
-        return {'success': False, 'msg': _('User is not the author of the commentThread')}
+    #if commentThread.user_id is not userobj.id:
+    #    return {'success': False, 'msg': _('User is not the author of the commentThread')}
 
     return {'success': True}
