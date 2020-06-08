@@ -206,4 +206,6 @@ class CommentController(BaseController):
         except Exception, e:
             log.debug(e)
 
+        h.redirect_to('/comments/list')
+
         return render("package/read.html")
