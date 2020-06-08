@@ -245,11 +245,13 @@ class CommentPlugin(p.SingletonPlugin):
         }
 
     def get_auth_functions(self):
-        from ckanext.ceh_comment.logic.auth import get, create, delete, update
+        from ckanext.ceh_comment.logic.auth import get, create, delete, update, read, thread_delete
 
         return {
             'comment_create': create.comment_create,
             'comment_update': update.comment_update,
+            'thread_read': read.thread_read,
+            'thread_delete': thread_delete.thread_delete,
             'comment_show': get.comment_show,
             'comment_delete': delete.comment_delete,
             "comment_count": get.comment_count
