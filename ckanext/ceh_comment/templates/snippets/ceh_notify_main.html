@@ -4,6 +4,7 @@
     <li class="nav-item">{{ h.nav_link(_('Todas las notificaciones'), named_route='list') }}</li>
   </ul>
 </section>
+{% resource 'ckanext_comment/ceh.js' %}
     <script type="text/javascript">
 	$('#delModal').on('show.bs.modal', function(e) {
 		//get data-id attribute of the clicked element
