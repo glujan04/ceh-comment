@@ -74,8 +74,8 @@ class CommentThread(Base):
     @classmethod
     def get_datasets(cls, id):
 
-        thread = model.Session.query(cls). \
-            filter(cls.state_thread == 'active')
+        thread = model.Session.query(cls).first()#. \
+            #filter(cls.state_thread == 'active')
 
         return thread
 
