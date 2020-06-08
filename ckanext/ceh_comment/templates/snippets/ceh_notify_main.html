@@ -4,7 +4,7 @@
     <li class="nav-item">{{ h.nav_link(_('Todas las notificaciones'), named_route='list') }}</li>
   </ul>
 </section>
-<script type="text/javascript">
+<script type="text/javascript" async>
 	jQuery(document).ready(function() {
 		$('#delModal').on('show.bs.modal', function(e) {
 			//get data-id attribute of the clicked element
@@ -12,10 +12,10 @@
 			//populate the textbox
 			$(e.currentTarget).find('input[name="tid"]').val(threadId);
 		});
-
-		function delNotify(){
-			let threadId = $('#tid').val();
-			console.log('threadId',threadId);
-		}
 	});
+
+	function delNotify(){
+		let threadId = $('#tid').val();
+		console.log('threadId',threadId);
+	}
 </script>
