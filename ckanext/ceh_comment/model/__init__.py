@@ -37,8 +37,8 @@ class CommentThread(Base):
     url = Column(types.UnicodeText)
     creation_date = Column(types.DateTime, default=datetime.datetime.now)
     locked = Column(types.Boolean, default=False)
-    #active_thread = Column(types.UnicodeText, default=u'active')
-    #state_thread = Column(types.UnicodeText, default=u'active')
+    active_thread = Column(types.UnicodeText, default=u'active')
+    state_thread = Column(types.UnicodeText, default=u'active')
 
     def __init__(self, **kwargs):
         for k, v in kwargs.items():
