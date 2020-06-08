@@ -31,7 +31,7 @@
 			<td class="dataset-label">{{ dataset.name }}</td>
 			<td class="dataset-details">{% if dataset.active_thread == 'active' %} {{ _('No leído') }} {% else %} {{ _('Leído') }} {% endif %}</td>
 			<td class="dataset-ceh-icons">
-				<a href="/comments/list/{{ dataset.id }}/read" title="{{ _('Ver el Conjunto de datos') }}"><i class="fa fa-share" aria-hidden="true"></i></a>
+				<a href="/dataset/list/{{ dataset.name }}/thread/{{ dataset.id }}/read" title="{{ _('Ver el Conjunto de datos') }}"><i class="fa fa-share" aria-hidden="true"></i></a>
 				<a href="/comments/list/{{ dataset.id }}/delete" title="{{ _('Eliminar notificación') }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
 			</td>
 		  </tr>

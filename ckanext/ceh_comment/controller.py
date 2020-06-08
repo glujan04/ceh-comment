@@ -160,7 +160,7 @@ class CommentController(BaseController):
         return render('ceh_notify_list.html')
 
 
-    def read(self, dataset_id):
+    def read(self, dataset_id, thread_id):
 
         context = {'model': model, 'user': c.user}
 
@@ -176,7 +176,7 @@ class CommentController(BaseController):
             abort(403)
 
         try:
-            data_dict = {'id': dataset_id}
+            data_dict = {'id': thread_id}
             get_action('thread_read')(context, data_dict)
         except Exception, e:
             log.debug(e)
