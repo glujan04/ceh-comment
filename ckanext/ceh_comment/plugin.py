@@ -284,7 +284,7 @@ class CommentPlugin(p.SingletonPlugin):
     def _get_comment_all_dataset(self, id):
         import ckan.model as model
         from ckan.logic import get_action
-        return get_action('thread_list')({'model': model}, {'id': id})
+        return get_action('thread_list')({'model': model}, {'userid': id})
 
     def _get_comment_count_for_dataset(self, dataset_name):
         import ckan.model as model
