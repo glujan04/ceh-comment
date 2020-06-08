@@ -13,9 +13,9 @@
         {% block page_heading %}{{ _('Notificaciones de Comentarios') }}{% endblock %}
       </h1> 
 	  {% set threads = h.get_comment_all_dataset(c.userobj.id) %}
-      <section class="additional-info">{{ c.userobj.id }}
+      <section class="additional-info">{# {{ c.userobj.id }} #}
 	  <ul>
-	  </ul> {{ threads }}
+	  </ul> {#{{ threads }} #}
   <table class="table table-striped-ceh table-hover-ceh table-bordered table-condensed">
     <thead>
       <tr>
@@ -31,7 +31,6 @@
 			<td class="dataset-details">{% if dataset.active_thread == 'active' %} {{ _('No leído') }} {% else %} {{ _('Leído') }} {% endif %}</td>
 			<td class="dataset-ceh-icons">
 				<a href="/dataset/list/{{ dataset.name }}/thread/{{ dataset.id }}/read" title="{{ _('Ver el Conjunto de datos') }}"><i class="fa fa-share" aria-hidden="true"></i></a>
-				<!-- <a href="/comments/list/{{ dataset.id }}/delete" title="{{ _('Eliminar notificación') }}"><i class="fa fa-trash" aria-hidden="true"></i></a> -->
 				<a href="#delModal" data-toggle="modal" data-thread-id="{{ dataset.id }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
 			</td>
 		  </tr>

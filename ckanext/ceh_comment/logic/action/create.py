@@ -56,7 +56,10 @@ def comment_create(context, data_dict):
             cmt.parent_id = parent.id
 
     # approval and spam checking removed
-
+    commentThread = comment_model.CommentThread.get(thread_id)
+    commentThread.active_thread = 'active'
+    commentThread.state_thread = 'active'
+    model.Session.add(commentThread)
     model.Session.add(cmt)
     model.Session.commit()
 
