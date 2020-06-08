@@ -75,7 +75,7 @@ class CommentThread(Base):
     def get_datasets(cls, id):
 
         thread = model.Session.query(cls). \
-            filter(cls.id == '0e03e7da-cf15-4dc1-9aff-b29cfd1f0116')
+            filter(cls.id == '0e03e7da-cf15-4dc1-9aff-b29cfd1f0116').first()
 
         return thread
 
