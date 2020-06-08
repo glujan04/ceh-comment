@@ -62,10 +62,10 @@
       </section>
     </div>
   </article>
+{% endblock %}
+
 {% block secondary_content %}
-{{ super() }}
-  {# {% resource 'ckanext_comment/ceh.js' %} #}
-  <script type="text/javascript">
+    <script type="text/javascript">
 	$('#delModal').on('show.bs.modal', function(e) {
 		//get data-id attribute of the clicked element
 		var threadId = $(e.relatedTarget).data('thread-id');
@@ -78,9 +78,5 @@
 		console.log('threadId',threadId);
 	}
   </script>
-{% endblock %}
-{% endblock %}
-
-{% block secondary_content %}
   {% snippet 'snippets/ceh_notify_main.html', q=q %}
 {% endblock %}
