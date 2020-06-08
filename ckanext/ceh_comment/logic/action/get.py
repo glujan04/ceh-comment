@@ -120,7 +120,7 @@ def thread_list(context, data_dict):
     userid = data_dict.get('userid')
     thread = None
     if userid:
-        thread = comment_model.CommentThread.from_url(userid)
+        thread = comment_model.CommentThread.get_datasets(userid)
 
     if not thread:
         return abort(404)
@@ -130,38 +130,6 @@ def thread_list(context, data_dict):
 
     # Dictize the thread and all the comments within it.
     thread_dict = thread.as_dict()
-    # Add the top level comments from the thread in order to the following list.
-    comments = model.Session.query(comment_model.Comment). \
-        filter(comment_model.Comment.thread_id == thread.id)
-
-    # Add more filters based on whether we want comments of a certain state,
-    # or spam comments etc.
-    if context.get('approved_only') is True:
-        comments = comments.filter(comment_model.Comment.approval_status ==
-                                   comment_model.COMMENT_APPROVED)
-
-    if context.get('with_deleted') is not True:
-        # TODO: Restrict to sysadmin
-        comments = comments.filter(comment_model.Comment.state == 'active')
-
-    # We only want the top-level comments because sub-comments will be retrieved in the
-    # c.as_dict call
-    comments = comments.filter(comment_model.Comment.parent_id == None)  # noqa
-
-    if isinstance(context.get('offset'), int):
-        comments = comments.offset(int(context.get('offset')))
-
-    if isinstance(context.get('limit'), int):
-        comments = comments.limit(int(context.get('limit')))
-
-    if context.get('with_deleted') is not True:
-        thread_dict['comments'] = [
-            c.as_dict() for c in comments.order_by('ceh2_comment.creation_date asc').all()
-        ]
-    else:
-        thread_dict['comments'] = [
-            c.as_dict(only_active_children=False) for c in comments.order_by('ceh2_comment.creation_date asc').all()
-        ]
 
     return thread_dict
 
