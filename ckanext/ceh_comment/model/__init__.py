@@ -179,8 +179,8 @@ class CommentThread(Base):
         d['url'] = self.url
         d['name'] = self.name
         d['locked'] = self.locked
-        d['active_thread'] = self.active_thread,
-        d['state_thread'] = self.state_thread,
+        d['active_thread'] = self.active_thread
+        d['state_thread'] = self.state_thread
         d['created'] = self.creation_date.isoformat()
         d['id'] = self.id
         return d
