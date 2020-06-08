@@ -1,8 +1,8 @@
 {% extends "page.html" %}
-{% resource 'ckanext_comment/ceh.js' %}
+
 {% block subtitle %}{{ _('Listado de Notificaciones') }}{% endblock %}
 
-
+{% resource 'ckanext_comment/ceh.js' %}
 {% block breadcrumb_content %}
   <li class="active">{{ h.nav_link(_('Notificaciones de comentarios'), named_route='list') }}</li>
 {% endblock %}
