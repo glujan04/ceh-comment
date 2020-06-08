@@ -27,10 +27,10 @@
     </thead>
     <tbody>
 	{% for dataset in threads %}
-		  <tr>
+		  <tr style="{% if dataset.active_thread == 'active' %}font-weight: bold{% endif %}">
 			<td class="dataset-label">{{ dataset.name }}</td>
 			<td class="dataset-details">{% if dataset.active_thread == 'active' %} {{ _('No leído') }} {% else %} {{ _('Leído') }} {% endif %}</td>
-			
+			<td class="dataset-details"><a href="{{ dataset.url }}">_('Ir')</a></td>
 		  </tr>
 	{% endfor %}
     </tbody>
