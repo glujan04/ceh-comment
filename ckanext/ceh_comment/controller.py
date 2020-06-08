@@ -184,3 +184,26 @@ class CommentController(BaseController):
         h.redirect_to(str('/dataset/%s' % c.pkg.name))
 
         return render("package/read.html")
+
+    def delNotify(self, thread_id):
+
+        context = {'model': model, 'user': c.user}
+
+        # Auth check to make sure the user can see this package
+
+        #data_dict = {'id': dataset_id}
+        #check_access('package_show', context, data_dict)
+
+        #try:
+            #c.pkg_dict = get_action('package_show')(context, {'id': dataset_id})
+            #c.pkg = context['package']
+        #except:
+            #abort(403)
+
+        try:
+            data_dict = {'id': thread_id}
+            get_action('thread_delete')(context, data_dict)
+        except Exception, e:
+            log.debug(e)
+
+        return render("package/read.html")

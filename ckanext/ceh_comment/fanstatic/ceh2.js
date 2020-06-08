@@ -8,6 +8,12 @@ jQuery(document).ready(function() {
 });
 
 function delNotify(){
-	let threadId = $('#tid').val();
-	console.log('threadId',threadId);
+	let thread_id = $('#tid').val();
+	let $form = document.createElement('form');
+    $form.setAttribute('id', 'data_form');
+    $form.setAttribute('action', `/dataset/list/${thread_id}/delete`);
+    $form.setAttribute('method', 'post');
+    document.body.appendChild($form);
+    $form.submit();
+	document.body.removeChild($form);
 }
