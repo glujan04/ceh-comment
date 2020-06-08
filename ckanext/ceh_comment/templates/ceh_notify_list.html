@@ -13,7 +13,7 @@
       <h1 class="page-heading">
         {% block page_heading %}{{ _('Notificaciones de Comentarios') }}{% endblock %}
       </h1> 
-	 {# {% set threads = h.get_comment_all_dataset(c.userobj.id) %} #}
+	  {% set threads = h.get_comment_all_dataset(c.userobj.id) %}
       <section class="additional-info">{{ c.userobj.id }}
 	  <ul>
 	  </ul>
