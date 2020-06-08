@@ -19,7 +19,7 @@ def thread_read(context, data_dict):
     if not commentThread:
         abort(404)
 
-    commentThread.active_thread = 'inactive'
+    commentThread.active_thread = 'active'
 
     model.Session.add(commentThread)
     model.Session.commit()
