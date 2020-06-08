@@ -229,7 +229,7 @@ class CommentPlugin(p.SingletonPlugin):
                 'get_comment_count_for_dataset': self._get_comment_count_for_dataset}
 
     def get_actions(self):
-        from ckanext.ceh_comment.logic.action import get, create, delete, update, publish
+        from ckanext.ceh_comment.logic.action import get, create, delete, update, publish, read
 
         return {
             "comment_create": create.comment_create,
@@ -239,6 +239,7 @@ class CommentPlugin(p.SingletonPlugin):
             "comment_delete": delete.comment_delete,
             "comment_count": get.comment_count,
             "thread_list": get.thread_list,
+            "thread_read": read.thread_read,
             "comment_publish": publish.comment_publish
         }
 
