@@ -11,7 +11,7 @@ log = logging.getLogger(__name__)
 def thread_read(context, data_dict):
     model = context['model']
 
-    #logic.check_access("thread_read", context, data_dict)
+    logic.check_access("thread_read", context, data_dict)
 
     # otherwise content should be set to withdrawn text
     id = logic.get_or_bust(data_dict, 'id')
@@ -19,7 +19,7 @@ def thread_read(context, data_dict):
     if not commentThread:
         abort(404)
 
-    commentThread.active_thread = 'active'
+    commentThread.active_thread = 'inactive'
 
     model.Session.add(commentThread)
     model.Session.commit()
