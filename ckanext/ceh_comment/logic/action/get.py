@@ -2,6 +2,7 @@ import logging
 
 import ckanext.ceh_comment.model as comment_model
 from ckan.lib.base import abort
+from pprint import pprint
 from ckan import logic
 
 log = logging.getLogger(__name__)
@@ -126,7 +127,7 @@ def thread_list(context, data_dict):
 
     data_dict['thread'] = thread
     #logic.check_access("thread_show", context, data_dict)
-    print(data_dict)
+    pprint(data_dict)
     # Dictize the thread and all the comments within it.
     thread_dict = thread.as_dict()
 
