@@ -33,28 +33,29 @@
 			<td class="dataset-ceh-icons">
 				<a href="/dataset/list/{{ dataset.name }}/thread/{{ dataset.id }}/read" title="{{ _('Ver el Conjunto de datos') }}"><i class="fa fa-share" aria-hidden="true"></i></a>
 				<!-- <a href="/comments/list/{{ dataset.id }}/delete" title="{{ _('Eliminar notificación') }}"><i class="fa fa-trash" aria-hidden="true"></i></a> -->
-				<a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-trash" aria-hidden="true"></i></a>
+				<a href="#delModal" data-toggle="modal" data-thread-id="{{ dataset.id }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
 			</td>
 		  </tr>
 	{% endfor %}
     </tbody>
   </table>
   <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="delModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">{{ _('Confirmación') }}</h5>
+        <h5 class="modal-title" id="delModalLabel">{{ _('Confirmación') }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         {{ _('¿Está seguro(a) que desea eliminar el registro?')}}
+		<input type="hidden" name="tid" id="tid">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ _('Salir') }}</button>
-        <button type="button" class="btn btn-primary">{{ _('Eliminar') }}</button>
+        <button type="button" class="btn btn-primary" onclick="delNotify();">{{ _('Eliminar') }}</button>
       </div>
     </div>
   </div>
