@@ -121,7 +121,7 @@ def thread_list(context, data_dict):
     thread = None
     if userid:
         thread = comment_model.CommentThread.get_datasets(userid)
-
+    pprint(thread)
     if not thread:
         return abort(404)
 
