@@ -131,7 +131,7 @@ def thread_list(context, data_dict):
     # Dictize the thread and all the comments within it.
     #thread_dict = thread.as_dict()
 
-    thread_dict = [
+    thread_dict['datasets'] = [
             c.as_dict() for c in thread.order_by('ceh2_comment_thread.creation_date asc').all()
     ]
 
