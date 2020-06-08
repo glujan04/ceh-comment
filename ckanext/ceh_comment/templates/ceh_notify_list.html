@@ -63,7 +63,24 @@
     </div>
   </article>
 {% endblock %}
+{%- block scripts %}
+  {{ super() }}
+ <script type="text/javascript" async>
+	jQuery(document).ready(function() {
+		$('#delModal').on('show.bs.modal', function(e) {
+			//get data-id attribute of the clicked element
+			var threadId = $(e.relatedTarget).data('thread-id');
+			//populate the textbox
+			$(e.currentTarget).find('input[name="tid"]').val(threadId);
+		});
+	});
 
+	function delNotify(){
+		let threadId = $('#tid').val();
+		console.log('threadId',threadId);
+	}
+ </script>
+{% endblock -%}
 {% block secondary_content %}
   {{ super() }}
   {% snippet 'snippets/ceh_notify_main.html', q=q %}
