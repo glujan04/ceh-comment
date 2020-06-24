@@ -186,6 +186,7 @@ function updCountdown(e) {
 	$(currentElement).nextAll('.countdown:first').text(remaining + '/' + maxLengh);
 }
 
+// Panel administración
 function publish( el, pkg_id, id ){
     $('.material-switch > input[type=checkbox]').attr('disabled','');
 	let $form = document.createElement('form');

@@ -6,7 +6,7 @@ from ckan.common import c
 from ckan.logic import check_access, get_action, clean_dict, tuplize_dict, ValidationError, parse_params
 from ckan.lib.navl.dictization_functions import unflatten
 
-
+from ckan.plugins import toolkit
 log = logging.getLogger(__name__)
 
 
@@ -98,8 +98,6 @@ class CommentController(BaseController):
        """
         context = {'model': model, 'user': c.user}
 
-        # Auth check to make sure the user can see this package
-
         data_dict = {'id': dataset_id}
         #check_access('package_show', context, data_dict)
 
@@ -116,7 +114,8 @@ class CommentController(BaseController):
             data_dict['url'] = '/dataset/%s' % c.pkg.name
             success = False
             try:
-                res = get_action('comment_create')(context, data_dict)
+                #res = get_action('comment_create')(context, data_dict)
+                res = {'id': dataset_id}
                 success = True
             except ValidationError, ve:
                 log.debug(ve)
@@ -125,6 +124,7 @@ class CommentController(BaseController):
                 abort(403)
 
             if success:
+                h.flash_success(_(u'Su comentario ha sido puesto en cola para su revisión por los administradores del sitio y se publicará después de su aprobación.'))
                 h.redirect_to(str('/dataset/%s#comment_%s' % (c.pkg.name, res['id'])))
 
         return render("package/read.html")

@@ -47,8 +47,6 @@ class CommentPlugin(p.SingletonPlugin):
 
         c = p.toolkit.c
 
-        # Get user info to send for Disqus SSO
-
         # Set up blank values
         message = 'blank'
         sig = 'blank'
