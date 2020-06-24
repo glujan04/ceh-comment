@@ -115,6 +115,7 @@ class CommentController(BaseController):
             try:
                 #res = get_action('comment_create')(context, data_dict)
                 res = {'id': dataset_id }
+                print res
                 success = True
             except ValidationError, ve:
                 log.debug(ve)
