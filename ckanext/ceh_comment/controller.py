@@ -99,7 +99,7 @@ class CommentController(BaseController):
 
         data_dict = {'id': dataset_id}
         #check_access('package_show', context, data_dict)
-
+        print 'antes del try'
         try:
             c.pkg_dict = get_action('package_show')(context, {'id': dataset_id})
             c.pkg = context['package']
