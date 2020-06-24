@@ -113,8 +113,8 @@ class CommentController(BaseController):
             data_dict['url'] = '/dataset/%s' % c.pkg.name
             success = False
             try:
-                #res = get_action('comment_create')(context, data_dict)
-                res = {'id': dataset_id }
+                res = get_action('comment_create')(context, data_dict)
+                #res = {'id': dataset_id }
                 print res
                 success = True
             except ValidationError, ve:
