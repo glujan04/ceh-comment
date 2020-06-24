@@ -151,7 +151,7 @@ class CommentController(BaseController):
             get_action('comment_delete')(context, data_dict)
         except Exception, e:
             log.debug(e)
-
+        h.flash_success(_(u'El registro ha sido eliminado correctamente'), allow_html=True)
         h.redirect_to(str('/dataset/%s' % c.pkg.name))
 
         return render("package/read.html")
