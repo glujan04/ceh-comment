@@ -99,7 +99,7 @@ class CommentController(BaseController):
 
         data_dict = {'id': dataset_id}
         #check_access('package_show', context, data_dict)
-        print data_dict
+
         try:
             c.pkg_dict = get_action('package_show')(context, {'id': dataset_id})
             c.pkg = context['package']
@@ -111,6 +111,7 @@ class CommentController(BaseController):
                 tuplize_dict(parse_params(request.POST))))
             data_dict['parent_id'] = c.parent.id if c.parent else None
             data_dict['url'] = '/dataset/%s' % c.pkg.name
+            print 'aquiii'
             success = False
             try:
                 #res = get_action('comment_create')(context, data_dict)
