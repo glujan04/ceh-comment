@@ -20,6 +20,14 @@ class CommentPlugin(p.SingletonPlugin):
     p.implements(p.IActions, inherit=True)
     p.implements(p.IAuthFunctions, inherit=True)
 
+
+    # IPackageController
+
+    def before_view(self, pkg_dict):
+        # TODO: append comments from model to pkg_dict
+        return pkg_dict
+
+
     # IConfigurer
 
     def update_config(self, config_):
@@ -27,130 +35,31 @@ class CommentPlugin(p.SingletonPlugin):
         #p.toolkit.add_public_directory(config_, 'public')
         p.toolkit.add_resource('fanstatic', 'ckanext_comment')
 
-    def configure(self, config):
-        ceh_name = config.get('ceh.comment.name', None)
-        ceh_url = config.get('ceh.comment.url', None)
-        site_url = config.get('ckan.site_url', None)
-        site_title = config.get('ckan.site_title', None)
-        if ceh_name is None:
-            log.warn("No forum name is set. Please set \
-                'ceh.comment.name' in your .ini!")
-        self.__class__.ceh_name = ceh_name
-        self.__class__.ceh_url = ceh_url
-        self.__class__.site_url = site_url
-        self.__class__.site_title = site_title
-
-
-    @classmethod
-    def ceh_manager_comments(cls):
-        '''Add Comments to the page.'''
-
-        c = p.toolkit.c
-
-        # Set up blank values
-        message = 'blank'
-        sig = 'blank'
-        timestamp = 'blank'
-
-        # Get the user if they are logged in.
-        user_dict = {}
-        try:
-            user_dict = p.toolkit.get_action('user_show')({'keep_email': True},
-                                                          {'id': c.user})
-
-        # Fill in blanks for the user if they are not logged in.
-        except:
-            user_dict['id'] = ''
-            user_dict['name'] = ''
-            user_dict['email'] = ''
-
-        # Create the SSOm data.
-        SSOdata = simplejson.dumps({
-            'id': user_dict['id'],
-            'username':  user_dict['name'],
-            'email': user_dict['email'],
-            })
-
-        message = base64.b64encode(SSOdata)
-        # generate a timestamp for signing the message
-        timestamp = int(time.time())
-        # generate our hmac signature
-        sig = ''
-        ##if cls.disqus_secret_key is not None:
-        ##    sig = hmac.HMAC(cls.disqus_secret_key, '%s %s' %
-        ##                    (message, timestamp), hashlib.sha1).hexdigest()
-
-        # we need to create an identifier
-        try:
-            identifier = c.controller
-            if identifier == 'package':
-                identifier = 'dataset'
-            if c.current_package_id:
-                identifier += '::' + c.current_package_id
-            elif c.id:
-                identifier += '::' + c.id
-            else:
-                # cannot make an identifier
-                identifier = ''
-            # special case
-            if c.action == 'resource_read':
-                identifier = 'dataset-resource::' + c.resource_id
-        except:
-            identifier = ''
-        data = {'identifier': identifier,
-                ##'developer': cls.disqus_developer,
-                ##'language': cls.language(),
-                'ceh_shortname': cls.ceh_name,
-
-                # start Koebrick change
-                'site_url': cls.site_url,
-                'site_title': cls.site_title,
-                'message': message,
-                ##'sig': sig,
-                'timestamp': timestamp}
-                ##'pub_key': cls.disqus_public_key}
-
-        return p.toolkit.render_snippet('ceh_manager_comments.html', data)
-
     @classmethod
     def ceh_comments(cls):
-        '''Add Comments to the page.'''
+        '''Para agregar un comentario'''
 
         c = p.toolkit.c
 
-        # Get user info to send for Disqus SSO
-
-        # Set up blank values
-        message = 'blank'
-        sig = 'blank'
+        # Inicializa
         timestamp = 'blank'
 
-        # Get the user if they are logged in.
+        # Se obtiene al usuario si se encuentra logueado
         user_dict = {}
         try:
             user_dict = p.toolkit.get_action('user_show')({'keep_email': True},
                                                           {'id': c.user})
 
-        # Fill in blanks for the user if they are not logged in.
+        # Blanquea campos si el usuario no ha sido logueado
         except:
             user_dict['id'] = ''
             user_dict['name'] = ''
             user_dict['email'] = ''
 
-        # Create the SSOm data.
-        SSOdata = simplejson.dumps({
-            'id': user_dict['id'],
-            'username':  user_dict['name'],
-            'email': user_dict['email'],
-            })
-
-        message = base64.b64encode(SSOdata)
-        # generate a timestamp for signing the message
+        # genera un timestamp
         timestamp = int(time.time())
-        # generate our hmac signature
-        sig = ''
 
-        # we need to create an identifier
+        # Se crea un identificador
         try:
             identifier = c.controller
             if identifier == 'package':
@@ -160,32 +69,38 @@ class CommentPlugin(p.SingletonPlugin):
             elif c.id:
                 identifier += '::' + c.id
             else:
-                # cannot make an identifier
+                # No se puede generar un identifier
                 identifier = ''
-            # special case
+            # Caso especial
             if c.action == 'resource_read':
                 identifier = 'dataset-resource::' + c.resource_id
         except:
             identifier = ''
         data = {'identifier': identifier,
-                ##'developer': cls.disqus_developer,
-                ##'language': cls.language(),
-                'ceh_shortname': cls.ceh_name,
-
-                # start Koebrick change
-                'site_url': cls.site_url,
-                'site_title': cls.site_title,
-                'message': message,
-                ##'sig': sig,
+                'id': user_dict['id'],
                 'timestamp': timestamp}
-                ##'pub_key': cls.disqus_public_key}
 
         return p.toolkit.render_snippet('ceh_comments.html', data)
 
     @classmethod
-    def ceh_notify(cls):
-        '''Icono de notificacion para el usuario logueado'''
-        data = {'userid':''}
+    def _ceh_notify_panel(cls):
+        '''Agrega un icono de notificacion en la parte superior para el usuario logueado'''
+
+        c = p.toolkit.c
+
+        # Se obtiene al usuario si se encuentra logueado
+        user_dict = {}
+        try:
+            user_dict = p.toolkit.get_action('user_show')({'keep_email': True},
+                                                          {'id': c.user})
+
+        # Blanquea campos si el usuario no ha sido logueado
+        except:
+            user_dict['id'] = ''
+            user_dict['name'] = ''
+            user_dict['email'] = ''
+
+        data = { 'id': user_dict['id'] }
         return p.toolkit.render_snippet('ceh_notify.html', data)
 
     @classmethod
@@ -197,31 +112,10 @@ class CommentPlugin(p.SingletonPlugin):
         count = get_action('comment_count')({'model': model}, {'approval': approval})
         return count
 
-    @classmethod
-    def ceh_recent(cls, num_comments=5):
-        '''Add recent comments to the page. '''
-        data = {'ceh_shortname': cls.ceh_name,
-                'ceh_num_comments': num_comments}
-        return p.toolkit.render_snippet('ceh_recent.html', data)
-
-    @classmethod
-    def current_ceh_url(cls, ):
-        '''If `ceh_comment.url` is defined, return a fully qualified url for
-        the current page with `ceh_comment.url` as the base url,'''
-
-        if cls.ceh_url is None:
-            return None
-
-        return url_for_static_or_external(request.environ['CKAN_CURRENT_URL'],
-                                          qualified=True, host=cls.ceh_url)
-
     def get_helpers(self):
         return {'ceh_comments': self.ceh_comments,
-                'ceh_recent': self.ceh_recent,
                 'new_comments': self._new_comments,
-                'ceh_notify': self.ceh_notify,
-                'ceh_manager_comments': self.ceh_manager_comments,
-                'current_ceh_url': self.current_ceh_url,
+                'ceh_notify': self._ceh_notify_panel,
                 'get_comment_thread': self._get_comment_thread,
                 'get_comment_all_dataset': self._get_comment_all_dataset,
                 'get_comment_count_for_dataset': self._get_comment_count_for_dataset}
@@ -255,11 +149,24 @@ class CommentPlugin(p.SingletonPlugin):
             "comment_count": get.comment_count
         }
 
-    # IPackageController
+    def _get_comment_thread(self, dataset_name):
+        import ckan.model as model
+        from ckan.logic import get_action
+        url = '/dataset/%s' % dataset_name
+        return get_action('thread_show')({'model': model, 'with_deleted': True}, {'url': url})
 
-    def before_view(self, pkg_dict):
-        # TODO: append comments from model to pkg_dict
-        return pkg_dict
+    def _get_comment_all_dataset(self, id):
+        import ckan.model as model
+        from ckan.logic import get_action
+        return get_action('thread_list')({'model': model}, {'userid': id})
+
+    def _get_comment_count_for_dataset(self, dataset_name):
+        import ckan.model as model
+        from ckan.logic import get_action
+        url = '/dataset/%s' % dataset_name
+        count = get_action('comment_count')({'model': model}, {'url': url})
+        return count
+
 
     # IRoutes
 
@@ -278,21 +185,3 @@ class CommentPlugin(p.SingletonPlugin):
         map.connect('/dataset/list/{dataset_id}/thread/{thread_id}/read', controller=controller, action='read')
         map.connect('/dataset/list/{thread_id}/delete', controller=controller, action='delNotify')
         return map
-
-    def _get_comment_thread(self, dataset_name):
-        import ckan.model as model
-        from ckan.logic import get_action
-        url = '/dataset/%s' % dataset_name
-        return get_action('thread_show')({'model': model, 'with_deleted': True}, {'url': url})
-
-    def _get_comment_all_dataset(self, id):
-        import ckan.model as model
-        from ckan.logic import get_action
-        return get_action('thread_list')({'model': model}, {'userid': id})
-
-    def _get_comment_count_for_dataset(self, dataset_name):
-        import ckan.model as model
-        from ckan.logic import get_action
-        url = '/dataset/%s' % dataset_name
-        count = get_action('comment_count')({'model': model}, {'url': url})
-        return count

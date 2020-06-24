@@ -1,10 +1,4 @@
 <section class="additional-info">
-  <div id="alertComment" class="alert alert-success alert-dismissible ceh-none" role="alert">
-    <strong>Muy Bien!</strong> Su comentario ha sido puesto en cola para su revisión por los administradores del sitio y se publicará después de su aprobación.
-      <button type="button" class="close ceh-close-calert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
   <h3>Agregar Comentario</h3> 
   <div class="module-content ceh-comments">
     <form action="" method="post" class="form-horizontal" id="cehCommentForm" name="cehCommentForm" role="form"> 
@@ -44,26 +38,6 @@
         </div>
       </div>
     </form>
-
-  <div id="ceh_thread"></div>
-
-  <script type="text/javascript">
-    var ceh_shortname =  '{{ ceh_shortname }}';
-    var ceh_identifier = '{{ identifier }}';
-    {%- set ceh_url = h.current_ceh_url() %}
-    {%- if ceh_url %}
-    var ceh_url = '{{ ceh_url }}';
-    {% endif %}
-	console.log('ceh_shortname',ceh_shortname);
-	console.log('ceh_identifier',ceh_identifier);
-	console.log('ceh_url',ceh_url);
-      /* * * DON'T EDIT BELOW THIS LINE * * */
-      /*(function() {
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = 'https://' + ceh_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();*/
-  </script>
   </div>
 <!-- Modal Terms and Conditions -->
 <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="termsConditionLabel" aria-hidden="true" style="display: none;">
