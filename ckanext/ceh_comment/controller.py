@@ -18,10 +18,10 @@ class CommentController(BaseController):
 
         context = {'model': model, 'user': c.user}
 
-        # Auth check to make sure the user can see this package
-
+        # Verifica que el usuario autenticado pueda ver el paquete
         data_dict = {'id': dataset_id}
-        check_access('package_show', context, data_dict)
+        # Se comenta para evitar que solo usuarios conectados puedan realizar comentarios
+        #check_access('package_show', context, data_dict)
 
         try:
             c.pkg_dict = get_action('package_show')(context, {'id': dataset_id})
@@ -52,9 +52,10 @@ class CommentController(BaseController):
 
         context = {'model': model, 'user': c.user}
 
-        # Auth check to make sure the user can see this package
-
+        # Verifica que el usuario autenticado pueda ver el paquete
         data_dict = {'id': dataset_id}
+
+        # Se comenta para evitar que solo usuarios conectados puedan realizar comentarios
         #check_access('package_show', context, data_dict)
 
         try:
@@ -99,6 +100,7 @@ class CommentController(BaseController):
         context = {'model': model, 'user': c.user}
 
         data_dict = {'id': dataset_id}
+        # Se comenta para evitar que solo usuarios conectados puedan realizar comentarios
         #check_access('package_show', context, data_dict)
 
         try:
