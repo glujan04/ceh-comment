@@ -99,7 +99,7 @@ class CommentController(BaseController):
 
         data_dict = {'id': dataset_id}
         #check_access('package_show', context, data_dict)
-
+        print data_dict
         try:
             c.pkg_dict = get_action('package_show')(context, {'id': dataset_id})
             c.pkg = context['package']
@@ -113,8 +113,8 @@ class CommentController(BaseController):
             data_dict['url'] = '/dataset/%s' % c.pkg.name
             success = False
             try:
-                res = get_action('comment_create')(context, data_dict)
-                #res = {'id': dataset_id }
+                #res = get_action('comment_create')(context, data_dict)
+                res = {'id': dataset_id }
                 print res
                 success = True
             except ValidationError, ve:
