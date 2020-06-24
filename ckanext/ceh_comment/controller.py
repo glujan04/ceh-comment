@@ -96,7 +96,7 @@ class CommentController(BaseController):
        Allows the user to add a comment to an existing dataset
        """
         context = {'model': model, 'user': c.user}
-
+        print('ggggggggggggggggg')
         data_dict = {'id': dataset_id}
         #check_access('package_show', context, data_dict)
         print 'antes del try'
