@@ -125,7 +125,8 @@ class CommentController(BaseController):
                 abort(403)
 
             if success:
-                h.flash_success(_(u'Su comentario ha sido puesto en cola para su revision por los administradores del sitio y se publicara despues de su aprobacion.'))
+                # coding=utf-8
+                h.flash_success(_(u'Su comentario ha sido puesto en cola para su revision por los administradores del sitio y se publicara despues de su aprobación.'))
                 h.redirect_to(str('/dataset/%s#comment_%s' % (c.pkg.name, res['id'])))
 
         return render("package/read.html")
