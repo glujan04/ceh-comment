@@ -1,6 +1,6 @@
         {% if c.userobj.sysadmin %}
         {% set new_comments = h.new_comments() %}
-        {% set notify_tooltip = ngettext('%(num)d nuevo comentario', '%(num)d nuevos comentarios', new_comments)
+        {% set notify_tooltip = ngettext('%(num)d nueva notificación', '%(num)d nuevas notificaciones', new_comments)
           %}
         <li class="notifications {% if new_comments > 0 %}notifications-important{% endif %}">
           <a href="/comments/list" title="{{ notify_tooltip }}">
