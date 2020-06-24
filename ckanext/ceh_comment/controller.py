@@ -96,28 +96,27 @@ class CommentController(BaseController):
        Allows the user to add a comment to an existing dataset
        """
         context = {'model': model, 'user': c.user}
-        print('ggggggggggggggggg')
+
         data_dict = {'id': dataset_id}
         #check_access('package_show', context, data_dict)
-        print 'antes del try'
+
         try:
             c.pkg_dict = get_action('package_show')(context, {'id': dataset_id})
             c.pkg = context['package']
         except:
             abort(403)
-        print 'antes del if'
+
         if request.method == 'POST':
             data_dict = clean_dict(unflatten(
                 tuplize_dict(parse_params(request.POST))))
-            print data_dict
+
             data_dict['parent_id'] = c.parent.id if c.parent else None
             data_dict['url'] = '/dataset/%s' % c.pkg.name
-            print 'aquiii'
             success = False
             try:
                 #res = get_action('comment_create')(context, data_dict)
                 res = {'id': dataset_id }
-                print res
+
                 success = True
             except ValidationError, ve:
                 log.debug(ve)
@@ -126,7 +125,7 @@ class CommentController(BaseController):
                 abort(403)
 
             if success:
-                #h.flash_success(_(u'Su comentario ha sido puesto en cola para su revision por los administradores del sitio y se publicara despues de su aprobacion.'))
+                h.flash_success(_(u'Su comentario ha sido puesto en cola para su revision por los administradores del sitio y se publicara despues de su aprobacion.'))
                 h.redirect_to(str('/dataset/%s#comment_%s' % (c.pkg.name, res['id'])))
 
         return render("package/read.html")
