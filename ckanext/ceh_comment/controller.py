@@ -105,10 +105,11 @@ class CommentController(BaseController):
             c.pkg = context['package']
         except:
             abort(403)
-
+        print 'antes del if'
         if request.method == 'POST':
             data_dict = clean_dict(unflatten(
                 tuplize_dict(parse_params(request.POST))))
+            print data_dict
             data_dict['parent_id'] = c.parent.id if c.parent else None
             data_dict['url'] = '/dataset/%s' % c.pkg.name
             print 'aquiii'
