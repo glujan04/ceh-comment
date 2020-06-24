@@ -77,7 +77,7 @@ def comment_show(context, data_dict):
     comment = comment_model.Comment.get(id)
     if not comment:
         abort(404)
-    logic.check_access("comment_show", context, data_dict)
+    #logic.check_access("comment_show", context, data_dict)
     data_dict['comment'] = comment
 
     return comment.as_dict()
