@@ -19,8 +19,8 @@ class CommentController(BaseController):
         context = {'model': model, 'user': c.user}
 
         # Verifica que el usuario autenticado pueda ver el paquete
-        data_dict = {'id': dataset_id}
         # Se comenta para evitar que solo usuarios conectados puedan realizar comentarios
+        data_dict = {'id': dataset_id}
         #check_access('package_show', context, data_dict)
 
         try:
@@ -53,9 +53,8 @@ class CommentController(BaseController):
         context = {'model': model, 'user': c.user}
 
         # Verifica que el usuario autenticado pueda ver el paquete
-        data_dict = {'id': dataset_id}
-
         # Se comenta para evitar que solo usuarios conectados puedan realizar comentarios
+        data_dict = {'id': dataset_id}
         #check_access('package_show', context, data_dict)
 
         try:
@@ -99,8 +98,9 @@ class CommentController(BaseController):
        """
         context = {'model': model, 'user': c.user}
 
-        data_dict = {'id': dataset_id}
+        # Verifica que el usuario autenticado pueda ver el paquete
         # Se comenta para evitar que solo usuarios conectados puedan realizar comentarios
+        data_dict = {'id': dataset_id}
         #check_access('package_show', context, data_dict)
 
         try:
@@ -137,8 +137,7 @@ class CommentController(BaseController):
 
         context = {'model': model, 'user': c.user}
 
-        # Auth check to make sure the user can see this package
-
+        # Verifica que el usuario autenticado pueda ver el paquete
         data_dict = {'id': dataset_id}
         check_access('package_show', context, data_dict)
 
@@ -189,27 +188,23 @@ class CommentController(BaseController):
 
         return render("package/read.html")
 
-    def delNotify(self, thread_id):
+    def delNotify(self, thread_id, dataset_id):
 
         context = {'model': model, 'user': c.user}
 
-        # Auth check to make sure the user can see this package
-
+        # Verifica que el usuario autenticado pueda ver el paquete
+        # Se comenta para evitar que solo usuarios conectados puedan realizar comentarios
         #data_dict = {'id': dataset_id}
         #check_access('package_show', context, data_dict)
 
-        #try:
-            #c.pkg_dict = get_action('package_show')(context, {'id': dataset_id})
-            #c.pkg = context['package']
-        #except:
-            #abort(403)
 
         try:
-            data_dict = {'id': thread_id}
-            get_action('thread_delete')(context, data_dict)
+            thread_dict = {'id': thread_id}
+            get_action('thread_delete')(context, thread_dict)
         except Exception, e:
             log.debug(e)
 
+        h.flash_success(_(u'El registro ha sido eliminado correctamente'), allow_html=True)
         h.redirect_to('/comments/list')
 
         return render("package/read.html")
