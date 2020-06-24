@@ -117,8 +117,8 @@ class CommentController(BaseController):
             data_dict['url'] = '/dataset/%s' % c.pkg.name
             success = False
             try:
-                #res = get_action('comment_create')(context, data_dict)
-                res = {'id': dataset_id }
+                res = get_action('comment_create')(context, data_dict)
+                #res = {'id': dataset_id }
 
                 success = True
             except ValidationError, ve:
@@ -188,7 +188,7 @@ class CommentController(BaseController):
 
         return render("package/read.html")
 
-    def delNotify(self, thread_id, dataset_id):
+    def delNotify(self, thread_id):
 
         context = {'model': model, 'user': c.user}
 
