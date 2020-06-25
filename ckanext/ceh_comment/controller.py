@@ -82,7 +82,7 @@ class CommentController(BaseController):
         #return jsonify({'data': render_template('package/read.html')}
         #return render_template("package/ceh_comment_list.html", pkg_id=c.pkg.id, pkg_name=c.pkg.name, userobj=c.userobj)
         data = []
-        return jsonify({'result': True, 'data': data})
+        return jsonify({'result': True, 'data': False})
 
     def reply(self, dataset_id, parent_id):
         c.action = 'reply'
