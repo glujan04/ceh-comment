@@ -197,7 +197,7 @@ function pruebaAjax(_form){
 	 $.ajax({
 		 type: form.attr('method'),
 		 url: '/publish2',/*form.attr('action'),*/
-		 data: form.serializeArray(),
+		 data: { name: 'nombre1', apellido: 'apellido1' },//form.serializeArray(),
 		 cache: false, 
 		 success: function (data) {
 			 console.log('correcto',data);
