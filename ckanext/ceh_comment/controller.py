@@ -6,6 +6,7 @@ from ckan import model
 from ckan.common import _,c
 from ckan.logic import check_access, get_action, clean_dict, tuplize_dict, ValidationError, parse_params
 from ckan.lib.navl.dictization_functions import unflatten
+from flask import jsonify
 
 log = logging.getLogger(__name__)
 
