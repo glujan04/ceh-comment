@@ -177,7 +177,8 @@ function publish( el, pkg_id, id ){
     $form.setAttribute('method', 'post');
     document.body.appendChild($form);
     addParam($form, "state", $(el).prop('checked'));
-    $form.submit();
+    pruebaAjax(form);
+    //$form.submit();
     // Se desactivan todos los botones luego del submit
     document.body.removeChild($form);
 }
@@ -188,6 +189,21 @@ function addParam(form, name, value) {
     $input.setAttribute('name', name);
     $input.setAttribute('value', value);
     form.appendChild($input);
+}
+
+function pruebaAjax(form){
+	 $.ajax({
+		 type: form.attr('method'),
+		 url: form.attr('action'),
+		 data: form.serializeArray(),
+		 cache: false, 
+		 success: function (data) {
+			 console.log('correcto',data);
+		 },
+		 error: function(data) {
+			 console.log('error',data);
+		 }
+	 });
 }
 
 

@@ -130,12 +130,12 @@
   {% block header_account_logged %} {% if userobj %}
      {% if userobj.sysadmin and thread.comments | length != 0 %}
 <section class="additional-info">
-  {#<div id="publishComment" class="alert alert-success alert-dismissible ceh-none" role="alert">
+  <div id="publishComment" class="alert alert-success alert-dismissible ceh-none" role="alert">
     <strong>Muy Bien!</strong> El comentario ha sido correctamente publicado.
       <button type="button" class="close ceh-close-cmalert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
-  </div>#}
+  </div>
   <h3>{{ _('Administrar Comentarios') }}</h3>
   <table class="table table-striped-ceh table-hover-ceh table-bordered table-condensed">
 	<thead>
