@@ -11,7 +11,6 @@ import ckan.plugins as p
 from flask import Blueprint
 
 foo = Blueprint('foo', __name__)
-api = Blueprint('api', __name__, url_prefix='/api')
 log = logging.getLogger(__name__)
 
 @foo.route('/publish2', endpoint='publish_2')
@@ -32,10 +31,10 @@ class CommentPlugin(p.SingletonPlugin):
     p.implements(p.ITemplateHelpers, inherit=True)
     p.implements(p.IActions, inherit=True)
     p.implements(p.IAuthFunctions, inherit=True)
-    p.implements(p.IBlueprint, inherit=True)
+    #p.implements(p.IBlueprint, inherit=True)
 
 
-    api.add_url_rule('/publish2', view_func=get_api, strict_slashes=False)
+foo.add_url_rule('/publish2', view_func=get_api)
 
     def get_blueprint(self):
 
