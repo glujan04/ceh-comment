@@ -16,8 +16,8 @@ log = logging.getLogger(__name__)
 
 
 def get_api(ver=1):
-    
-    return 'Hola'
+
+    return render("package/read.html")
 
 class CommentPlugin(p.SingletonPlugin):
     p.implements(p.IRoutes, inherit=True)
