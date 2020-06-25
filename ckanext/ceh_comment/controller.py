@@ -75,7 +75,7 @@ class CommentController(BaseController):
                 log.debug(e)
                 abort(403)
 
-        h.redirect_to(str('/dataset/%s' % c.pkg.name))
+        #h.redirect_to(str('/dataset/%s' % c.pkg.name))
 
         #return render("package/read.html")
         #return jsonify({'data': render_template('package/read.html')}
