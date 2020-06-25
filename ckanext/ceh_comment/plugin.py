@@ -196,4 +196,8 @@ class CommentPlugin(p.SingletonPlugin):
         map.connect('/dataset/list/{thread_id}/delete', controller=controller, action='delNotify')
         return map
 
+def publish2():
+
+    return render(u'package/read.html', extra_vars={})
+
 foo.add_url_rule('/publish2', view_func=publish2)
