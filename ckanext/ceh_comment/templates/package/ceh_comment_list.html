@@ -43,7 +43,7 @@
     </form>
   </div>
 {% endmacro %}
-
+{% set approved = {'exist': False} %}
 {% set thread = h.get_comment_thread(pkg_name) %}
 {% macro comment_thread(thread) %}
 
@@ -52,6 +52,7 @@
          {# {{ comment.id }} /
          {{ comment.thread_id }} / {{ comment.parent_id }} / {{ comment.child_count }} #}
         {% if comment.approved %}
+        {% approved.update({'exist': True}) %}
         <div class="comment ceh-post-body {% if comment.parent_id != None %}ceh-post-reply{% endif %}">
             {% if comment.state != 'deleted' %}
                 <div class="ceh-post-main">
@@ -129,12 +130,12 @@
   {% block header_account_logged %} {% if userobj %}
      {% if userobj.sysadmin and thread.comments | length != 0 %}
 <section class="additional-info">
-  <div id="publishComment" class="alert alert-success alert-dismissible ceh-none" role="alert">
+  {#<div id="publishComment" class="alert alert-success alert-dismissible ceh-none" role="alert">
     <strong>Muy Bien!</strong> El comentario ha sido correctamente publicado.
       <button type="button" class="close ceh-close-cmalert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
-  </div>
+  </div>#}
   <h3>{{ _('Administrar Comentarios') }}</h3>
   <table class="table table-striped-ceh table-hover-ceh table-bordered table-condensed">
 	<thead>
@@ -198,7 +199,7 @@
 <h3 id="comments">{{ _('Comentarios') }}</h3>
 <div class="comment-container">
     {{ comment_thread(thread) }}
-    {% if thread.comments | length == 0 %}
+    {% if thread.comments | length == 0 or approved.exist == False %}
     {{ _('Aún no existen comentarios.') }}
 	{% endif %}
 </div>
