@@ -34,10 +34,13 @@ class CommentPlugin(p.SingletonPlugin):
     p.implements(p.IAuthFunctions, inherit=True)
     p.implements(p.IBlueprint, inherit=True)
 
+
+    api.add_url_rule('/publish2', view_func=get_api, strict_slashes=False)
+
     def get_blueprint(self):
 
         return foo
-api.add_url_rule('/publish2', view_func=get_api, strict_slashes=False)
+
 
     # IPackageController
 
