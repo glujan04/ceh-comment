@@ -4,7 +4,7 @@ from flask import jsonify, Flask, render_template, request
 app = Flask(__name__)
 
 @app.route('/')
-def hello_world():
+def index():
     return 'hello world!'
 
 @app.route('/publish2/', methods=['POST'])
