@@ -9,7 +9,7 @@ from ckan.common import request
 from ckan.lib.helpers import url_for_static_or_external
 import ckan.plugins as p
 
-
+foo = Blueprint('foo', __name__)
 log = logging.getLogger(__name__)
 
 class CommentPlugin(p.SingletonPlugin):
@@ -19,7 +19,7 @@ class CommentPlugin(p.SingletonPlugin):
     p.implements(p.ITemplateHelpers, inherit=True)
     p.implements(p.IActions, inherit=True)
     p.implements(p.IAuthFunctions, inherit=True)
-    p.implements(p.IBlueprint)
+    p.implements(p.IBlueprint, inherit=True)
 
     def get_blueprint(self):
 

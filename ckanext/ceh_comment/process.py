@@ -1,7 +1,4 @@
 from flask import Blueprint, jsonify, Flask, render_template, request
-import ckan.plugins as p
-
-foo = Blueprint('foo', __name__)
 
 @foo.route('/')
 def index():
