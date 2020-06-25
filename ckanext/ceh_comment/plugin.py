@@ -13,6 +13,13 @@ from flask import Blueprint
 foo = Blueprint('foo', __name__)
 log = logging.getLogger(__name__)
 
+@foo.route('/publish2', endpoint='publish_2')
+def publish_2():
+
+    context = {'model': model, 'user': c.user}
+    data = ['Element 1', ' Element 2', 'Element 3']
+    return jsonify({'result': True, 'data': False})
+
 class CommentPlugin(p.SingletonPlugin):
     p.implements(p.IRoutes, inherit=True)
     p.implements(p.IConfigurer, inherit=True)
