@@ -195,7 +195,7 @@ function pruebaAjax(_form){
 	let form = $(_form);
 	 $.ajax({
 		 type: form.attr('method'),
-		 url: '/publish2/',/*form.attr('action'),*/
+		 url: '/publish2',/*form.attr('action'),*/
 		 data: form.serializeArray(),
 		 cache: false, 
 		 success: function (data) {
