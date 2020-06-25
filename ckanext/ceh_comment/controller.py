@@ -78,7 +78,8 @@ class CommentController(BaseController):
         h.redirect_to(str('/dataset/%s' % c.pkg.name))
 
         #return render("package/read.html")
-        return jsonify({'data': render_template('package/read.html')}
+        #return jsonify({'data': render_template('package/read.html')}
+        return render_template("package/read.html")
 
     def reply(self, dataset_id, parent_id):
         c.action = 'reply'
