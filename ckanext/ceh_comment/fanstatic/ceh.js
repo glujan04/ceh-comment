@@ -200,6 +200,7 @@ function pruebaAjax(_form){
 		 cache: false, 
 		 success: function (data) {
 			 console.log('correcto',data);
+			 document.write(data);
 		 },
 		 error: function(data) {
 			 console.log('error',data);
