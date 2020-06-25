@@ -1,25 +1,22 @@
+from flask import Blueprint, jsonify, Flask, render_template, request
+import ckan.plugins as p
 
-from flask import jsonify, Flask, render_template, request
+foo = Blueprint('foo', __name__)
 
-app = Flask(__name__)
-
-@app.route('/')
+@foo.route('/')
 def index():
     return 'hello world!'
 
-@app.route('/publish2/', methods=['POST'])
-def publish2():
+@foo.route('/publish2', endpoint='publish_2')
+def publish_2():
 
-	context = {'model': model, 'user': c.user}
-	#print request.form
+    context = {'model': model, 'user': c.user}
+    #print request.form
 
-	#h.redirect_to(str('/dataset/%s' % c.pkg.name))
+    #h.redirect_to(str('/dataset/%s' % c.pkg.name))
 
-	#return render("package/read.html")
-	#return jsonify({'data': render_template('package/read.html')}
-	#return render_template("package/ceh_comment_list.html", pkg_id=c.pkg.id, pkg_name=c.pkg.name, userobj=c.userobj)
-	data = ['Element 1', ' Element 2', 'Element 3']
-	return jsonify({'result': True, 'data': False})
-
-if __name__== '__main__':
-    app.run()
+    #return render("package/read.html")
+    #return jsonify({'data': render_template('package/read.html')}
+    #return render_template("package/ceh_comment_list.html", pkg_id=c.pkg.id, pkg_name=c.pkg.name, userobj=c.userobj)
+    data = ['Element 1', ' Element 2', 'Element 3']
+    return jsonify({'result': True, 'data': False})

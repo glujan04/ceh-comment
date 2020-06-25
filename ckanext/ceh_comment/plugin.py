@@ -19,7 +19,11 @@ class CommentPlugin(p.SingletonPlugin):
     p.implements(p.ITemplateHelpers, inherit=True)
     p.implements(p.IActions, inherit=True)
     p.implements(p.IAuthFunctions, inherit=True)
+    p.implements(p.IBlueprint)
 
+    def get_blueprint(self):
+
+        return foo
 
     # IPackageController
 
