@@ -34,8 +34,6 @@ class CommentPlugin(p.SingletonPlugin):
     #p.implements(p.IBlueprint, inherit=True)
 
 
-foo.add_url_rule('/publish2', view_func=get_api)
-
     def get_blueprint(self):
 
         return foo
@@ -207,3 +205,5 @@ foo.add_url_rule('/publish2', view_func=get_api)
         map.connect('/dataset/list/{dataset_id}/thread/{thread_id}/read', controller=controller, action='read')
         map.connect('/dataset/list/{thread_id}/delete', controller=controller, action='delNotify')
         return map
+
+foo.add_url_rule('/publish2', view_func=get_api)
