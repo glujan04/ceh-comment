@@ -9,7 +9,7 @@ from ckan.lib.navl.dictization_functions import unflatten
 from flask import jsonify
 
 log = logging.getLogger(__name__)
-
+app = Flask(__name__)
 
 class CommentController(BaseController):
     def add(self, dataset_id):
@@ -80,18 +80,18 @@ class CommentController(BaseController):
 
         return render("package/read.html")
 
-    @app.route('/publish2/')
+    @app.route('/publish2/', methods=['POST'])
     def publish2():
 
         context = {'model': model, 'user': c.user}
-        print request.form
+        #print request.form
 
         #h.redirect_to(str('/dataset/%s' % c.pkg.name))
 
         #return render("package/read.html")
         #return jsonify({'data': render_template('package/read.html')}
         #return render_template("package/ceh_comment_list.html", pkg_id=c.pkg.id, pkg_name=c.pkg.name, userobj=c.userobj)
-        data = []
+        data = ['Element 1', ' Element 2', 'Element 3']
         return jsonify({'result': True, 'data': False})
 
     def reply(self, dataset_id, parent_id):
