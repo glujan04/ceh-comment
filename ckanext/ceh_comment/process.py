@@ -3,6 +3,10 @@ from flask import jsonify, Flask, render_template, request
 
 app = Flask(__name__)
 
+@app.route('/')
+def hello_world():
+    return 'hello world!'
+
 @app.route('/publish2/', methods=['POST'])
 def publish2():
 
@@ -17,5 +21,5 @@ def publish2():
 	data = ['Element 1', ' Element 2', 'Element 3']
 	return jsonify({'result': True, 'data': False})
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__== '__main__':
+    app.run(debug=True, port=8080)
