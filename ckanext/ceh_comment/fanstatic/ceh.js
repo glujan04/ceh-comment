@@ -192,8 +192,8 @@ function addParam(form, name, value) {
 }
 
 function pruebaAjax(_form){
-	console.log(form.serializeArray());
 	let form = $(_form);
+	console.log(form.serializeArray());
 	 $.ajax({
 		 type: form.attr('method'),
 		 url: '/publish2',/*form.attr('action'),*/
