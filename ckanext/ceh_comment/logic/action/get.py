@@ -35,7 +35,7 @@ def thread_show(context, data_dict):
 
     # Usado solo para obtener listado => url_list
     if url_list:
-        thread = comment_model.CommentThread.from_url_list(url)
+        thread = comment_model.CommentThread.from_url_list(url_list)
 
     # Usado solo para obtener listado => url_list
     if not thread and url_list:
