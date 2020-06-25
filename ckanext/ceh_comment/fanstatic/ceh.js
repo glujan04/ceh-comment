@@ -170,8 +170,9 @@ function updCountdown(e) {
 
 // Panel administración
 function publish( el, pkg_id, id ){
-    $('.material-switch > input[type=checkbox]').attr('disabled','');
-	let $form = document.createElement('form');
+    // Se desactivan todos los botones antes del submit
+    //$('.material-switch > input[type=checkbox]').attr('disabled','');
+    let $form = document.createElement('form');
     $form.setAttribute('id', 'data_form');
     $form.setAttribute('action', `/dataset/${pkg_id}/comments/${id}/publish`);
     $form.setAttribute('method', 'post');
@@ -179,7 +180,6 @@ function publish( el, pkg_id, id ){
     addParam($form, "state", $(el).prop('checked'));
     pruebaAjax($form);
     //$form.submit();
-    // Se desactivan todos los botones luego del submit
     document.body.removeChild($form);
 }
 
