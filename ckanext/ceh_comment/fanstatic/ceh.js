@@ -191,7 +191,8 @@ function addParam(form, name, value) {
     form.appendChild($input);
 }
 
-function pruebaAjax(form){
+function pruebaAjax(_form){
+	let form = $(_form);
 	 $.ajax({
 		 type: form.attr('method'),
 		 url: form.attr('action'),
