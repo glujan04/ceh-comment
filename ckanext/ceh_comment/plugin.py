@@ -14,11 +14,6 @@ foo = Blueprint('foo', __name__)
 log = logging.getLogger(__name__)
 
 
-
-def get_api(self):
-
-    return render(u'package/read.html', extra_vars={})
-
 class CommentPlugin(p.SingletonPlugin):
     p.implements(p.IRoutes, inherit=True)
     p.implements(p.IConfigurer, inherit=True)
@@ -201,4 +196,4 @@ class CommentPlugin(p.SingletonPlugin):
         map.connect('/dataset/list/{thread_id}/delete', controller=controller, action='delNotify')
         return map
 
-foo.add_url_rule('/publish2', view_func=get_api)
+foo.add_url_rule('/publish2', view_func=publish2)
