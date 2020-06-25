@@ -76,6 +76,16 @@ class CommentController(BaseController):
                 log.debug(e)
                 abort(403)
 
+        h.redirect_to(str('/dataset/%s' % c.pkg.name))
+
+        return render("package/read.html")
+
+    @app.route('/publish2/')
+    def publish2():
+
+        context = {'model': model, 'user': c.user}
+
+
         #h.redirect_to(str('/dataset/%s' % c.pkg.name))
 
         #return render("package/read.html")
