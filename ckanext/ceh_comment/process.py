@@ -3,7 +3,7 @@ from flask import jsonify, Flask, render_template, request
 
 app = Flask(__name__)
 
-@app.route('/publish2', methods=['POST'])
+@app.route('/publish2/', methods=['POST'])
 def publish2():
 
 	context = {'model': model, 'user': c.user}
