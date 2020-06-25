@@ -8,6 +8,7 @@ import time
 from ckan.common import request
 from ckan.lib.helpers import url_for_static_or_external
 import ckan.plugins as p
+from flask import Blueprint
 
 foo = Blueprint('foo', __name__)
 log = logging.getLogger(__name__)
