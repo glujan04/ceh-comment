@@ -84,7 +84,7 @@ class CommentController(BaseController):
     def publish2():
 
         context = {'model': model, 'user': c.user}
-
+        print request.form
 
         #h.redirect_to(str('/dataset/%s' % c.pkg.name))
 
