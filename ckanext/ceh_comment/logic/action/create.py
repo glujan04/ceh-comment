@@ -18,7 +18,7 @@ def comment_create(context, data_dict):
 
     #logic.check_access("comment_create", context, data_dict)
 
-    # Validate that we have the required fields.
+    # Valida que se tengan todos los campos requeridos.
     if not all([data_dict.get('comment')]):
         raise logic.ValidationError("Comment text is required")
 

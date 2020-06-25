@@ -77,6 +77,7 @@ def comment_show(context, data_dict):
     comment = comment_model.Comment.get(id)
     if not comment:
         abort(404)
+    # Se comenta para evitar que solo usuarios conectados puedan realizar comentarios
     #logic.check_access("comment_show", context, data_dict)
     data_dict['comment'] = comment
 
@@ -85,8 +86,9 @@ def comment_show(context, data_dict):
 
 def comment_count(context, data_dict):
 
-    # For now everybody is allowed to view count
+    # Por ahora la cantidad esta permitida para todos
     # logic.check_access('comment_count', context, data_dict)
+
     url = data_dict.get('url')
     id = data_dict.get('id')
     approval = data_dict.get('approval')
