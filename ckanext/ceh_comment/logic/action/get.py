@@ -21,12 +21,25 @@ def thread_show(context, data_dict):
 
     url = data_dict.get('url')
     id = data_dict.get('id')
+
+    # Campo usado solo para obtener listado
+    url_list = data_dict.get('url_list')
+
     thread = None
+
     if url:
         thread = comment_model.CommentThread.from_url(url)
 
     if not thread and id:
         thread = comment_model.CommentThread.get(id)
+
+    # Usado solo para obtener listado => url_list
+    if url_list:
+        thread = comment_model.CommentThread.from_url_list(url)
+
+    # Usado solo para obtener listado => url_list
+    if not thread and url_list:
+        return thread
 
     if not thread:
         return abort(404)
@@ -123,7 +136,7 @@ def thread_list(context, data_dict):
     thread = None
     if userid:
         thread = comment_model.CommentThread.get_datasets(userid)
-    pprint(thread)
+
     if not thread:
         return abort(404)
 

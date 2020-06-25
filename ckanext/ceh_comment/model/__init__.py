@@ -73,6 +73,16 @@ class CommentThread(Base):
         return thread
 
     @classmethod
+    def from_url_list(cls, threadurl):
+        u = cls.clean_url(threadurl)
+
+        # Look for CommentThread for that URL or create it.
+        thread = model.Session.query(cls). \
+            filter(cls.url == u).first()
+
+        return thread
+
+    @classmethod
     def get_datasets(cls, id):
 
         thread = model.Session.query(cls). \

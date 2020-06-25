@@ -151,10 +151,11 @@ class CommentPlugin(p.SingletonPlugin):
 
     def _get_comment_thread(self, dataset_name):
         '''Obtiene los thread new comments activos'''
+
         import ckan.model as model
         from ckan.logic import get_action
         url = '/dataset/%s' % dataset_name
-        return get_action('thread_show')({'model': model, 'with_deleted': True}, {'url': url})
+        return get_action('thread_show')({'model': model, 'with_deleted': True}, {'url_list': url})
 
     def _get_comment_all_dataset(self, id):
         import ckan.model as model
