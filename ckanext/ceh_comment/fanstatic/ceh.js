@@ -177,7 +177,7 @@ function publish( el, pkg_id, id ){
     $form.setAttribute('method', 'post');
     document.body.appendChild($form);
     addParam($form, "state", $(el).prop('checked'));
-    pruebaAjax(form);
+    pruebaAjax($form);
     //$form.submit();
     // Se desactivan todos los botones luego del submit
     document.body.removeChild($form);
