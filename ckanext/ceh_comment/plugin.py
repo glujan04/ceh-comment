@@ -15,9 +15,9 @@ log = logging.getLogger(__name__)
 
 
 
-def get_api(ver=1):
+def get_api(self):
 
-    return render("package/read.html")
+    return render(u'package/read.html', extra_vars={})
 
 class CommentPlugin(p.SingletonPlugin):
     p.implements(p.IRoutes, inherit=True)
@@ -26,7 +26,7 @@ class CommentPlugin(p.SingletonPlugin):
     p.implements(p.ITemplateHelpers, inherit=True)
     p.implements(p.IActions, inherit=True)
     p.implements(p.IAuthFunctions, inherit=True)
-    #p.implements(p.IBlueprint, inherit=True)
+    p.implements(p.IBlueprint, inherit=True)
 
 
     def get_blueprint(self):
