@@ -94,7 +94,7 @@ class CommentController(BaseController):
             try:
                 c.pkg_dict = get_action('package_show')(context, {'id': data_dict['dataset_id']})
                 c.pkg = context['package']
-                get_action('comment_publish')(context, data_dict)
+                #get_action('comment_publish')(context, data_dict)
 
                 extra_vars = {
                     'pkg_name': c.pkg.name
