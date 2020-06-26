@@ -198,7 +198,7 @@ function pruebaAjax(_form,pkg_id_,id_,state_){
     $.ajax({
 		type: form.attr('method'),
 		url: form.attr('action'),
-		data: JSON.stringify({ pkg_id: pkg_id_, c_id: id_, state: state_ }),
+		data: form.serialize(),//JSON.stringify({ pkg_id: pkg_id_, c_id: id_, state: state_ }),
 		cache: false, 
 		success: function (data) {
 			console.log('correcto',data);
