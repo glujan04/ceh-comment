@@ -102,7 +102,7 @@ class CommentController(BaseController):
                 log.debug(e)
                 abort(403)
 
-        return render('snippets/comment_thread.html', extra_vars=None)
+        return render('snippets/comment_thread.html', extra_vars=extra_vars)
 
     def reply(self, dataset_id, parent_id):
         c.action = 'reply'
