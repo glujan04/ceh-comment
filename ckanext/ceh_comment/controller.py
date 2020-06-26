@@ -85,8 +85,8 @@ class CommentController(BaseController):
         data_dict = {'user_obj': c.userobj}
 
         extra_vars = {
-            'user_dict': user_dict,
-            'acquired_datasets': acquired_datasets,
+            'user_dict': data_dict,
+            'acquired_datasets': context,
         }
 
         return base.render('package/read.html', extra_vars)
