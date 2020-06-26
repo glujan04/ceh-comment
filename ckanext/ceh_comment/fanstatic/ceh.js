@@ -214,13 +214,13 @@ function pruebaAjax(_form,el,arr){
 				$(el).attr('checked','checked');
 				$('#t_'+arr.id).html(arr.t_pub);
 				$('#l_'+arr.id).attr('title', arr.l_unput);
-				$('#publishComment > label').html(arr.msg.replace('%s',arr.t_pub));
+				$('#publishComment > div:first').html(arr.msg.replace('%s',arr.t_pub));
 			}
 			else {
 				$(el).removeAttr('checked');
 				$('#t_'+arr.id).html(arr.t_unpub);
 				$('#l_'+arr.id).attr('title', arr.l_pub);
-				$('#publishComment > label').html(arr.msg.replace('%s',arr.t_unpub));
+				$('#publishComment > div:first').html(arr.msg.replace('%s',arr.t_unpub));
 			}
 			$('#publishComment').fadeIn();
 		},
