@@ -146,6 +146,9 @@ $(document).ready(function(){
    $('.ceh-close-calert').click(function(){
       $('#alertComment').fadeOut();
    });
+   $('.ceh-close-cmalert').click(function(){
+      $('#publishComment').fadeOut();
+   });
    let ta = resetCounter();
    ta.on('input', updCountdown);
 });
