@@ -204,7 +204,7 @@ function pruebaAjax(_form){
 		cache: false, 
 		success: function (data) {
 			//console.log('correcto',data);
-			$('#alertComment').fadeIn();
+			$('#publishComment').fadeIn();
 			$('.comment-container').html(data);
 		},
 		error: function(data) {
