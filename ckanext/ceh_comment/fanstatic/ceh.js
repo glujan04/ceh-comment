@@ -203,7 +203,8 @@ function pruebaAjax(_form){
 		data: form.serialize(),
 		cache: false, 
 		success: function (data) {
-			console.log('correcto',data);
+			//console.log('correcto',data);
+			$('.comment-container').html(data);
 		},
 		error: function(data) {
 			console.log('error',data);
