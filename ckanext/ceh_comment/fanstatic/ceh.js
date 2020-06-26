@@ -179,7 +179,9 @@ function publish(el,pkg_id,id){
     $form.setAttribute('method', 'post');
     document.body.appendChild($form);
     addParam($form, "state", $(el).prop('checked'));
-    pruebaAjax($form,pkg_id,id,$(el).prop('checked'));
+    addParam($form, "dataset_id", pkg_id);
+    addParam($form, "id", id);
+    pruebaAjax($form);
     //$form.submit();
     document.body.removeChild($form);
 }
@@ -192,13 +194,13 @@ function addParam(form, name, value) {
     form.appendChild($input);
 }
 
-function pruebaAjax(_form,pkg_id_,id_,state_){
+function pruebaAjax(_form){
     let form = $(_form);
     console.log(form.serializeArray());
     $.ajax({
 		type: form.attr('method'),
 		url: form.attr('action'),
-		data: form.serialize(),//JSON.stringify({ pkg_id: pkg_id_, c_id: id_, state: state_ }),
+		data: form.serialize(),
 		cache: false, 
 		success: function (data) {
 			console.log('correcto',data);

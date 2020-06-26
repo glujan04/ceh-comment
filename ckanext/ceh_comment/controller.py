@@ -85,12 +85,9 @@ class CommentController(BaseController):
         context = {'model': model, 'user': c.user}
 
         if request.method == 'POST':
-            #data_dict = {
-            #    'dataset_id': request.args.get('pkg_id'),
-            #    'id': request.args.get('c_id'),
-            #    'state': request.args.get('state')
-            #}
-            print parse_params(request.POST)
+            data_dict = clean_dict(unflatten(
+                tuplize_dict(parse_params(request.POST))))
+            print data_dict
             try:
                 c.pkg_dict = get_action('package_show')(context, {'id': data_dict['dataset_id']})
                 c.pkg = context['package']
