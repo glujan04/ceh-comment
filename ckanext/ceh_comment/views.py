@@ -1,8 +1,9 @@
 
 from ckan import logic, model
 from ckan.common import _, g
+from ckan.lib import base
 
-def acquired_datasets():
+def acquired_datasets_():
     context = {'auth_user_obj': g.userobj, 'for_view': True, 'model': model, 'session': model.Session, 'user': g.user}
     data_dict = {'user_obj': g.userobj}
 
@@ -15,5 +16,5 @@ def acquired_datasets():
 
 class AcquiredDatasetsControllerUI(base.BaseController):
 
-    def acquired_datasets(self):
-        return acquired_datasets()
+    def acquired_datasets_(self):
+        return acquired_datasets_()
