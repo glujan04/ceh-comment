@@ -80,15 +80,32 @@ class CommentController(BaseController):
 
         return render("package/read.html")
 
-    def acquired_datasets(self):
-        context = {'auth_user_obj': c.userobj, 'for_view': True, 'model': model, 'session': model.Session, 'user': c.user}
-        data_dict = {'user_obj': c.userobj}
+    def publish_ren(self):
 
-        extra_vars = {
-            'pkg_name': 'mapa-de-cultivos-de-canarias'
-        }
+        context = {'model': model, 'user': c.user}
 
-        return render('snippets/comment_thread.html', extra_vars)
+        if request.method == 'POST':
+            data_dict = {
+                'dataset_id': request.form['pkg_id'],
+                'id': request.form['c_id'],
+                'state': request.form['state']
+            }
+            print data_dict
+            try:
+                c.pkg_dict = get_action('package_show')(context, {'id': data_dict['dataset_id']})
+                c.pkg = context['package']
+                get_action('comment_publish')(context, data_dict)
+
+                extra_vars = {
+                    'pkg_name': c.pkg.name
+                }
+            except ValidationError, ve:
+                log.debug(ve)
+            except Exception, e:
+                log.debug(e)
+                abort(403)
+
+        return render('snippets/comment_thread.html', extra_vars=None)
 
     def reply(self, dataset_id, parent_id):
         c.action = 'reply'

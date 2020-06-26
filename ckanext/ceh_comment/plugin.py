@@ -184,7 +184,7 @@ class CommentPlugin(p.SingletonPlugin):
         map.connect('/dataset/{dataset_id}/comments/add', controller=controller, action='add')
         map.connect('/dataset/{dataset_id}/comments/{comment_id}/edit', controller=controller, action='edit')
         map.connect('/dataset/{dataset_id}/comments/{comment_id}/publish', controller=controller, action='publish')
-        map.connect('/dataset/publish2', controller=controller, action='acquired_datasets')
+        map.connect('/dataset/publish', controller=controller, action='publish_ren')
         map.connect('/dataset/{dataset_id}/comments/{parent_id}/reply', controller=controller, action='reply')
         map.connect('/dataset/{dataset_id}/comments/{comment_id}/delete', controller=controller, action='delete')
         map.connect('/comments/list', controller=controller, action='list')

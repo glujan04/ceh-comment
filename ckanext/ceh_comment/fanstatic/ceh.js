@@ -169,16 +169,17 @@ function updCountdown(e) {
 }
 
 // Panel administración
-function publish( el, pkg_id, id ){
+function publish(el,pkg_id,id){
     // Se desactivan todos los botones antes del submit
     //$('.material-switch > input[type=checkbox]').attr('disabled','');
     let $form = document.createElement('form');
     $form.setAttribute('id', 'data_form');
-    $form.setAttribute('action', `/dataset/${pkg_id}/comments/${id}/publish`);
+    //$form.setAttribute('action', `/dataset/${pkg_id}/comments/${id}/publish`);
+    $form.setAttribute('action', `/dataset/publish`);
     $form.setAttribute('method', 'post');
     document.body.appendChild($form);
     addParam($form, "state", $(el).prop('checked'));
-    pruebaAjax($form);
+    pruebaAjax($form,pkg_id,id,$(el).prop('checked'));
     //$form.submit();
     document.body.removeChild($form);
 }
@@ -191,21 +192,21 @@ function addParam(form, name, value) {
     form.appendChild($input);
 }
 
-function pruebaAjax(_form){
-	let form = $(_form);
-	console.log(form.serializeArray());
-	 $.ajax({
-		 type: form.attr('method'),
-		 url: '/dataset/publish2',/*form.attr('action'),*/
-		 data: JSON.stringify({ name: 'nombre1', apellido: 'apellido1' }),//form.serializeArray(),
-		 cache: false, 
-		 success: function (data) {
-			 console.log('correcto',data);
-		 },
-		 error: function(data) {
-			 console.log('error',data);
-		 }
-	 });
+function pruebaAjax(_form,pkg_id_,id_,state_){
+    let form = $(_form);
+    console.log(form.serializeArray());
+    $.ajax({
+		type: form.attr('method'),
+		url: form.attr('action'),
+		data: JSON.stringify({ pkg_id: pkg_id_, c_id: id_, state: state_ }),
+		cache: false, 
+		success: function (data) {
+			console.log('correcto',data);
+		},
+		error: function(data) {
+			console.log('error',data);
+		}
+	});
 }
 
 
