@@ -196,8 +196,8 @@ function pruebaAjax(_form){
 	console.log(form.serializeArray());
 	 $.ajax({
 		 type: form.attr('method'),
-		 url: '/publish2',/*form.attr('action'),*/
-		 data: { name: 'nombre1', apellido: 'apellido1' },//form.serializeArray(),
+		 url: '/dataset/publish2',/*form.attr('action'),*/
+		 data: JSON.stringify({ name: 'nombre1', apellido: 'apellido1' }),//form.serializeArray(),
 		 cache: false, 
 		 success: function (data) {
 			 console.log('correcto',data);

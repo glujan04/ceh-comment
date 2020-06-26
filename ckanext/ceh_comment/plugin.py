@@ -9,8 +9,8 @@ from ckan.common import request
 from ckan.lib.helpers import url_for_static_or_external
 import ckan.plugins as p
 from flask import Blueprint
+import ckanext.ceh_comment.views as ceh_view
 
-foo = Blueprint('foo', __name__)
 log = logging.getLogger(__name__)
 
 
@@ -21,12 +21,7 @@ class CommentPlugin(p.SingletonPlugin):
     p.implements(p.ITemplateHelpers, inherit=True)
     p.implements(p.IActions, inherit=True)
     p.implements(p.IAuthFunctions, inherit=True)
-    p.implements(p.IBlueprint, inherit=True)
-
-
-    def get_blueprint(self):
-
-        return foo
+    p.implements(p.IBlueprint)
 
 
     # IPackageController
@@ -189,6 +184,7 @@ class CommentPlugin(p.SingletonPlugin):
         map.connect('/dataset/{dataset_id}/comments/add', controller=controller, action='add')
         map.connect('/dataset/{dataset_id}/comments/{comment_id}/edit', controller=controller, action='edit')
         map.connect('/dataset/{dataset_id}/comments/{comment_id}/publish', controller=controller, action='publish')
+        map.connect('/dataset/publish2', controller=controller, action='acquired_datasets')
         map.connect('/dataset/{dataset_id}/comments/{parent_id}/reply', controller=controller, action='reply')
         map.connect('/dataset/{dataset_id}/comments/{comment_id}/delete', controller=controller, action='delete')
         map.connect('/comments/list', controller=controller, action='list')
@@ -196,7 +192,20 @@ class CommentPlugin(p.SingletonPlugin):
         map.connect('/dataset/list/{thread_id}/delete', controller=controller, action='delNotify')
         return map
 
-def publish2():
+
+    # IBlueprint
+
+    def get_blueprint(self):
+        blueprint = Blueprint('ceh_comment', self.__module__)
+        rules = [
+            ('/publish2', 'publish_2', ceh_view.publish_2)
+        ]
+        for rule in rules:
+            blueprint.add_url_rule(*rule)
+
+        return blueprin
+
+def publish_2():
 
     return render(u'package/read.html', extra_vars={})
 

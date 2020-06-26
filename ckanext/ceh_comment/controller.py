@@ -6,10 +6,10 @@ from ckan import model
 from ckan.common import _,c
 from ckan.logic import check_access, get_action, clean_dict, tuplize_dict, ValidationError, parse_params
 from ckan.lib.navl.dictization_functions import unflatten
-from flask import jsonify,Flask
+
 
 log = logging.getLogger(__name__)
-app = Flask(__name__)
+
 
 class CommentController(BaseController):
     def add(self, dataset_id):
@@ -79,6 +79,17 @@ class CommentController(BaseController):
         h.redirect_to(str('/dataset/%s' % c.pkg.name))
 
         return render("package/read.html")
+
+    def acquired_datasets():
+        context = {'auth_user_obj': c.userobj, 'for_view': True, 'model': model, 'session': model.Session, 'user': c.user}
+        data_dict = {'user_obj': c.userobj}
+
+        extra_vars = {
+            'user_dict': user_dict,
+            'acquired_datasets': acquired_datasets,
+        }
+
+        return base.render('package/read.html', extra_vars)
 
     def reply(self, dataset_id, parent_id):
         c.action = 'reply'
