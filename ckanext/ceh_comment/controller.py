@@ -89,7 +89,7 @@ class CommentController(BaseController):
             'acquired_datasets': context,
         }
 
-        return base.render('package/read.html', extra_vars)
+        return render('package/read.html', extra_vars)
 
     def reply(self, dataset_id, parent_id):
         c.action = 'reply'
