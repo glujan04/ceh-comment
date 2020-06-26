@@ -216,7 +216,7 @@ function pruebaAjax(_form,el,state_,id,txt,lbl){
 			else
 				$(el).removeAttr('checked');
 			$('#t_'+id).html(txt);
-			$('#l_'+id).html(lbl);
+			$('#l_'+id).attr('title', lbl);
 		},
 		error: function(data) {
 			console.log('error',data);
