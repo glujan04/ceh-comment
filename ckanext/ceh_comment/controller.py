@@ -80,7 +80,7 @@ class CommentController(BaseController):
 
         return render("package/read.html")
 
-    def acquired_datasets():
+    def acquired_datasets(self):
         context = {'auth_user_obj': c.userobj, 'for_view': True, 'model': model, 'session': model.Session, 'user': c.user}
         data_dict = {'user_obj': c.userobj}
 
