@@ -172,7 +172,7 @@ function updCountdown(e) {
 }
 
 // Panel administración
-function publish(el,pkg_id,id,txt,lbl){
+function publish(el,pkg_id,arr){
     // Se desactivan todos los botones antes del submit
     //$('.material-switch > input[type=checkbox]').attr('disabled','');
     let $form = document.createElement('form');
@@ -185,7 +185,9 @@ function publish(el,pkg_id,id,txt,lbl){
     addParam($form, "state", state_);
     addParam($form, "dataset_id", pkg_id);
     addParam($form, "id", id);
-    pruebaAjax($form,el,state_,id,txt,lbl);
+    arr['state_'] = state_;
+    arr['id'] = id;
+    pruebaAjax($form,el,arr);
     //$form.submit();
     document.body.removeChild($form);
 }
@@ -198,28 +200,31 @@ function addParam(form, name, value) {
     form.appendChild($input);
 }
 
-function pruebaAjax(_form,el,state_,id,txt,lbl){
+function pruebaAjax(_form,el,arr){
     let form = $(_form);
-	console.log('txt',txt);
-	console.log('lbl',lbl);
+	console.log('arr',arr);
     $.ajax({
 		type: form.attr('method'),
 		url: form.attr('action'),
 		data: form.serialize(),
 		cache: false, 
 		success: function (data) {
-			//console.log('correcto',data);
 			$('#publishComment').fadeIn();
 			$('.comment-container').html(data);
-			if (state_)
+			if (arr.state_){
 				$(el).attr('checked','checked');
-			else
+				$('#t_'+arr.id).html(arr.t_unpub);
+				$('#l_'+arr.id).attr('title', arr.l_unput);
+				$('#publishComment > strong').after(arr.msg.replace('%s',arr.t_unpub));
+			}
+			else {
 				$(el).removeAttr('checked');
-			$('#t_'+id).html(txt);
-			$('#l_'+id).attr('title', lbl);
+				$('#t_'+arr.id).html(arr.t_pub);
+				$('#l_'+arr.id).attr('title', arr.l_pub);
+				$('#publishComment > strong').after(arr.msg.replace('%s',arr.t_pub));
+			}
 		},
 		error: function(data) {
-			console.log('error',data);
 		}
 	});
 }
