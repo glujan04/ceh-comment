@@ -87,8 +87,8 @@ class CommentController(BaseController):
         if request.method == 'POST':
             data_dict = {
                 'dataset_id': request.args.get('pkg_id'),
-                'id': request.args.get'c_id'),
-                'state': request.args.get'state')
+                'id': request.args.get('c_id'),
+                'state': request.args.get('state')
             }
             print data_dict
             try:
