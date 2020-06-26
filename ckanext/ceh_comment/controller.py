@@ -85,11 +85,10 @@ class CommentController(BaseController):
         data_dict = {'user_obj': c.userobj}
 
         extra_vars = {
-            'user_dict': data_dict,
-            'acquired_datasets': context,
+            'pkg_name': 'mapa-de-cultivos-de-canarias'
         }
 
-        return render('package/read.html', extra_vars)
+        return render('snippets/comment_thread.html', extra_vars)
 
     def reply(self, dataset_id, parent_id):
         c.action = 'reply'
