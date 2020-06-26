@@ -209,7 +209,6 @@ function pruebaAjax(_form,el,arr){
 		data: form.serialize(),
 		cache: false, 
 		success: function (data) {
-			$('#publishComment').fadeIn();
 			$('.comment-container').html(data);
 			if (arr.state_){
 				$(el).attr('checked','checked');
@@ -223,6 +222,7 @@ function pruebaAjax(_form,el,arr){
 				$('#l_'+arr.id).attr('title', arr.l_pub);
 				$('#publishComment > strong').after(arr.msg.replace('%s',arr.t_pub));
 			}
+			$('#publishComment').fadeIn();
 		},
 		error: function(data) {
 		}
