@@ -192,21 +192,3 @@ class CommentPlugin(p.SingletonPlugin):
         map.connect('/dataset/list/{thread_id}/delete', controller=controller, action='delNotify')
         return map
 
-
-    # IBlueprint
-
-    def get_blueprint(self):
-        blueprint = Blueprint('ceh_comment', self.__module__)
-        rules = [
-            ('/publish2', 'publish_2', ceh_view.publish_2)
-        ]
-        for rule in rules:
-            blueprint.add_url_rule(*rule)
-
-        return blueprin
-
-def publish_2():
-
-    return render(u'package/read.html', extra_vars={})
-
-foo.add_url_rule('/publish2', view_func=publish2)
