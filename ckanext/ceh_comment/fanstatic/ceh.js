@@ -172,7 +172,7 @@ function updCountdown(e) {
 }
 
 // Panel administración
-function publish(el,pkg_id,arr){
+function publish(el,pkg_id,id,arr){
     // Se desactivan todos los botones antes del submit
     //$('.material-switch > input[type=checkbox]').attr('disabled','');
     let $form = document.createElement('form');
