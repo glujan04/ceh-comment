@@ -1,3 +1,4 @@
+    {% set approved = {'exist': False} %}
     {% set thread = h.get_comment_thread(pkg_name) %}
     <div class="comment-wrapper">
     {% for comment in thread.comments %}
