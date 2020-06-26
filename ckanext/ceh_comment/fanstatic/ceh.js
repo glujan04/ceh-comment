@@ -174,7 +174,7 @@ function updCountdown(e) {
 // Panel administración
 function publish(el,pkg_id,id,arr){
     // Se desactivan todos los botones antes del submit
-    //$('.material-switch > input[type=checkbox]').attr('disabled','');
+    $('.material-switch > input[type=checkbox]').attr('disabled','');
     let $form = document.createElement('form');
 	let state_ = $(el).prop('checked');
     $form.setAttribute('id', 'data_form');
@@ -223,6 +223,7 @@ function pruebaAjax(_form,el,arr){
 				$('#publishComment > div:first').html(arr.msg.replace('%s',arr.t_unpub));
 			}
 			$('#publishComment').fadeIn();
+			$('.material-switch > input[type=checkbox]').removeAttr('disabled');
 		},
 		error: function(data) {
 		}
