@@ -200,6 +200,8 @@ function addParam(form, name, value) {
 
 function pruebaAjax(_form,el,state_,id,txt,lbl){
     let form = $(_form);
+	console.log('txt',txt);
+	console.log('lbl',lbl);
     $.ajax({
 		type: form.attr('method'),
 		url: form.attr('action'),
