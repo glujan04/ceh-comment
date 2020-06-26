@@ -90,7 +90,7 @@ class CommentController(BaseController):
             #    'id': request.args.get('c_id'),
             #    'state': request.args.get('state')
             #}
-            print request
+            print request.form
             try:
                 c.pkg_dict = get_action('package_show')(context, {'id': data_dict['dataset_id']})
                 c.pkg = context['package']
