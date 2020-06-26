@@ -172,19 +172,20 @@ function updCountdown(e) {
 }
 
 // Panel administración
-function publish(el,pkg_id,id){
+function publish(el,pkg_id,id,txt,lbl){
     // Se desactivan todos los botones antes del submit
     //$('.material-switch > input[type=checkbox]').attr('disabled','');
     let $form = document.createElement('form');
+	let state_ = $(el).prop('checked');
     $form.setAttribute('id', 'data_form');
     //$form.setAttribute('action', `/dataset/${pkg_id}/comments/${id}/publish`);
     $form.setAttribute('action', `/dataset/publish`);
     $form.setAttribute('method', 'post');
     document.body.appendChild($form);
-    addParam($form, "state", $(el).prop('checked'));
+    addParam($form, "state", state_);
     addParam($form, "dataset_id", pkg_id);
     addParam($form, "id", id);
-    pruebaAjax($form);
+    pruebaAjax($form,el,state_,id,txt,lbl);
     //$form.submit();
     document.body.removeChild($form);
 }
@@ -197,9 +198,8 @@ function addParam(form, name, value) {
     form.appendChild($input);
 }
 
-function pruebaAjax(_form){
+function pruebaAjax(_form,el,state_,id,txt,lbl){
     let form = $(_form);
-    console.log(form.serializeArray());
     $.ajax({
 		type: form.attr('method'),
 		url: form.attr('action'),
@@ -209,6 +209,12 @@ function pruebaAjax(_form){
 			//console.log('correcto',data);
 			$('#publishComment').fadeIn();
 			$('.comment-container').html(data);
+			if (state_)
+				$(el).attr('checked','checked');
+			else
+				$(el).removeAttr('checked');
+			$('#t_'+id).html(txt);
+			$('#l_'+id).html(lbl);
 		},
 		error: function(data) {
 			console.log('error',data);

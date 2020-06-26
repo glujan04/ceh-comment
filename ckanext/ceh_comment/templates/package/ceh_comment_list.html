@@ -104,9 +104,18 @@
             {% endif %}
     {% endfor %}
     </div>
-
 {% endmacro %}
 
+{% set pub_text = _('Publicado') %}
+{% set unpub_text = _('Despublicado') %}
+{% set lb_pub_text = _('Publicar') %}
+{% set lb_unpub_text = _('Despublicar') %}
+<script type="text/javascript">
+ let pub_text = '{{pub_text}}';
+ let unpub_text = '{{unpub_text}}';
+ let lb_pub_text = '{{lb_pub_text}}';
+ let lb_unpub_text = '{{lb_unpub_text}}';
+</script
 {% macro managed_thread(thread) %}
 	{% for comment in thread.comments %}
 		  <tr>
@@ -114,10 +123,10 @@
 			<td class="dataset-details">{{ comment.email }}</td>
 			<td class="dataset-details">{{ comment.content|safe }}</td>
 			<td class="dataset-details">
-			  <div style="float:left;">{% if comment.approved == False %}{{ _('Despublicado') }}{% else %}{{ _('Publicado') }}{% endif %}</div>
+			  <div style="float:left;" id="t_{{ comment.id }}">{% if comment.approved == False %}{{ _('Despublicado') }}{% else %}{{ _('Publicado') }}{% endif %}</div>
 			  <div class="material-switch pull-right">
-                            <input id="{{ comment.id }}" name="approval_status" type="checkbox" {% if comment.approved == True %}checked{% endif %} onclick="javascript:publish(this,'{% if h.check_access('package_update', {'id': pkg_id }) %}{{ pkg_id }}{% endif %}','{{ comment.id }}');"/>
-                            <label for="{{ comment.id }}" class="label-primary" title="{% if comment.approved %}{{ _('Despublicar') }}{% else %}{{ _('Publicar') }}{% endif %}"></label>
+                            <input id="{{ comment.id }}" name="approval_status" type="checkbox" {% if comment.approved == True %}checked{% endif %} onclick="javascript:publish(this,'{% if h.check_access('package_update', {'id': pkg_id }) %}{{ pkg_id }}{% endif %}','{{ comment.id }}',(this.checked ?unpub_text:pub_text),(this.checked?lb_pub_text:lb_unpub_text));"/>
+                            <label id="l_{{ comment.id }}" for="{{ comment.id }}" class="label-primary" title="{% if comment.approved %}{{ _('Despublicar') }}{% else %}{{ _('Publicar') }}{% endif %}"></label>
 			  </div>
 			</td>
 		  </tr>
@@ -262,8 +271,3 @@
   </div>
 </div>
 </section>
-{#
-{% else %}
-    {{ _('Login to comment.') }}
-{% endif %}
-#}
