@@ -214,7 +214,7 @@ class CommentController(BaseController):
 
         return render("package/read.html")
 
-    def delNotify(self, thread_id):
+    def delNotify(self, thread_id, d_name):
 
         context = {'model': model, 'user': c.user}
 
@@ -224,7 +224,7 @@ class CommentController(BaseController):
         check_access('package_show', context, data_dict)
 
         try:
-            thread_dict = {'id': thread_id}
+            thread_dict = {'name': d_name}
             get_action('thread_delete')(context, thread_dict)
         except Exception, e:
             log.debug(e)

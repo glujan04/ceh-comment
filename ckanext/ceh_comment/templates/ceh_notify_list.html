@@ -27,11 +27,11 @@
     <tbody>
 	{% for dataset in threads %}
 		  <tr style="{% if dataset.active_thread == 'active' %}font-weight: bold{% endif %}">
-			<td class="dataset-label">{{ dataset.name }}</td> {{ dataset }}
+			<td class="dataset-label">{{ dataset.name }}</td>
 			<td class="dataset-details">{% if dataset.active_thread == 'active' %} {{ _('No leído') }} {% else %} {{ _('Leído') }} {% endif %}</td>
 			<td class="dataset-ceh-icons">
 				<a href="/dataset/list/{{ dataset.name }}/thread/{{ dataset.id }}/read" title="{{ _('Ver el Conjunto de datos') }}"><i class="fa fa-share" aria-hidden="true"></i></a>
-				<a href="#delModal" data-toggle="modal" data-thread-id="{{ dataset.id }}" title="{{ _('Eliminar notificación') }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+				<a href="#delModal" data-toggle="modal" data-thread-id="{{ dataset.id }}" data-dataset-name="{{ dataset.name }}" title="{{ _('Eliminar notificación') }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
 			</td>
 		  </tr>
 	{% endfor %}
@@ -49,7 +49,8 @@
       </div>
       <div class="modal-body">
         {{ _('¿Está seguro(a) que desea eliminar el registro?')}}
-		<input type="hidden" name="tid" id="tid">
+        <input type="hidden" name="tid" id="tid">
+        <input type="hidden" name="dname" id="dname">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ _('Salir') }}</button>

@@ -189,6 +189,6 @@ class CommentPlugin(p.SingletonPlugin):
         map.connect('/dataset/{dataset_id}/comments/{comment_id}/delete', controller=controller, action='delete')
         map.connect('/comments/list', controller=controller, action='list')
         map.connect('/dataset/list/{dataset_id}/thread/{thread_id}/read', controller=controller, action='read')
-        map.connect('/dataset/list/{thread_id}/delete', controller=controller, action='delNotify')
+        map.connect('/dataset/list/{thread_id}/{d_name}/delete', controller=controller, action='delNotify')
         return map
 
