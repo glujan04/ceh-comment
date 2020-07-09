@@ -118,28 +118,7 @@ $(document).ready(function(){
            errorPlacement: function(label, element) {
                    label.addClass('ceh-error');
                    element.parent().append(label);
-           },
-           // submitHandler : function(_form) {
-                   // let form = $(_form);
-                   // console.log('form',form.serialize());
-				   // console.log('formArray',form.serializeArray());
-                   // $.ajax({
-						// type: form.attr('method'),
-						// url: form.attr('action'),
-						// data: form.serializeArray(),
-						// cache: false, 
-						// success: function (data) {
-							// console.log('correcto',data);
-						// },
-						// error: function(data) {
-							// console.log('error',data);
-						// }
-					// });
-				   // $('#cehCommentForm').trigger("reset");
-                   // $('#alertComment').fadeIn();
-				   // resetCounter();
-                   // return false;
-           // }
+           }
    });
    // COMENTARIOS
    // popup
@@ -202,7 +181,6 @@ function addParam(form, name, value) {
 
 function pruebaAjax(_form,el,arr){
     let form = $(_form);
-	console.log('arr',arr);
     $.ajax({
 		type: form.attr('method'),
 		url: form.attr('action'),
