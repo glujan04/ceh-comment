@@ -220,11 +220,11 @@ class CommentController(BaseController):
 
         # Verifica que el usuario autenticado pueda ver el paquete
         # Se comenta para evitar que solo usuarios conectados puedan realizar comentarios
-        data_dict = {'id': dataset_id}
+        data_dict = {'name': d_name}
         check_access('package_show', context, data_dict)
 
         try:
-            thread_dict = {'name': d_name}
+            thread_dict = {'id': thread_id}
             get_action('thread_delete')(context, thread_dict)
         except Exception, e:
             log.debug(e)
