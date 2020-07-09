@@ -27,7 +27,7 @@
     <tbody>
 	{% for dataset in threads %}
 		  <tr style="{% if dataset.active_thread == 'active' %}font-weight: bold{% endif %}">
-			<td class="dataset-label">{{ dataset.name }}</td>
+			<td class="dataset-label">{{ dataset.name }}</td> {{ dataset }}
 			<td class="dataset-details">{% if dataset.active_thread == 'active' %} {{ _('No leído') }} {% else %} {{ _('Leído') }} {% endif %}</td>
 			<td class="dataset-ceh-icons">
 				<a href="/dataset/list/{{ dataset.name }}/thread/{{ dataset.id }}/read" title="{{ _('Ver el Conjunto de datos') }}"><i class="fa fa-share" aria-hidden="true"></i></a>
